@@ -24,3 +24,14 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans, Arial, Helvetica, sans-serif);
 }
+
+.searchSection {
+  border: 2px solid var(--foreground);
+  border-radius: 10px;
+  background-color: var(--accentcolor);
+}
+
+.divLine {
+  margin: 0 10px 0 10px;
+  border-top: 1px solid var(--foreground);
+}
