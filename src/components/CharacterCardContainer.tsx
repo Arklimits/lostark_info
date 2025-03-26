@@ -41,13 +41,13 @@ const CharacterCardContainer = ({ keyword }: Props) => {
 
               return {
                 ...char,
-                imageUrl: profile.CharacterImage || "/img-anonymous.webp",
+                imageUrl: profile.CharacterImage || "/img-unknown.png",
                 guildName: profile.GuildName ?? "-",
               };
             } catch {
               return {
                 ...char,
-                imageUrl: "/img-anonymous.webp",
+                imageUrl: "/img-unknown.png",
                 guildName: "-",
               };
             }

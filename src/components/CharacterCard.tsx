@@ -35,8 +35,8 @@ const CharacterCard = ({
         className={styles.avatar}
         src={imageUrl}
         alt={`${name} 이미지`}
-        width={200}
-        height={100}
+        width={160}
+        height={200}
         unoptimized
       />
       <div className={styles.info}>
