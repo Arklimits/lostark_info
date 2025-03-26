@@ -9,9 +9,8 @@ type CharacterCardProps = {
   classLevel: number;
   guildName: string;
   itemLevel: string;
-  stat2: string;
-  stat3: string;
   score: string;
+  onClick?: () => void;
 };
 
 const CharacterCard = ({
@@ -23,9 +22,10 @@ const CharacterCard = ({
   guildName,
   itemLevel,
   score,
+  onClick
 }: CharacterCardProps) => {
   return (
-    <div className={styles.card}>
+    <div className={styles.card} onClick={onClick}>
       <div className={styles.header}>
         <span className={styles.job}>{job}</span>
         <span className={styles.level}>Lv.{classLevel}</span>
