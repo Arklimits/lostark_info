@@ -1,11 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 import styles from "./SearchBar.module.scss";
 
 const SearchBar = () => {
   const [keyword, setKeyword] = useState("");
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -13,14 +15,7 @@ const SearchBar = () => {
     const trimmed = keyword.trim();
     if (!trimmed) return;
 
-    try {
-      const res = await fetch(`/api/search?keyword=${trimmed}`);
-
-      const data = await res.json();
-      console.log("검색 결과:", data);
-    } catch (err) {
-      console.error("검색 실패:", err);
-    }
+    router.push(`/search?keyword=${encodeURIComponent(trimmed)}`);
   };
 
   return (
