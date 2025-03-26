@@ -29,6 +29,9 @@ export async function GET(req: NextRequest) {
   } catch (err: any) {
     const status = err.response?.status || 500;
     const message = err.response?.data || err.message || "알 수 없는 에러";
-    return NextResponse.json({ error: "LOA API 에러", detail: message }, { status });
+    return NextResponse.json(
+      { error: "LOA API 에러", detail: message },
+      { status }
+    );
   }
 }
