@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import CharacterCard from "./CharacterCard";
+import styles from "./CharacterCardContainer.module.scss";
 
 type CharacterData = {
   ServerName: string;
@@ -71,7 +72,7 @@ const CharacterCardContainer = ({ keyword }: Props) => {
   if (!characters) return <div>로딩 중...</div>;
 
   return (
-    <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
+    <div className={styles.cardContainer}>
       {characters.map((char) => (
         <CharacterCard
           key={char.CharacterName}
