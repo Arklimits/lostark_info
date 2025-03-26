@@ -26,10 +26,20 @@ export async function GET(req: NextRequest) {
     });
 
     const data = res.data;
+
+    const critStat = data.Stats.find((s: any) => s.Type === "치명");
+    let critRate = null;
+
+    if (critStat && Array.isArray(critStat.Tooltip)) {
+      const match = critStat.Tooltip[0].match(/([0-9.]+)%/);
+      critRate = match[1];
+    }
+
     return NextResponse.json({
       CharacterImage: data.CharacterImage,
       GuildName: data.GuildName,
       AttackPower: data.Stats[7].Value,
+      CritRate: critRate,
     });
   } catch (err: any) {
     const status = err.response?.status || 500;

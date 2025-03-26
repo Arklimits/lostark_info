@@ -36,7 +36,7 @@ const CharacterCardContainer = ({ keyword }: Props) => {
         const withImages = await Promise.all(
           rawList.map(async (char: CharacterData) => {
             try {
-              const profileRes = await axios.get(`/api/profile`, {
+              const profileRes = await axios.get(`/api/character/profile`, {
                 params: { name: char.CharacterName },
               });
               const profile = profileRes.data;
