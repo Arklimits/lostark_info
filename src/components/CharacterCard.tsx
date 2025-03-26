@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import styles from './CharacterCard.module.scss';
 
 type CharacterCardProps = {
@@ -30,7 +31,14 @@ const CharacterCard = ({
         <span className={styles.level}>Lv.{classLevel}</span>
       </div>
       <div className={styles.server}>{server}</div>
-      <img className={styles.avatar} src={imageUrl} alt={`${name} 이미지`} />
+      <Image
+        className={styles.avatar}
+        src={imageUrl}
+        alt={`${name} 이미지`}
+        width={100}
+        height={100}
+        unoptimized
+      />
       <div className={styles.info}>
         <span className={styles.itemLevel}>{itemLevel}</span>
         <div className={styles.name}>{name}</div>
