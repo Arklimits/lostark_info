@@ -27,7 +27,7 @@ const CharacterCardContainer = ({ keyword }: Props) => {
       const rawList = await searchRes.json();
 
       const withImages = await Promise.all(
-        rawList.map(async (char: any) => {
+        rawList.map(async (char: CharacterData) => {
           try {
             const profileRes = await fetch(`/api/profile?name=${encodeURIComponent(char.CharacterName)}`);
             const profile = await profileRes.json();
