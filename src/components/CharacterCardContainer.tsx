@@ -15,6 +15,7 @@ type CharacterData = {
   imageUrl: string;
   GuildName: string;
   AttackPower: string;
+  score: string;
 };
 
 type Props = {
@@ -72,6 +73,27 @@ const CharacterCardContainer = ({ keyword }: Props) => {
     fetchData();
   }, [keyword]);
 
+  const handleCardClick = async (CharacterName: string) => {
+    if (!characters) return;
+
+    try {
+      const res = await axios.get("/api/character/score/", {
+        params: { name: CharacterName }
+      });
+
+      const updated = characters.map((char) =>
+        char.CharacterName === CharacterName
+          ? { ...char, score: res.data.score }
+          : char
+      );
+
+      setCharacters(updated);
+    } catch (error) {
+      console.error("스코어 계산 실패:", error);
+    }
+  };
+
+
   if (!characters) return <div>로딩 중...</div>;
 
   return (
@@ -86,7 +108,8 @@ const CharacterCardContainer = ({ keyword }: Props) => {
           classLevel={char.CharacterLevel}
           guildName={char.GuildName}
           itemLevel={char.ItemAvgLevel}
-          score={char.AttackPower}
+          score={char.score ?? "-"}
+          onClick={() => handleCardClick(char.CharacterName)}
         />
       ))}
     </div>
