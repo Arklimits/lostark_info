@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import axios from "axios";
 import CharacterCard from "./CharacterCard";
 
 type CharacterData = {
@@ -23,42 +24,49 @@ const CharacterCardContainer = ({ keyword }: Props) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const searchRes = await fetch(`/api/search?keyword=${encodeURIComponent(keyword)}`);
-      const rawList = await searchRes.json();
+      try {
+        const searchRes = await axios.get(`/api/search`, {
+          params: { keyword },
+        });
+        const rawList = searchRes.data;
 
-      const withImages = await Promise.all(
-        rawList.map(async (char: CharacterData) => {
-          try {
-            const profileRes = await fetch(`/api/profile?name=${encodeURIComponent(char.CharacterName)}`);
-            const profile = await profileRes.json();
+        const withImages = await Promise.all(
+          rawList.map(async (char: CharacterData) => {
+            try {
+              const profileRes = await axios.get(`/api/profile`, {
+                params: { name: char.CharacterName },
+              });
+              const profile = profileRes.data;
 
-            return {
-              ...char,
-              imageUrl: profile.CharacterImage || "/img-anonymous.webp",
-              guildName: profile.GuildName ?? "-",
-            };
-          } catch {
-            return {
-              ...char,
-              imageUrl: "/img-anonymous.webp",
-              guildName: "-",
-            };
-          }
-        })
-      );
+              return {
+                ...char,
+                imageUrl: profile.CharacterImage || "/img-anonymous.webp",
+                guildName: profile.GuildName ?? "-",
+              };
+            } catch {
+              return {
+                ...char,
+                imageUrl: "/img-anonymous.webp",
+                guildName: "-",
+              };
+            }
+          })
+        );
 
-      const sorted = withImages.sort((a, b) => {
-        const levelA = parseFloat(a.ItemAvgLevel.replace(",", ""));
-        const levelB = parseFloat(b.ItemAvgLevel.replace(",", ""));
-        return levelB - levelA;
-      });
+        const sorted = withImages.sort((a, b) => {
+          const levelA = parseFloat(a.ItemAvgLevel.replace(",", ""));
+          const levelB = parseFloat(b.ItemAvgLevel.replace(",", ""));
+          return levelB - levelA;
+        });
 
-      setCharacters(sorted);
+        setCharacters(sorted);
+      } catch (error) {
+        console.error("데이터 불러오기 실패:", error);
+      }
     };
 
     fetchData();
   }, [keyword]);
-
 
   if (!characters) return <div>로딩 중...</div>;
 

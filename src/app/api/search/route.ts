@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import axios from "axios";
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -17,22 +18,17 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    const res = await fetch(apiUrl, {
+    const res = await axios.get(apiUrl, {
       headers: {
         Authorization: `bearer ${token}`,
         Accept: "application/json",
       },
-      next: { revalidate: 0 },
     });
 
-    if (!res.ok) {
-      const errorText = await res.text();
-      return NextResponse.json({ error: "LOA API 에러", detail: errorText }, { status: res.status });
-    }
-
-    const data = await res.json();
-    return NextResponse.json(data);
-  } catch (err) {
-    return NextResponse.json({ error: "요청 실패", detail: err }, { status: 500 });
+    return NextResponse.json(res.data);
+  } catch (err: any) {
+    const status = err.response?.status || 500;
+    const message = err.response?.data || err.message || "알 수 없는 에러";
+    return NextResponse.json({ error: "LOA API 에러", detail: message }, { status });
   }
 }
