@@ -29,6 +29,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({
       CharacterImage: data.CharacterImage,
       GuildName: data.GuildName,
+      AttackPower: data.Stats[7].Value,
     });
   } catch (err: any) {
     const status = err.response?.status || 500;

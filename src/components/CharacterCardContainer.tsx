@@ -13,7 +13,8 @@ type CharacterData = {
   ItemAvgLevel: string;
   ItemMaxLevel: string;
   imageUrl: string;
-  guildName: string;
+  GuildName: string;
+  AttackPower: string;
 };
 
 type Props = {
@@ -42,13 +43,15 @@ const CharacterCardContainer = ({ keyword }: Props) => {
               return {
                 ...char,
                 imageUrl: profile.CharacterImage || "/img-unknown.png",
-                guildName: profile.GuildName ?? "-",
+                GuildName: profile.GuildName ?? "-",
+                AttackPower: profile.AttackPower ?? "-"
               };
             } catch {
               return {
                 ...char,
                 imageUrl: "/img-unknown.png",
-                guildName: "-",
+                GuildName: "-",
+                AttackPower: "-"
               };
             }
           })
@@ -81,11 +84,9 @@ const CharacterCardContainer = ({ keyword }: Props) => {
           job={char.CharacterClassName}
           imageUrl={char.imageUrl}
           classLevel={char.CharacterLevel}
-          guildName={char.guildName}
+          guildName={char.GuildName}
           itemLevel={char.ItemAvgLevel}
-          stat2="-"
-          stat3="-"
-          score="-"
+          score={char.AttackPower}
         />
       ))}
     </div>
