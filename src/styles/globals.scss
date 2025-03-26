@@ -25,6 +25,14 @@ body {
   font-family: var(--font-sans, Arial, Helvetica, sans-serif);
 }
 
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  grid-row-start: 2;
+  align-items: center;
+}
+
 .searchSection {
   border: 2px solid var(--foreground);
   border-radius: 10px;
