@@ -1,0 +1,78 @@
+.card {
+  position: relative;
+  width: 200px;
+  background-color: #15181D;
+  color: white;
+  border-radius: 10px;
+  padding: 16px;
+  padding-top: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avatar {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+.info {
+  text-align: center;
+}
+
+.header {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  height: 30px;
+  border: 1px solid var(--foreground);
+  border-radius: 4px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+  gap: 5px;
+  font-size: 12px;
+  color: #ccc;
+}
+
+.name {
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 4px;
+}
+
+.server {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  font-size: 12px;
+  color: #888;
+}
+
+.guild {
+  font-size: 12px;
+  margin: 2px 0;
+  color: #4dd;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  margin-top: 6px;
+}
+
+.itemLevel {
+  color: #c1ac95;
+}
+
+.score {
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #ffd700;
+}
