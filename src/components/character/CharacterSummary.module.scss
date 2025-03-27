@@ -1,0 +1,50 @@
+.container {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background-color: #fff;
+}
+
+.image {
+  width: 120px;
+  height: auto;
+  border-radius: 4px;
+}
+
+.info {
+  flex: 1;
+}
+
+.name {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.server {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.levels span {
+  display: inline-block;
+  margin-right: 12px;
+  font-size: 13px;
+}
+
+.stats, .tendencies {
+  margin-top: 12px;
+}
+
+.stats ul, .tendencies ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.stats li, .tendencies li {
+  font-size: 13px;
+  margin-bottom: 4px;
+}

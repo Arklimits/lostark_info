@@ -1,5 +1,5 @@
-import SearchBar from "@/components/SearchBar";
-import CharacterCardContainer from "@/components/CharacterCardContainer";
+import SearchBar from "@/components/search/SearchBar";
+import CharacterCardContainer from "@/components/card/CharacterCardContainer";
 import "@/styles/globals.scss";
 import styles from "./SearchPage.module.scss"
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import axios from "axios";
 import CharacterCard from "./CharacterCard";
 import styles from "./CharacterCardContainer.module.scss";
@@ -24,6 +25,7 @@ type Props = {
 
 const CharacterCardContainer = ({ keyword }: Props) => {
   const [characters, setCharacters] = useState<CharacterData[] | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -109,7 +111,7 @@ const CharacterCardContainer = ({ keyword }: Props) => {
           guildName={char.GuildName}
           itemLevel={char.ItemAvgLevel}
           score={char.score ?? "-"}
-          onClick={() => handleCardClick(char.CharacterName)}
+          onClick={() => router.push(`/character?name=${char.CharacterName}`)}
         />
       ))}
     </div>

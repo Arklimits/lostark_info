@@ -1,6 +1,6 @@
 import Image from "next/image";
-import SearchBar from '@/components/SearchBar';
-import RecentSearchList from "@/components/RecentSearchList";
+import SearchBar from '@/components/search/SearchBar';
+import RecentSearchList from "@/components/search/RecentSearchList";
 
 export default function Home() {
   return (
