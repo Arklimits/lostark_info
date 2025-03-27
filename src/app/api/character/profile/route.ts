@@ -29,17 +29,30 @@ export async function GET(req: NextRequest) {
 
     const critStat = data.Stats.find((s: any) => s.Type === "치명");
     let critRate = null;
-
     if (critStat && Array.isArray(critStat.Tooltip)) {
       const match = critStat.Tooltip[0].match(/([0-9.]+)%/);
       critRate = match[1];
     }
+
+    const swiftness = data.Stats.find((s: any) => s.Type === "신속");
+    const tooltip = swiftness.Tooltip.find((line: string) =>
+      line.includes("스킬 재사용 대기시간")
+    );
+    const coolDown = tooltip.match(/([0-9.]+)%/);
+
+    const specialize = data.Stats.find((s: any) => s.Type === "특화");
+    const line = specialize.Tooltip.find((line: string) =>
+      line.includes("피해량이") && line.includes("%")
+    );
+    const damageBonus = line.match(/([0-9.]+)%/);
 
     return NextResponse.json({
       CharacterImage: data.CharacterImage,
       GuildName: data.GuildName,
       AttackPower: data.Stats[7].Value,
       CritRate: critRate,
+      CoolDown: coolDown,
+      DamageBonus: damageBonus
     });
   } catch (err: any) {
     const status = err.response?.status || 500;
