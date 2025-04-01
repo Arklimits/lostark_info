@@ -1,7 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 10px;
   padding: 1rem;
   background-color: #1e1e1e;
   border-radius: 8px;
@@ -16,38 +16,65 @@
   }
 }
 
-
-
-.type {
-  width: 150px;
-}
-
-.icon {
-  place-items: center;
-  width: 100px;
-}
-
-.icon {
-  margin-right: 8px;
-}
-
-.esther {
-  color: #06f3c0;
+.transcendenceIcon {
+  height: 20px;
 }
 
 .row {
   text-align: center;
+  height: 60px;
   display: flex;
+  gap: 10px;
   background-color: var(--accentcolor);
 
+  .type {
+    align-content: center;
+    width: 120px;
+  }
+
+  .iconHolder {
+    align-content: center;
+    align-items: center;
+    justify-items: center;
+    width: 60px;
+
+    .icon {
+      place-items: center;
+      border: 1px solid var(--foreground);
+      border-radius: 5px;
+    }
+  }
+
   .name {
-    text-align: center;
-    width: 500px;
+    align-content: center;
+    width: 280px;
+
+    span {
+      color: orange;
+    }
+  }
+
+  .slot1 {
+    width: 60px;
+    font-size: 12px;
+    align-content: center;
+  }
+
+  .slot2 {
+    width: 180px;
+    font-size: 12px;
+    text-align: left;
+    align-content: center;
+  }
+
+  .slot3 {
+    width: 60px;
+    display: flex;
+    align-items: center;
   }
 
   &[data-grade='전설'] {
     .icon {
-      
       background-color: #ffce00;
     }
 
@@ -58,7 +85,7 @@
 
   &[data-grade='유물'] {
     .icon {
-      background-color: #ff4f00;
+      background-image: linear-gradient(135deg, #3d3333, #ff4f00);
     }
 
     .name {
