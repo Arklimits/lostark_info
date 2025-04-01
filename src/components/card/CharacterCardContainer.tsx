@@ -30,7 +30,7 @@ const CharacterCardContainer = ({ keyword }: Props) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const searchRes = await axios.get(`/api/search`, {
+        const searchRes = await axios.get('/api/search', {
           params: { keyword },
         });
         const rawList = searchRes.data;
@@ -38,7 +38,7 @@ const CharacterCardContainer = ({ keyword }: Props) => {
         const withImages = await Promise.all(
           rawList.map(async (char: CharacterData) => {
             try {
-              const profileRes = await axios.get(`/api/character/profile`, {
+              const profileRes = await axios.get('/api/character/profile', {
                 params: { name: char.CharacterName },
               });
               const profile = profileRes.data;
