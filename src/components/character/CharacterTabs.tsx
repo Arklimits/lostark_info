@@ -19,18 +19,18 @@ const CharacterTabs = ({ data }: Props) => {
         );
       case '장비':
         return <EquipmentTable equipment={data.ArmoryEquipment} />;
-      case '각인':
-        return <div>각인 정보</div>;
-      case '보석':
-        return <div>보석 정보</div>;
-      case '카드':
-        return <div>카드 정보</div>;
+      case '아바타':
+        return <div>미구현</div>;
+      case '딜표':
+        return <div>딜링 정보</div>;
+      case '스킬':
+        return <div>스킬 정보</div>;
       default:
         return null;
     }
   };
 
-  const tabs = ['특성', '장비', '각인', '보석', '카드'];
+  const tabs = ['특성', '장비', '아바타', '딜표', '스킬'];
 
   return (
     <div className={styles.wrapper}>
