@@ -26,9 +26,17 @@ export async function GET(req: NextRequest) {
     });
 
     return NextResponse.json(res.data);
-  } catch (err: any) {
-    const status = err.response?.status || 500;
-    const message = err.response?.data || err.message || "알 수 없는 에러";
+  } catch (err: unknown) {
+    let status = 500;
+    let message = "알 수 없는 에러";
+
+    if (axios.isAxiosError(err)) {
+      status = err.response?.status || 500;
+      message = err.response?.data || err.message || "알 수 없는 에러";
+    } else if (err instanceof Error) {
+      message = err.message;
+    }
+
     return NextResponse.json(
       { error: "LOA API 에러", detail: message },
       { status }
