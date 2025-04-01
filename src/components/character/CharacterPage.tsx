@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import axios from "axios";
 import styles from "./CharacterPage.module.scss";
 import CharacterSummary from "@/components/character/CharacterSummary";
@@ -11,12 +11,16 @@ import { notFound } from "next/navigation";
 
 const CharacterPage = () => {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const [data, setData] = useState<CharacterData>();
   const [error, setError] = useState(false);
-  const name = searchParams.get("name");
+  const name = searchParams.get("name")?.trim() ?? "";
 
   useEffect(() => {
-    if (!name) return;
+    if (!name) {
+      router.push("/");
+      return;
+    }
 
     const fetchData = async () => {
       try {
@@ -37,6 +41,7 @@ const CharacterPage = () => {
     fetchData();
   }, [name]);
 
+  if (!name) return <div>메인화면으로 돌아갑니다.</div>
   if (error) return notFound();
   if (!data) return <div>로딩 중...</div>;
 
