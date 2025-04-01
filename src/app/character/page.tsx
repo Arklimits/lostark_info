@@ -5,7 +5,7 @@ import CharacterPage from '@/components/character/CharacterPage';
 export default function Page() {
   return (
     <main className="page-container">
-      <section className="search-section">
+      <section className="top-section">
         <SearchBar />
       </section>
 
