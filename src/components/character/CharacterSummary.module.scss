@@ -1,50 +1,67 @@
-.container {
+/* CharacterSummary.module.scss */
+.wrapper {
   display: flex;
-  gap: 20px;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  background-color: #fff;
+  padding: 2rem;
+  background-color: #1c1c1e;
+  color: #f5f5f7;
+  gap: 2rem;
+  border-radius: 12px;
 }
 
-.image {
-  width: 120px;
-  height: auto;
-  border-radius: 4px;
+.leftSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 260px;
+  flex-shrink: 0;
 }
 
-.info {
-  flex: 1;
+.characterImage {
+  border-radius: 8px;
+  border: 1px solid #333;
+  margin-bottom: 1rem;
 }
 
-.name {
-  font-size: 20px;
-  font-weight: bold;
+.basicInfo {
+  text-align: center;
+  font-size: 0.95rem;
+  line-height: 1.5;
+
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.3rem;
+    color: #ffffff;
+  }
+
+  p {
+    margin: 0.1rem 0;
+    color: #aaa;
+  }
 }
 
-.server {
-  font-size: 14px;
-  color: #555;
-  margin-bottom: 10px;
+.rightSection {
+  flex-grow: 1;
 }
 
-.levels span {
-  display: inline-block;
-  margin-right: 12px;
-  font-size: 13px;
+.profileSummary {
+  margin-bottom: 2rem;
 }
 
-.stats, .tendencies {
-  margin-top: 12px;
+.levels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 1rem;
+
+  span {
+    background: #2c2c2e;
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+  }
 }
 
-.stats ul, .tendencies ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.stats li, .tendencies li {
-  font-size: 13px;
-  margin-bottom: 4px;
+.tables {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }

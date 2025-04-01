@@ -1,39 +1,38 @@
+import Image from 'next/image';
 import { ArmoryProfile } from '@/types/character';
 import styles from './CharacterSummary.module.scss';
 
-type CharacterSummaryProps = {
+type Props = {
   profile: ArmoryProfile;
 };
 
-const CharacterSummary = ({ profile }: CharacterSummaryProps) => {
+const CharacterSummary = ({ profile }: Props) => {
   return (
-    <div className={styles.container}>
-      <img src={profile.CharacterImage} alt="캐릭터 이미지" className={styles.image} />
-      <div className={styles.info}>
-        <div className={styles.name}>{profile.CharacterName} ({profile.CharacterClassName})</div>
-        <div className={styles.server}>{profile.ServerName} / Lv. {profile.CharacterLevel}</div>
-        <div className={styles.levels}>
-          <span>아이템 레벨: {profile.ItemAvgLevel}</span>
-          <span>원정대 Lv. {profile.ExpeditionLevel}</span>
-          <span>PVP: {profile.PvpGradeName}</span>
+    <div className={styles.wrapper}>
+      <div className={styles.leftSection}>
+        <Image
+          src={profile.CharacterImage}
+          alt="캐릭터 이미지"
+          className={styles.characterImage}
+          width={240}
+          height={320}
+          unoptimized
+        />
+        <div className={styles.basicInfo}>
+          <h2>{profile.CharacterName}</h2>
+          <p>{profile.CharacterClassName}</p>
+          <p>{profile.ServerName}</p>
         </div>
-        <div className={styles.stats}>
-          <h4>전투 특성</h4>
-          <ul>
-            {profile.Stats.map((stat) => (
-              <li key={stat.Type}>{stat.Type}: {stat.Value}</li>
-            ))}
-          </ul>
-        </div>
-        <div className={styles.tendencies}>
-          <h4>성향</h4>
-          <ul>
-            {profile.Tendencies.map((tendency) => (
-              <li key={tendency.Type}>
-                {tendency.Type}: {tendency.Point} / {tendency.MaxPoint}
-              </li>
-            ))}
-          </ul>
+      </div>
+
+      <div className={styles.rightSection}>
+        <div className={styles.profileSummary}>
+          <div className={styles.levels}>
+            <span>Lv. {profile.CharacterLevel}</span>
+            <span>아이템 레벨: {profile.ItemAvgLevel}</span>
+            <span>원정대 Lv. {profile.ExpeditionLevel}</span>
+            <span>PVP: {profile.PvpGradeName}</span>
+          </div>
         </div>
       </div>
     </div>
