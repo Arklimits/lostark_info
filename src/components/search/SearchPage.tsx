@@ -24,12 +24,7 @@ const SearchPage = () => {
 
   return (
     <div className={styles.container}>
-      <main>
-        <div className={styles.searchSection}>
-          <SearchBar />
-        </div>
-        <CharacterCardContainer keyword={keyword} />
-      </main>
+      <CharacterCardContainer keyword={keyword} />
     </div>
   );
 };
