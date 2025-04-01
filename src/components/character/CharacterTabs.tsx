@@ -33,7 +33,7 @@ const CharacterTabs = ({ data }: Props) => {
   const tabs = ['특성', '장비', '아바타', '딜표', '스킬'];
 
   return (
-    <div className={styles.wrapper}>
+    <>
       <div className={styles.tabList}>
         {tabs.map(tab => (
           <button
@@ -46,7 +46,7 @@ const CharacterTabs = ({ data }: Props) => {
         ))}
       </div>
       <div className={styles.tabContent}>{renderTabContent()}</div>
-    </div>
+    </>
   );
 };
 

@@ -43,14 +43,14 @@ const CharacterPage = () => {
   if (!data) return <div>로딩 중...</div>;
 
   return (
-    <div className={styles.container}>
-      <section className={styles.summarySection}>
+    <>
+      <div className={styles.summarySection}>
         <CharacterSummary profile={data.ArmoryProfile} />
-      </section>
-      <section className={styles.section}>
+      </div>
+      <div>
         <CharacterTabs data={data} />
-      </section>
-    </div>
+      </div>
+    </>
   );
 };
 
