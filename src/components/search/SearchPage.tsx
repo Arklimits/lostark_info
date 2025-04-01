@@ -1,20 +1,20 @@
-"use client";
+'use client';
 
-import { useSearchParams, useRouter } from "next/navigation";
-import { useEffect } from "react";
-import SearchBar from "@/components/search/SearchBar";
-import CharacterCardContainer from "@/components/card/CharacterCardContainer";
-import "@/styles/globals.scss";
-import styles from "./SearchPage.module.scss";
+import { useSearchParams, useRouter } from 'next/navigation';
+import { useEffect } from 'react';
+import SearchBar from '@/components/search/SearchBar';
+import CharacterCardContainer from '@/components/card/CharacterCardContainer';
+import '@/styles/globals.scss';
+import styles from './SearchPage.module.scss';
 
 const SearchPage = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const keyword = searchParams.get("keyword")?.trim() ?? "";
+  const keyword = searchParams.get('keyword')?.trim() ?? '';
 
   useEffect(() => {
     if (!keyword) {
-      router.push("/");
+      router.push('/');
     }
   }, [keyword, router]);
 

@@ -1,5 +1,5 @@
-import CharacterPage from "@/components/character/CharacterPage";
-import { Suspense } from "react";
+import CharacterPage from '@/components/character/CharacterPage';
+import { Suspense } from 'react';
 
 export default function Page() {
   return (

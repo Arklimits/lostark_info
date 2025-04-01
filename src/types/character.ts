@@ -40,4 +40,4 @@ export interface CharacterData {
       Description: string;
     }[];
   };
-};
+}

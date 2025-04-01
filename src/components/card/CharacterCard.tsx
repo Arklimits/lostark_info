@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import Image from 'next/image';
 import styles from './CharacterCard.module.scss';
@@ -24,7 +24,7 @@ const CharacterCard = ({
   guildName,
   itemLevel,
   score,
-  onClick
+  onClick,
 }: CharacterCardProps) => {
   return (
     <div className={styles.card} onClick={onClick}>
