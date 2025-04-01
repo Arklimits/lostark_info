@@ -1,0 +1,88 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 1rem;
+  background-color: #1e1e1e;
+  border-radius: 8px;
+  color: #fff;
+
+  h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid #444;
+    padding-bottom: 0.3rem;
+    color: #ccc;
+  }
+}
+
+
+
+.type {
+  width: 150px;
+}
+
+.icon {
+  place-items: center;
+  width: 100px;
+}
+
+.icon {
+  margin-right: 8px;
+}
+
+.esther {
+  color: #06f3c0;
+}
+
+.row {
+  text-align: center;
+  display: flex;
+  background-color: var(--accentcolor);
+
+  .name {
+    text-align: center;
+    width: 500px;
+  }
+
+  &[data-grade='전설'] {
+    .icon {
+      
+      background-color: #ffce00;
+    }
+
+    .name {
+      color: #ffce00;
+    }
+  }
+
+  &[data-grade='유물'] {
+    .icon {
+      background-color: #ff4f00;
+    }
+
+    .name {
+      color: #ff4f00;
+    }
+  }
+
+  &[data-grade='고대'] {
+    .icon {
+      background-image: linear-gradient(135deg, #3d3333, #dcc99a);
+    }
+
+    .name {
+      color: #dcc99a;
+    }
+  }
+
+  &[data-grade='에스더'] {
+    .icon {
+      background-color: #06f3c0;
+    }
+
+    .name {
+      color: #06f3c0;
+    }
+  }
+}
