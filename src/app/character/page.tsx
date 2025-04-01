@@ -8,7 +8,6 @@ export default function Page() {
       <section className="top-section">
         <SearchBar />
       </section>
-
       <section className="character-section">
         <Suspense fallback={<div>로딩 중...</div>}>
           <CharacterPage />
