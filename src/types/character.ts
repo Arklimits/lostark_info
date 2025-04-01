@@ -21,3 +21,23 @@ export interface ArmoryProfile {
   Stats: Stat[];
   Tendencies: Tendency[];
 }
+
+export interface ArmoryEquipment {
+  Type: string;
+  Name: string;
+  Icon: string;
+  Grade: string;
+  Tooltip: string;
+}
+
+export interface CharacterData {
+  ArmoryProfile: ArmoryProfile;
+  ArmoryEquipment: ArmoryEquipment[];
+  ArmoryEngraving: {
+    Effects: {
+      Icon: string;
+      Name: string;
+      Description: string;
+    }[];
+  };
+};
