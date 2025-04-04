@@ -30,6 +30,14 @@ export interface ArmoryEquipment {
   Tooltip: string;
 }
 
+export interface ArmoryEngraving {
+  Effects: {
+    Icon: string;
+    Name: string;
+    Description: string;
+  }[];
+}
+
 export interface ArmorySkill {
   Name: string;
   Icon: string;
@@ -57,12 +65,6 @@ export interface ArmorySkill {
 export interface CharacterData {
   ArmoryProfile: ArmoryProfile;
   ArmoryEquipment: ArmoryEquipment[];
-  ArmoryEngraving: {
-    Effects: {
-      Icon: string;
-      Name: string;
-      Description: string;
-    }[];
-    ArmorySkills: ArmorySkill[];
-  };
+  ArmoryEngraving: ArmoryEngraving;
+  ArmorySkills: ArmorySkill[];
 }
