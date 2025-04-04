@@ -36,7 +36,7 @@ const CharacterPage = () => {
     };
 
     fetchData();
-  }, [name]);
+  }, [name, router]);
 
   if (!name) return <div>메인화면으로 돌아갑니다.</div>;
   if (error) return notFound();
