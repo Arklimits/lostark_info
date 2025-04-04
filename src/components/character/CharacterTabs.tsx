@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import StatTable from './tables/StatTable';
-import styles from './CharacterTabs.module.scss';
 import EquipmentTable from './tables/EquipmentTable';
+import SkillTable from './tables/SkillTable';
+import styles from './CharacterTabs.module.scss';
 import { CharacterData } from '@/types/character';
 
 interface Props {
@@ -24,7 +25,7 @@ const CharacterTabs = ({ data }: Props) => {
       case '딜표':
         return <div>딜링 정보</div>;
       case '스킬':
-        return <div>스킬 정보</div>;
+        return <SkillTable skills={data.ArmorySkills} />;
       default:
         return null;
     }
