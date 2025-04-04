@@ -30,6 +30,30 @@ export interface ArmoryEquipment {
   Tooltip: string;
 }
 
+export interface ArmorySkill {
+  Name: string;
+  Icon: string;
+  Level: number;
+  Type: string;
+  SkillType: number;
+  Tripods: {
+    Tier: number;
+    Slot: number;
+    Name: string;
+    Icon: string;
+    Level: number;
+    IsSelected: boolean;
+    ToolTip: string;
+  }[];
+  Rune: {
+    Name: string;
+    Icon: string;
+    Grade: string;
+    ToolTip: string;
+  };
+  Tooltip: string;
+}
+
 export interface CharacterData {
   ArmoryProfile: ArmoryProfile;
   ArmoryEquipment: ArmoryEquipment[];
@@ -39,5 +63,6 @@ export interface CharacterData {
       Name: string;
       Description: string;
     }[];
+    ArmorySkills: ArmorySkill[];
   };
 }
