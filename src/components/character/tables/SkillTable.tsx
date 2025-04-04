@@ -42,13 +42,6 @@ function extractCoolTimeFromTooltip(tooltipRaw: string): number {
   return totalSeconds;
 }
 
-function extractDamageTextFromTooltip(tooltipRaw: string): string {
-  const tooltip = JSON.parse(tooltipRaw);
-  const raw = tooltip['Element_005']?.value ?? '';
-
-  return stripHtml(raw);
-}
-
 function extractTripodsFromTooltip(tooltipRaw: string): ParsedTripod[] {
   const tooltip = JSON.parse(tooltipRaw);
 
@@ -69,7 +62,6 @@ const SkillTable = ({ skills }: Props) => {
       {skills
         .filter(skill => skill.Level >= 4 || skill.SkillType > 0)
         .map((skill, idx) => {
-          const damages = extractDamageTextFromTooltip(skill.Tooltip);
           const tripods = extractTripodsFromTooltip(skill.Tooltip);
           const coolTime = extractCoolTimeFromTooltip(skill.Tooltip);
 
@@ -113,11 +105,6 @@ const SkillTable = ({ skills }: Props) => {
                 <div>TBD</div>
                 <div className={styles.tag}>시전시간</div>
               </div>
-              {/* {damages && (
-                <div className={styles.damage}>
-                  <strong>스킬 설명:</strong> {damages}
-                </div>
-              )} */}
             </div>
           );
         })}
