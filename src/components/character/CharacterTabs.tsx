@@ -5,12 +5,14 @@ import SkillTable from './tables/SkillTable';
 import styles from './CharacterTabs.module.scss';
 import { CharacterData } from '@/types/character';
 import DealTable from './tables/DealTable';
+import { Skill } from '@/types/character';
 
 interface Props {
   data: CharacterData;
+  skills: Skill[];
 }
 
-const CharacterTabs = ({ data }: Props) => {
+const CharacterTabs = ({ data, skills }: Props) => {
   const [activeTab, setActiveTab] = useState('특성');
 
   const renderTabContent = () => {
@@ -24,7 +26,13 @@ const CharacterTabs = ({ data }: Props) => {
       case '아바타':
         return <div>미구현</div>;
       case '딜표':
-        return <DealTable skills={data.ArmorySkills} />;
+        return (
+          <DealTable
+            skills={skills}
+            attackPower={data.ArmoryProfile.Stats[7].Value}
+            engraving={data.ArmoryEngraving}
+          />
+        );
       case '스킬':
         return <SkillTable skills={data.ArmorySkills} />;
       default:
