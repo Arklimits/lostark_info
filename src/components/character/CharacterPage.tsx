@@ -56,7 +56,7 @@ const CharacterPage = () => {
         <CharacterSummary profile={data.ArmoryProfile} />
       </div>
       <div>
-        <CharacterTabs data={data} skills={skills} />
+        <CharacterTabs data={data} skills={skills} gem={data.ArmoryGem} />
       </div>
     </>
   );

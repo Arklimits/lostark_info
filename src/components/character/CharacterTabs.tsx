@@ -3,16 +3,17 @@ import StatTable from './tables/StatTable';
 import EquipmentTable from './tables/EquipmentTable';
 import SkillTable from './tables/SkillTable';
 import styles from './CharacterTabs.module.scss';
-import { CharacterData } from '@/types/character';
+import { CharacterData, ArmoryGem } from '@/types/character';
 import DealTable from './tables/DealTable';
 import { Skill } from '@/types/character';
 
 interface Props {
   data: CharacterData;
   skills: Skill[];
+  gem: ArmoryGem;
 }
 
-const CharacterTabs = ({ data, skills }: Props) => {
+const CharacterTabs = ({ data, skills, gem }: Props) => {
   const [activeTab, setActiveTab] = useState('특성');
 
   const renderTabContent = () => {
@@ -34,7 +35,7 @@ const CharacterTabs = ({ data, skills }: Props) => {
           />
         );
       case '스킬':
-        return <SkillTable skills={data.ArmorySkills} />;
+        return <SkillTable skills={data.ArmorySkills} gem={gem} />;
       default:
         return null;
     }
