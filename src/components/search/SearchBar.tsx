@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
-import styles from "./SearchBar.module.scss";
+import styles from './SearchBar.module.scss';
 
 const SearchBar = () => {
-  const [keyword, setKeyword] = useState("");
+  const [keyword, setKeyword] = useState('');
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -20,12 +20,12 @@ const SearchBar = () => {
 
   return (
     <form className={styles.searchBar} onSubmit={handleSubmit}>
-      <div style={{ width: "10px" }}></div>
+      <div style={{ width: '10px' }}></div>
       <input
         type="text"
         placeholder="캐릭터명"
         value={keyword}
-        onChange={(e) => setKeyword(e.target.value)}
+        onChange={e => setKeyword(e.target.value)}
       />
       <button type="submit" aria-label="검색"></button>
     </form>

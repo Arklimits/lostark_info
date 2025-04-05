@@ -1,10 +1,9 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  /* config options here */
   images: {
-    domains: ['img.lostark.co.kr'],
-  }
+    domains: ['img.lostark.co.kr', 'cdn-lostark.game.onstove.com'],
+  },
 };
 
 export default nextConfig;

@@ -3,16 +3,16 @@ import axios from 'axios';
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
-  const keyword = searchParams.get('keyword');
+  const name = searchParams.get('name');
 
-  if (!keyword) {
-    return NextResponse.json({ error: '검색어가 없습니다.' }, { status: 400 });
+  if (!name) {
+    return NextResponse.json({ error: '이름 없음' }, { status: 400 });
   }
 
-  const encodedName = encodeURIComponent(keyword);
-  const apiUrl = `https://developer-lostark.game.onstove.com/characters/${encodedName}/siblings`;
-
+  const encodedName = encodeURIComponent(name);
+  const apiUrl = `https://developer-lostark.game.onstove.com/armories/characters/${encodedName}/engravings`;
   const token = process.env.LOSTARK_API_TOKEN;
+
   if (!token) {
     return NextResponse.json({ error: '서버 토큰 없음' }, { status: 500 });
   }
@@ -25,7 +25,11 @@ export async function GET(req: NextRequest) {
       },
     });
 
-    return NextResponse.json(res.data);
+    const data = res.data;
+
+    return NextResponse.json({
+      ArkPassiveEffects: data.ArkPassiveEffects,
+    });
   } catch (err: unknown) {
     let status = 500;
     let message = '알 수 없는 에러';

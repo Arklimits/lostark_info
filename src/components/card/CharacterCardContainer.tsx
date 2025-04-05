@@ -1,19 +1,22 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import axios from "axios";
-import CharacterCard from "./CharacterCard";
-import styles from "./CharacterCardContainer.module.scss";
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import axios from 'axios';
+import CharacterCard from './CharacterCard';
+import styles from './CharacterCardContainer.module.scss';
 
 type CharacterData = {
   ServerName: string;
   CharacterName: string;
   CharacterLevel: number;
   CharacterClassName: string;
-  ItemAvgLevel: string;
-  ItemMaxLevel: string;
+  ItemAvgLevel: number;
+  ItemMaxLevel: number;
   imageUrl: string;
-  guildName: string;
+  GuildName: string;
+  AttackPower: string;
+  score: string;
 };
 
 type Props = {
@@ -22,11 +25,12 @@ type Props = {
 
 const CharacterCardContainer = ({ keyword }: Props) => {
   const [characters, setCharacters] = useState<CharacterData[] | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const searchRes = await axios.get(`/api/search`, {
+        const searchRes = await axios.get('/api/search', {
           params: { keyword },
         });
         const rawList = searchRes.data;
@@ -34,35 +38,37 @@ const CharacterCardContainer = ({ keyword }: Props) => {
         const withImages = await Promise.all(
           rawList.map(async (char: CharacterData) => {
             try {
-              const profileRes = await axios.get(`/api/profile`, {
+              const profileRes = await axios.get('/api/character/profile', {
                 params: { name: char.CharacterName },
               });
               const profile = profileRes.data;
 
               return {
                 ...char,
-                imageUrl: profile.CharacterImage || "/img-unknown.png",
-                guildName: profile.GuildName ?? "-",
+                imageUrl: profile.CharacterImage || '/img-unknown.png',
+                GuildName: profile.GuildName ?? '-',
+                AttackPower: profile.AttackPower ?? '-',
               };
             } catch {
               return {
                 ...char,
-                imageUrl: "/img-unknown.png",
-                guildName: "-",
+                imageUrl: '/img-unknown.png',
+                GuildName: '-',
+                AttackPower: '-',
               };
             }
           })
         );
 
         const sorted = withImages.sort((a, b) => {
-          const levelA = parseFloat(a.ItemAvgLevel.replace(",", ""));
-          const levelB = parseFloat(b.ItemAvgLevel.replace(",", ""));
+          const levelA = a.ItemMaxLevel;
+          const levelB = b.ItemMaxLevel;
           return levelB - levelA;
         });
 
         setCharacters(sorted);
       } catch (error) {
-        console.error("데이터 불러오기 실패:", error);
+        console.error('데이터 불러오기 실패:', error);
       }
     };
 
@@ -73,7 +79,7 @@ const CharacterCardContainer = ({ keyword }: Props) => {
 
   return (
     <div className={styles.cardContainer}>
-      {characters.map((char) => (
+      {characters.map(char => (
         <CharacterCard
           key={char.CharacterName}
           name={char.CharacterName}
@@ -81,11 +87,10 @@ const CharacterCardContainer = ({ keyword }: Props) => {
           job={char.CharacterClassName}
           imageUrl={char.imageUrl}
           classLevel={char.CharacterLevel}
-          guildName={char.guildName}
-          itemLevel={char.ItemAvgLevel}
-          stat2="-"
-          stat3="-"
-          score="-"
+          guildName={char.GuildName}
+          itemLevel={char.ItemMaxLevel}
+          score={char.score ?? '-'}
+          onClick={() => router.push(`/character?name=${char.CharacterName}`)}
         />
       ))}
     </div>

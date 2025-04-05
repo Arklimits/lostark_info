@@ -1,5 +1,6 @@
 .searchBar {
   height: 80px;
+  width: 396px;
   align-items: center;
   display: flex;
   gap: 10px;
@@ -16,14 +17,14 @@
   button {
     width: 56px;
     height: 100%;
-    background-image: url("/ico/ico-search_light.png");
+    background-image: url('/ico/ico-search_light.png');
     background-repeat: no-repeat;
     background-size: 80%;
     background-position: center;
     cursor: pointer;
 
     @media (prefers-color-scheme: dark) {
-      background-image: url("/ico/ico-search_dark.png");
+      background-image: url('/ico/ico-search_dark.png');
     }
   }
 }

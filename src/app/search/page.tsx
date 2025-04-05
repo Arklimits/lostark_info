@@ -1,29 +1,18 @@
-import SearchBar from "@/components/SearchBar";
-import CharacterCardContainer from "@/components/CharacterCardContainer";
-import "@/styles/globals.scss";
-import styles from "./SearchPage.module.scss"
+import SearchPage from '@/components/search/SearchPage';
+import SearchBar from '@/components/search/SearchBar';
+import { Suspense } from 'react';
 
-type SearchPageProps = {
-  searchParams: { keyword?: string };
-};
-
-const SearchPage = ({ searchParams }: SearchPageProps) => {
-  const keyword = typeof searchParams.keyword === "string" ? searchParams.keyword.trim() : "";
-
-  if (!keyword) {
-    return <div>검색어가 없습니다.</div>;
-  }
-
+export default function Page() {
   return (
-    <div className={styles.container}>
-      <main>
-        <div className="searchSection">
-          <SearchBar />
-        </div>
-        <CharacterCardContainer keyword={keyword} />
-      </main>
-    </div>
+    <main>
+      <section className="top-section">
+        <SearchBar />
+      </section>
+      <section>
+        <Suspense>
+          <SearchPage />
+        </Suspense>
+      </section>
+    </main>
   );
-};
-
-export default SearchPage;
+}

@@ -1,0 +1,115 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 1rem;
+  background-color: #1e1e1e;
+  border-radius: 0 0 8px 8px;
+  color: #fff;
+
+  h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid #444;
+    padding-bottom: 0.3rem;
+    color: #ccc;
+  }
+}
+
+.transcendenceIcon {
+  height: 20px;
+}
+
+.row {
+  text-align: center;
+  height: 60px;
+  display: flex;
+  gap: 10px;
+  background-color: var(--accentcolor);
+
+  .type {
+    align-content: center;
+    width: 120px;
+  }
+
+  .iconHolder {
+    align-content: center;
+    align-items: center;
+    justify-items: center;
+    width: 60px;
+
+    .icon {
+      place-items: center;
+      border: 1px solid var(--foreground);
+      border-radius: 5px;
+    }
+  }
+
+  .name {
+    align-content: center;
+    width: 280px;
+
+    span {
+      color: orange;
+    }
+  }
+
+  .slot1 {
+    width: 60px;
+    font-size: 12px;
+    align-content: center;
+  }
+
+  .slot2 {
+    width: 180px;
+    font-size: 12px;
+    text-align: left;
+    align-content: center;
+  }
+
+  .slot3 {
+    width: 60px;
+    display: flex;
+    align-items: center;
+  }
+
+  &[data-grade='전설'] {
+    .icon {
+      background-color: #ffce00;
+    }
+
+    .name {
+      color: #ffce00;
+    }
+  }
+
+  &[data-grade='유물'] {
+    .icon {
+      background-image: linear-gradient(135deg, #3d3333, #ff4f00);
+    }
+
+    .name {
+      color: #ff4f00;
+    }
+  }
+
+  &[data-grade='고대'] {
+    .icon {
+      background-image: linear-gradient(135deg, #3d3333, #dcc99a);
+    }
+
+    .name {
+      color: #dcc99a;
+    }
+  }
+
+  &[data-grade='에스더'] {
+    .icon {
+      background-color: #06f3c0;
+    }
+
+    .name {
+      color: #06f3c0;
+    }
+  }
+}
