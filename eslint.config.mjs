@@ -10,7 +10,6 @@ export default [
   ...compat.extends('next/core-web-vitals', 'plugin:prettier/recommended'),
   {
     rules: {
-      quotes: ['error', 'single'],
       semi: ['error', 'always'],
     },
   },
