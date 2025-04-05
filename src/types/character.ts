@@ -1,6 +1,6 @@
 export interface Stat {
   Type: string;
-  Value: string;
+  Value: number;
 }
 
 export interface Tendency {
@@ -31,8 +31,9 @@ export interface ArmoryEquipment {
 }
 
 export interface ArmoryEngraving {
-  Effects: {
-    Icon: string;
+  ArkPassiveEffects: {
+    Grade: string;
+    Level: number;
     Name: string;
     Description: string;
   }[];
@@ -60,6 +61,13 @@ export interface ArmorySkill {
     ToolTip: string;
   };
   Tooltip: string;
+}
+
+export interface Skill extends ArmorySkill {
+  coefficient: number;
+  constant: number;
+  cooltime: number;
+  casttime: number;
 }
 
 export interface CharacterData {
