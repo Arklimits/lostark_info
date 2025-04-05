@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import axios from 'axios';
-import { Stat } from '@/types/character';
+import { db } from '@/lib/db';
+import { RowDataPacket, ResultSetHeader } from 'mysql2';
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -10,15 +11,24 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: '이름 없음' }, { status: 400 });
   }
 
-  const encodedName = encodeURIComponent(name);
-  const apiUrl = `https://developer-lostark.game.onstove.com/armories/characters/${encodedName}/profiles`;
-  const token = process.env.LOSTARK_API_TOKEN;
-
-  if (!token) {
-    return NextResponse.json({ error: '서버 토큰 없음' }, { status: 500 });
-  }
-
   try {
+    const [rows] = await db.query<RowDataPacket[]>(
+      'SELECT character_image AS CharacterImage, guild AS GuildName FROM characters WHERE name = ?',
+      [name]
+    );
+
+    if (rows[0].CharacterImage !== null) {
+      return NextResponse.json(rows[0]);
+    }
+
+    const encodedName = encodeURIComponent(name);
+    const apiUrl = `https://developer-lostark.game.onstove.com/armories/characters/${encodedName}/profiles`;
+    const token = process.env.LOSTARK_API_TOKEN;
+
+    if (!token) {
+      return NextResponse.json({ error: '서버 토큰 없음' }, { status: 500 });
+    }
+
     const res = await axios.get(apiUrl, {
       headers: {
         Authorization: `bearer ${token}`,
@@ -26,34 +36,14 @@ export async function GET(req: NextRequest) {
       },
     });
 
-    const data = res.data;
-
-    const critStat = data.Stats.find((s: Stat) => s.Type === '치명');
-    let critRate = null;
-    if (critStat && Array.isArray(critStat.Tooltip)) {
-      const match = critStat.Tooltip[0].match(/([0-9.]+)%/);
-      critRate = match?.[1] ?? null;
-    }
-
-    const swiftness = data.Stats.find((s: Stat) => s.Type === '신속');
-    const tooltip = swiftness?.Tooltip.find((line: string) =>
-      line.includes('스킬 재사용 대기시간')
+    await db.query<ResultSetHeader>(
+      'UPDATE characters SET character_image = ?, guild = ? WHERE name = ?',
+      [res.data.CharacterImage, res.data.GuildName, name]
     );
-    const coolDown = tooltip?.match(/([0-9.]+)%/)?.[1] ?? null;
-
-    const specialize = data.Stats.find((s: Stat) => s.Type === '특화');
-    const line = specialize?.Tooltip.find(
-      (line: string) => line.includes('피해량이') && line.includes('%')
-    );
-    const damageBonus = line?.match(/([0-9.]+)%/)?.[1] ?? null;
 
     return NextResponse.json({
-      CharacterImage: data.CharacterImage,
-      GuildName: data.GuildName,
-      AttackPower: data.Stats[7].Value,
-      CritRate: critRate,
-      CoolDown: coolDown,
-      DamageBonus: damageBonus,
+      CharacterImage: res.data.CharacterImage,
+      GuildName: res.data.GuildName,
     });
   } catch (err: unknown) {
     let status = 500;
