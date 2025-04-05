@@ -4,6 +4,7 @@ import EquipmentTable from './tables/EquipmentTable';
 import SkillTable from './tables/SkillTable';
 import styles from './CharacterTabs.module.scss';
 import { CharacterData } from '@/types/character';
+import DealTable from './tables/DealTable';
 
 interface Props {
   data: CharacterData;
@@ -23,7 +24,7 @@ const CharacterTabs = ({ data }: Props) => {
       case '아바타':
         return <div>미구현</div>;
       case '딜표':
-        return <div>딜링 정보</div>;
+        return <DealTable skills={data.ArmorySkills} />;
       case '스킬':
         return <SkillTable skills={data.ArmorySkills} />;
       default:
