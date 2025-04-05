@@ -11,8 +11,8 @@ type CharacterData = {
   CharacterName: string;
   CharacterLevel: number;
   CharacterClassName: string;
-  ItemAvgLevel: string;
-  ItemMaxLevel: string;
+  ItemAvgLevel: number;
+  ItemMaxLevel: number;
   imageUrl: string;
   GuildName: string;
   AttackPower: string;
@@ -61,8 +61,8 @@ const CharacterCardContainer = ({ keyword }: Props) => {
         );
 
         const sorted = withImages.sort((a, b) => {
-          const levelA = parseFloat(a.ItemAvgLevel.replace(',', ''));
-          const levelB = parseFloat(b.ItemAvgLevel.replace(',', ''));
+          const levelA = a.ItemMaxLevel;
+          const levelB = b.ItemMaxLevel;
           return levelB - levelA;
         });
 
@@ -88,7 +88,7 @@ const CharacterCardContainer = ({ keyword }: Props) => {
           imageUrl={char.imageUrl}
           classLevel={char.CharacterLevel}
           guildName={char.GuildName}
-          itemLevel={char.ItemAvgLevel}
+          itemLevel={char.ItemMaxLevel}
           score={char.score ?? '-'}
           onClick={() => router.push(`/character?name=${char.CharacterName}`)}
         />

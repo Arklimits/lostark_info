@@ -10,7 +10,7 @@ type CharacterCardProps = {
   imageUrl: string;
   classLevel: number;
   guildName: string;
-  itemLevel: string;
+  itemLevel: number;
   score: string;
   onClick?: () => void;
 };
