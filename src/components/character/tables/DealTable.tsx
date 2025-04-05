@@ -36,7 +36,7 @@ const DealTable = ({ skills, attackPower, engraving }: Props) => {
             </div>
             <div className={styles.name}>{skill.Name}</div>
             <div className={styles.damage}>
-              {calculateCriticalDamage({
+              {/* {calculateCriticalDamage({
                 motionCoefficient: skill.coefficient,
                 attackPower: attackPower * engAttackBonus,
                 motionConstant: skill.constant,
@@ -45,7 +45,8 @@ const DealTable = ({ skills, attackPower, engraving }: Props) => {
                 damageTakenIncrease: 0.8056,
                 criticalDamageIncrease: 2.58 + engCritDamageBonus,
                 criticalHitDamageMultiplier: 1.153852,
-              }).toFixed(0)}
+              }).toFixed(0)} */}
+              TBD
             </div>
           </div>
         ))}
