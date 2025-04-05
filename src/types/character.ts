@@ -70,7 +70,12 @@ export interface Skill extends ArmorySkill {
   casttime: number;
 }
 
-export interface ArkPassiveEffect {
+export interface ArkPassive {
+  Points: {
+    Name: string;
+    Value: number;
+    Tooltip: string;
+  }[];
   Effects: {
     Name: string;
     Description: string;
@@ -94,6 +99,6 @@ export interface CharacterData {
   ArmoryEquipment: ArmoryEquipment[];
   ArmoryEngraving: ArmoryEngraving;
   ArmorySkills: ArmorySkill[];
-  ArkPassiveEffect: ArkPassiveEffect[];
+  ArkPassive: ArkPassive;
   ArmoryGem: ArmoryGem;
 }
