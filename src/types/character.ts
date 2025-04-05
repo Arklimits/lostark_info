@@ -79,10 +79,21 @@ export interface ArkPassiveEffect {
   }[];
 }
 
+export interface ArmoryGem {
+  Gems: {
+    Name: string;
+    Icon: string;
+    Level: number;
+    Grade: string;
+    Tooltip: string;
+  }[];
+}
+
 export interface CharacterData {
   ArmoryProfile: ArmoryProfile;
   ArmoryEquipment: ArmoryEquipment[];
   ArmoryEngraving: ArmoryEngraving;
   ArmorySkills: ArmorySkill[];
   ArkPassiveEffect: ArkPassiveEffect[];
+  ArmoryGem: ArmoryGem;
 }
