@@ -86,15 +86,60 @@
   }
 }
 
-.rune {
-  width: 120px;
-  display: flex;
-  justify-content: center;
-  line-height: 1.8;
-}
-
 .damage {
   width: 580px;
   font-size: 25px;
   font-weight: 500;
 }
+
+.gemsAndRunes {
+  width: 120px;
+  line-height: 1.8;
+
+  .rune {
+    display: flex;
+  }
+  
+  .gem {
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    gap: 2px;  
+  }
+  
+  img {
+    border: 1px solid var(--foreground);
+    border-radius: 8px;
+    margin-right: 4px;
+  }
+  [data-grade='희귀'] {
+    img {
+      background-image: linear-gradient(135deg, #3d3333, #3cff00);
+    }
+  }
+
+  [data-grade='영웅'] {
+    img {
+      background-image: linear-gradient(135deg, #3d3333, #9900ff);
+    }
+  }
+
+  [data-grade='전설'] {
+    img {
+      background-image: linear-gradient(135deg, #3d3333, #ffce00);
+    }
+  }
+
+  [data-grade='유물'] {
+    img {
+      background-image: linear-gradient(135deg, #3d3333, #ff4f00);
+    }
+  }
+
+  [data-grade='고대'] {
+    img {
+      background-image: linear-gradient(135deg, #3d3333, #dcc99a);
+    }
+  }
+}
+

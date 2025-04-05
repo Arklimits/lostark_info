@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { ArmorySkill } from '@/types/character';
+import { ArmorySkill, ArmoryGem } from '@/types/character';
 import styles from './SkillTable.module.scss';
 
 interface ParsedTripod {
@@ -11,6 +11,7 @@ interface ParsedTripod {
 
 type Props = {
   skills: ArmorySkill[];
+  gem: ArmoryGem;
 };
 
 function stripHtml(input: string): string {
@@ -56,7 +57,7 @@ function extractTripodsFromTooltip(tooltipRaw: string): ParsedTripod[] {
   }));
 }
 
-const SkillTable = ({ skills }: Props) => {
+const SkillTable = ({ skills, gem }: Props) => {
   return (
     <div className={styles.table}>
       {skills
@@ -64,14 +65,16 @@ const SkillTable = ({ skills }: Props) => {
         .map((skill, idx) => {
           const tripods = extractTripodsFromTooltip(skill.Tooltip);
           const coolTime = extractCoolTimeFromTooltip(skill.Tooltip);
+          const matchingGems = gem.Gems.filter(g => g.Tooltip.includes(skill.Name));
 
           return (
             <div key={idx} className={styles.row}>
               <div className={styles.skillIcon}>
                 <Image src={skill.Icon} alt={skill.Name} width={40} height={40} />
               </div>
-              <div className={styles.name}>{skill.Name}</div>
-
+              <div className={styles.name}>
+                {skill.Name}
+              </div>
               <div className={styles.tripods}>
                 {tripods.map((tripod, i) =>
                   tripod.name ? (
@@ -84,12 +87,22 @@ const SkillTable = ({ skills }: Props) => {
                 )}
               </div>
 
-              <div className={styles.rune}>
+              <div className={styles.gemsAndRunes}>
                 {skill.Rune && (
-                  <>
+                  <div className={styles.rune} data-grade={skill.Rune.Grade}>
                     <Image src={skill.Rune.Icon} alt={skill.Rune.Name} width={30} height={30} />
                     <div>{`${skill.Rune.Grade} ${skill.Rune.Name}`}</div>
-                  </>
+                  </div>
+                )}
+                {matchingGems.length > 0 && (
+                  <div className={styles.gems}>
+                    {matchingGems.map((g, i) => (
+                      <div key={i} className={styles.gem} data-grade={g.Grade}>
+                        <Image src={g.Icon} alt={g.Name} width={30} height={30} />
+                        <div className={styles.gemName}>{stripHtml(g.Name).replace(/의 보석/, '')}</div>
+                      </div>
+                    ))}
+                  </div>
                 )}
               </div>
 
