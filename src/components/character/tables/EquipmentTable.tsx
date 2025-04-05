@@ -9,7 +9,6 @@ interface Props {
 function extractRefinementLevel(tooltip: string): number | null {
   const match = tooltip.match(/<FONT COLOR='#FFD200'>(\d+)<\/FONT>단계/);
 
-  console.log(match);
   return match ? parseInt(match[1], 10) : null;
 }
 
