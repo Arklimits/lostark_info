@@ -72,9 +72,7 @@ const SkillTable = ({ skills, gem }: Props) => {
               <div className={styles.skillIcon}>
                 <Image src={skill.Icon} alt={skill.Name} width={40} height={40} />
               </div>
-              <div className={styles.name}>
-                {skill.Name}
-              </div>
+              <div className={styles.name}>{skill.Name}</div>
               <div className={styles.tripods}>
                 {tripods.map((tripod, i) =>
                   tripod.name ? (
@@ -99,7 +97,9 @@ const SkillTable = ({ skills, gem }: Props) => {
                     {matchingGems.map((g, i) => (
                       <div key={i} className={styles.gem} data-grade={g.Grade}>
                         <Image src={g.Icon} alt={g.Name} width={30} height={30} />
-                        <div className={styles.gemName}>{stripHtml(g.Name).replace(/의 보석/, '')}</div>
+                        <div className={styles.gemName}>
+                          {stripHtml(g.Name).replace(/의 보석/, '')}
+                        </div>
                       </div>
                     ))}
                   </div>

@@ -1,5 +1,5 @@
 import styles from './ArkPassiveIcon.module.scss';
-
+import Image from 'next/image';
 type ArkPassiveIconProps = {
   title: string;
   icon: string;
@@ -20,7 +20,7 @@ const ArkPassiveIcon = ({ title, icon, level, maxLevel, isActive }: ArkPassiveIc
   return (
     <div className={styles.container} title={title}>
       <div className={styles.iconWrapper}>
-        <img
+        <Image
           alt={title}
           src={icon}
           className={`${styles.icon} ${!isActive ? styles.inactive : ''}`}
