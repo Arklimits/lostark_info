@@ -15,8 +15,9 @@ export interface ArmoryProfile {
   CharacterClassName: string;
   ServerName: string;
   CharacterLevel: number;
-  ItemAvgLevel: string;
+  ItemMaxLevel: number;
   ExpeditionLevel: number;
+  GuildName: string;
   PvpGradeName: string;
   Stats: Stat[];
   Tendencies: Tendency[];
