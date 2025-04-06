@@ -1,12 +1,17 @@
 import { ArmoryProfile } from '@/types/character';
 import styles from './StatTable.module.scss';
-
+import EvolutionSection from './EvolutionSection';
+import { EvolutionDto } from '@/types/dto/evolution';
+import EnlightenmentSection from './EnlightenmentSection';
+import LeapSection from './LeapSection';
 type Props = {
   stats: ArmoryProfile['Stats'];
   tendencies: ArmoryProfile['Tendencies'];
+  evolution: EvolutionDto[];
+  characterClass: string;
 };
 
-const StatTable = ({ stats, tendencies }: Props) => {
+const StatTable = ({ stats, tendencies, evolution, characterClass }: Props) => {
   return (
     <div className={styles.container}>
       <div className={styles.section}>
@@ -32,6 +37,25 @@ const StatTable = ({ stats, tendencies }: Props) => {
               </span>
             </div>
           ))}
+        </div>
+      </div>
+
+      <div className={styles.halfSectionContainer}>
+        <div className={styles.halfSection}>
+          <h3>진화</h3>
+          <EvolutionSection evolution={evolution} />
+        </div>
+
+        <div className={styles.halfSection}>
+          <h3>깨달음</h3>
+          <EnlightenmentSection evolution={evolution} characterClass={characterClass} />
+        </div>
+      </div>
+
+      <div className={styles.halfSectionContainer}>
+        <div className={styles.halfSection}>
+          <h3>도약</h3>
+          <LeapSection evolution={evolution} characterClass={characterClass} />
         </div>
       </div>
     </div>

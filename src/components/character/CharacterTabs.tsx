@@ -6,6 +6,7 @@ import styles from './CharacterTabs.module.scss';
 import { CharacterData, ArmoryGem } from '@/types/character';
 import DealTable from './tables/DealTable';
 import { Skill } from '@/types/character';
+import { parseArkPassive } from '@/utils/parse/arkPassive';
 
 interface Props {
   data: CharacterData;
@@ -16,11 +17,19 @@ interface Props {
 const CharacterTabs = ({ data, skills, gem }: Props) => {
   const [activeTab, setActiveTab] = useState('특성');
 
+  // 진화 정보 파싱
+  const evolution = parseArkPassive(data.ArkPassive);
+
   const renderTabContent = () => {
     switch (activeTab) {
       case '특성':
         return (
-          <StatTable stats={data.ArmoryProfile.Stats} tendencies={data.ArmoryProfile.Tendencies} />
+          <StatTable
+            stats={data.ArmoryProfile.Stats}
+            tendencies={data.ArmoryProfile.Tendencies}
+            characterClass={data.ArmoryProfile.CharacterClassName}
+            evolution={evolution}
+          />
         );
       case '장비':
         return <EquipmentTable equipment={data.ArmoryEquipment} />;
