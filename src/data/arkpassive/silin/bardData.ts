@@ -1,0 +1,164 @@
+export const bardData = [
+  {
+    name: "깨달음",
+    title: "null",
+    icon: "",
+    level: -1,
+    maxLevel: -1,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "구원의 선물",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_bd/ark_passive_bd_1.png",
+    level: 0,
+    maxLevel: 1,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "진실된 용맹",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_bd/ark_passive_bd_2.png",
+    level: 0,
+    maxLevel: 3,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "null",
+    icon: "",
+    level: -1,
+    maxLevel: -1,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "null",
+    icon: "",
+    level: -1,
+    maxLevel: -1,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "절실한 구원",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_bd/ark_passive_bd_3.png",
+    level: 0,
+    maxLevel: 3,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "끝없는 찬가",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_bd/ark_passive_bd_4.png",
+    level: 0,
+    maxLevel: 3,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "null",
+    icon: "",
+    level: -1,
+    maxLevel: -1,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "포용의 세레나데",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_01/ark_passive_01_33.png",
+    level: 0,
+    maxLevel: 5,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "증폭의 세레나데",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_bd/ark_passive_bd_7.png",
+    level: 0,
+    maxLevel: 3,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "용맹의 찬가",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_bd/ark_passive_bd_6.png",
+    level: 0,
+    maxLevel: 3,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "전투의 찬가",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_bd/ark_passive_bd_8.png",
+    level: 0,
+    maxLevel: 5,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "낙인의 세레나데",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_bd/ark_passive_bd_9.png",
+    level: 0,
+    maxLevel: 5,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "합창의 세레나데",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_bd/ark_passive_bd_5.png",
+    level: 0,
+    maxLevel: 3,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "찬가 : 템페스트",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_bd/ark_passive_bd_10.png",
+    level: 0,
+    maxLevel: 3,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "방랑자",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_01/ark_passive_01_71.png",
+    level: 0,
+    maxLevel: 5,
+    isActive: false
+  },
+  {
+    name: "도약",
+    title: "마르지 않는 영감",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_bd/ark_passive_bd_12.png",
+    level: 0,
+    maxLevel: 3,
+    isActive: false
+  },
+  {
+    name: "도약",
+    title: "풍요의 랩소디",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_bd/ark_passive_bd_11.png",
+    level: 0,
+    maxLevel: 3,
+    isActive: false
+  },
+  {
+    name: "도약",
+    title: "앙코르",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_bd/ark_passive_bd_13.png",
+    level: 0,
+    maxLevel: 3,
+    isActive: false
+  },
+  {
+    name: "도약",
+    title: "이명",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_bd/ark_passive_bd_14.png",
+    level: 0,
+    maxLevel: 3,
+    isActive: false
+  }
+];
+
+export default bardData; 

@@ -1,0 +1,161 @@
+export const demonicData = [
+  {
+    name: "깨달음",
+    title: "null",
+    icon: "",
+    level: -1,
+    maxLevel: -1,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "멈출 수 없는 충동",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_dm/ark_passive_dm_1.png",
+    level: 0,
+    maxLevel: 1,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "완벽한 억제",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_dm/ark_passive_dm_6.png",
+    level: 0,
+    maxLevel: 3,
+    isActive: false
+  },
+  {
+    name: "null",
+    icon: "",
+    level: -1,
+    maxLevel: -1,
+    isActive: false
+  },
+  {
+    name: "null",
+    icon: "",
+    level: -1,
+    maxLevel: -1,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "본능 강화",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_dm/ark_passive_dm_2.png",
+    level: 0,
+    maxLevel: 3,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "잠식 제어",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_dm/ark_passive_dm_7.png",
+    level: 0,
+    maxLevel: 3,
+    isActive: false
+  },
+  {
+    name: "null",
+    icon: "",
+    level: -1,
+    maxLevel: -1,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "혼돈 단련",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_dm/ark_passive_dm_3.png",
+    level: 0,
+    maxLevel: 5,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "혼돈 강화",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_01/ark_passive_01_18.png",
+    level: 0,
+    maxLevel: 3,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "무기 단련",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_01/ark_passive_01_15.png",
+    level: 0,
+    maxLevel: 3,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "잠식 흡수",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_dm/ark_passive_dm_8.png",
+    level: 0,
+    maxLevel: 5,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "침식",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_dm/ark_passive_dm_4.png",
+    level: 0,
+    maxLevel: 5,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "블러드 피어싱",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_dm/ark_passive_dm_5.png",
+    level: 0,
+    maxLevel: 3,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "스톰 그라인딩",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_dm/ark_passive_dm_9.png",
+    level: 0,
+    maxLevel: 3,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "잠식 강화",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_dm/ark_passive_dm_10.png",
+    level: 0,
+    maxLevel: 5,
+    isActive: false
+  },
+  {
+    name: "도약",
+    title: "악의적인 권한",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_dm/ark_passive_dm_11.png",
+    level: 0,
+    maxLevel: 3,
+    isActive: false
+  },
+  {
+    name: "도약",
+    title: "황천 주입",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_dm/ark_passive_dm_14.png",
+    level: 0,
+    maxLevel: 3,
+    isActive: false
+  },
+  {
+    name: "도약",
+    title: "지옥의 광란",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_dm/ark_passive_dm_15.png",
+    level: 0,
+    maxLevel: 3,
+    isActive: false
+  },
+  {
+    name: "도약",
+    title: "악마의 승천",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_dm/ark_passive_dm_16.png",
+    level: 0,
+    maxLevel: 3,
+    isActive: false
+  }
+];
+
+export default demonicData;

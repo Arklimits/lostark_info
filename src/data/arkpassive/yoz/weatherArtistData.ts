@@ -1,0 +1,164 @@
+export const weatherArtistData = [
+  {
+    name: "깨달음",
+    title: "null",
+    icon: "",
+    level: -1,
+    maxLevel: -1,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "질풍노도",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_wa/ark_passive_wa_1.png",
+    level: 0,
+    maxLevel: 1,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "이슬비",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_01/ark_passive_01_56.png",
+    level: 0,
+    maxLevel: 3,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "null",
+    icon: "",
+    level: -1,
+    maxLevel: -1,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "null",
+    icon: "",
+    level: -1,
+    maxLevel: -1,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "환기",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_01/ark_passive_01_54.png",
+    level: 0,
+    maxLevel: 3,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "비의 보호막",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_wa/ark_passive_wa_5.png",
+    level: 0,
+    maxLevel: 3,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "null",
+    icon: "",
+    level: -1,
+    maxLevel: -1,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "자연의 흐름",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_01/ark_passive_01_17.png",
+    level: 0,
+    maxLevel: 5,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "기민함",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_wa/ark_passive_wa_2.png",
+    level: 0,
+    maxLevel: 3,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "맑은 날",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_01/ark_passive_01_21.png",
+    level: 0,
+    maxLevel: 3,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "단련",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_01/ark_passive_01_5.png",
+    level: 0,
+    maxLevel: 5,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "바람의 길",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_wa/ark_passive_wa_3.png",
+    level: 0,
+    maxLevel: 5,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "공간 가르기",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_wa/ark_passive_wa_4.png",
+    level: 0,
+    maxLevel: 3,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "눈부신 나날들",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_wa/ark_passive_wa_6.png",
+    level: 0,
+    maxLevel: 3,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "수증기 충전",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_01/ark_passive_01_22.png",
+    level: 0,
+    maxLevel: 5,
+    isActive: false
+  },
+  {
+    name: "도약",
+    title: "완벽한 가르기",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_wa/ark_passive_wa_7.png",
+    level: 0,
+    maxLevel: 3,
+    isActive: false
+  },
+  {
+    name: "도약",
+    title: "단련된 가르기",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_wa/ark_passive_wa_8.png",
+    level: 0,
+    maxLevel: 3,
+    isActive: false
+  },
+  {
+    name: "도약",
+    title: "온도 상승",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_wa/ark_passive_wa_9.png",
+    level: 0,
+    maxLevel: 3,
+    isActive: false
+  },
+  {
+    name: "도약",
+    title: "햇살의 포옹",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_wa/ark_passive_wa_10.png",
+    level: 0,
+    maxLevel: 3,
+    isActive: false
+  }
+];
+
+export default weatherArtistData; 

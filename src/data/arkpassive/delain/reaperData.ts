@@ -1,0 +1,164 @@
+export const reaperData = [
+  {
+    name: "깨달음",
+    title: "null",
+    icon: "",
+    level: -1,
+    maxLevel: -1,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "달의 소리",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_rp/ark_passive_rp_1.png",
+    level: 0,
+    maxLevel: 3,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "피냄새",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_rp/ark_passive_rp_5.png",
+    level: 0,
+    maxLevel: 3,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "null",
+    icon: "",
+    level: -1,
+    maxLevel: -1,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "null",
+    icon: "",
+    level: -1,
+    maxLevel: -1,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "유령 무희",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_01/ark_passive_01_37.png",
+    level: 0,
+    maxLevel: 3,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "굶주림",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_01/ark_passive_01_52.png",
+    level: 0,
+    maxLevel: 3,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "null",
+    icon: "",
+    level: -1,
+    maxLevel: -1,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "곡예사",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_rp/ark_passive_rp_2.png",
+    level: 0,
+    maxLevel: 5,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "그림자 밟기",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_01/ark_passive_01_10.png",
+    level: 0,
+    maxLevel: 3,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "갈증",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_01/ark_passive_01_16.png",
+    level: 0,
+    maxLevel: 3,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "암살자의 손놀림",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_01/ark_passive_01_44.png",
+    level: 0,
+    maxLevel: 5,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "잠행",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_rp/ark_passive_rp_3.png",
+    level: 0,
+    maxLevel: 5,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "급소 확보",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_rp/ark_passive_rp_4.png",
+    level: 0,
+    maxLevel: 3,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "살인귀",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_rp/ark_passive_rp_6.png",
+    level: 0,
+    maxLevel: 3,
+    isActive: false
+  },
+  {
+    name: "깨달음",
+    title: "혼돈 강화",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_rp/ark_passive_rp_7.png",
+    level: 0,
+    maxLevel: 5,
+    isActive: false
+  },
+  {
+    name: "도약",
+    title: "비열한 칼날",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_rp/ark_passive_rp_8.png",
+    level: 0,
+    maxLevel: 3,
+    isActive: false
+  },
+  {
+    name: "도약",
+    title: "잔혹한 칼날",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_rp/ark_passive_rp_9.png",
+    level: 0,
+    maxLevel: 3,
+    isActive: false
+  },
+  {
+    name: "도약",
+    title: "암살자의 발자취",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_rp/ark_passive_rp_10.png",
+    level: 0,
+    maxLevel: 3,
+    isActive: false
+  },
+  {
+    name: "도약",
+    title: "그림자 맹수",
+    icon: "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_rp/ark_passive_rp_11.png",
+    level: 0,
+    maxLevel: 3,
+    isActive: false
+  }
+];
+
+export default reaperData;
