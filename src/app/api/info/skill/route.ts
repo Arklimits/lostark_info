@@ -18,7 +18,6 @@ export async function POST(req: NextRequest) {
   const enriched = skills.map(skill => {
     const constant = constants.find(c => c.name === skill.Name);
 
-    console.log(constant);
     return {
       ...skill,
       ...constant,
