@@ -1,5 +1,5 @@
 import { ArkPassive } from '@/types/character';
-import { EvolutionDto } from '@/types/dto/evolution';
+import { ArkPassiveDto } from '@/types/dto/arkPassive';
 
 export default function parseEvolutionDamage(arkPassive: ArkPassive): {
   revoDamageBonus: number;
@@ -98,7 +98,7 @@ function extractEffect(description: string): {
  * @param arkPassive ArkPassive 객체
  * @returns 진화 정보 DTO 배열
  */
-export function parseArkPassive(arkPassive: ArkPassive): EvolutionDto[] {
+export function parseArkPassive(arkPassive: ArkPassive): ArkPassiveDto[] {
   if (!arkPassive || !arkPassive.Effects) {
     return [];
   }

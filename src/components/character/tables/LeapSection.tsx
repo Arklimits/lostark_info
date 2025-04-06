@@ -1,10 +1,10 @@
 import styles from './ArkPassiveSection.module.scss';
 import ArkPassiveIcon from './ArkPassiveIcon';
 import { getArkPassiveDataByClass } from '@/data/arkpassive/arkpassiveData';
-import { EvolutionDto } from '@/types/dto/evolution';
+import { ArkPassiveDto } from '@/types/dto/arkPassive';
 import leapData from '@/data/arkpassive/common/leapData';
 
-const useLeapData = (evolution: EvolutionDto[], characterClass: string) => {
+const useLeapData = (evolution: ArkPassiveDto[], characterClass: string) => {
   const updatedCommonLeapData = leapData.map(item => {
     const matchingLeap = evolution?.find((e: any) => e.title === item.title);
     return {
@@ -42,7 +42,7 @@ const LeapSection = ({
   evolution,
   characterClass,
 }: {
-  evolution: EvolutionDto[];
+  evolution: ArkPassiveDto[];
   characterClass: string;
 }) => {
   const groupedLeap = useLeapData(evolution, characterClass);

@@ -1,9 +1,9 @@
 import styles from './ArkPassiveSection.module.scss';
 import ArkPassiveIcon from './ArkPassiveIcon';
 import { getArkPassiveDataByClass } from '@/data/arkpassive/arkpassiveData';
-import { EvolutionDto } from '@/types/dto/evolution';
+import { ArkPassiveDto } from '@/types/dto/arkPassive';
 
-const useEnlightenmentData = (evolution: EvolutionDto[], characterClass: string) => {
+const useEnlightenmentData = (evolution: ArkPassiveDto[], characterClass: string) => {
   const updatedEnlightenmentData = getArkPassiveDataByClass(characterClass)
     .filter((item: any) => item.name === '깨달음')
     .map((item: any) => {
@@ -28,7 +28,7 @@ const EnlightenmentSection = ({
   evolution,
   characterClass,
 }: {
-  evolution: EvolutionDto[];
+  evolution: ArkPassiveDto[];
   characterClass: string;
 }) => {
   const groupedEnlightenment = useEnlightenmentData(evolution, characterClass);

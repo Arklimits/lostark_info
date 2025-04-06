@@ -1,9 +1,9 @@
 import styles from './ArkPassiveSection.module.scss';
 import ArkPassiveIcon from './ArkPassiveIcon';
 import evolutionData from '@/data/arkpassive/common/evolutionData';
-import { EvolutionDto } from '@/types/dto/evolution';
+import { ArkPassiveDto } from '@/types/dto/arkPassive';
 
-const useEvolutionData = (evolution: EvolutionDto[]) => {
+const useEvolutionData = (evolution: ArkPassiveDto[]) => {
   const updatedEvolutionData = evolutionData.map(item => {
     const matchingEvolution = evolution?.find((e: any) => e.title === item.title);
     return {
@@ -22,7 +22,7 @@ const useEvolutionData = (evolution: EvolutionDto[]) => {
   return groupedEvolution;
 };
 
-const EvolutionSection = ({ evolution }: { evolution: EvolutionDto[] }) => {
+const EvolutionSection = ({ evolution }: { evolution: ArkPassiveDto[] }) => {
   const groupedEvolution = useEvolutionData(evolution);
 
   return (
