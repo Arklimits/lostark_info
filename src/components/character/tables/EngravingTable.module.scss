@@ -1,0 +1,57 @@
+.engravingTable {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+
+  .item {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    gap: 10px;
+
+    .engravingImg {
+      border-radius: 100%;
+    }
+
+    .engravingName {
+      width: 100px;
+    }
+
+    .engravingLevelContainer {
+      width: 80px;
+      display: flex;
+      gap: 2px;
+    }
+
+    .engravingLevel {
+      background: no-repeat center center;
+      background-size: 16px 16px;
+      width: 16px;
+      height: 16px;
+
+      &[data-grade='유물'] {
+        background-image: url('/ico/ico-engraving_relic.png');
+      }
+
+      &[data-grade='전설'] {
+        background-image: url('/ico/ico-engraving_legendary.png');
+      }
+
+      &[data-grade='영웅'] {
+        background-image: url('/ico/ico-engraving_heroic.png');
+      }
+    }
+
+    .engravingStoneContainer {
+      align-items: center;
+      width: 60px;
+      height: 26px;
+      font-size: 12px;
+      color: #00bfff;
+
+      display: flex;
+      gap: 10px;
+    }
+  }
+}
