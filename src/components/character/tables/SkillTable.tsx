@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { ArmorySkill, ArmoryGem } from '@/types/character';
 import styles from './SkillTable.module.scss';
+import stripHtml from '@/utils/common/stripHtml';
 
 interface ParsedTripod {
   name: string;
@@ -13,19 +14,6 @@ type Props = {
   skills: ArmorySkill[];
   gem: ArmoryGem;
 };
-
-function stripHtml(input: string): string {
-  return input
-    .replace(/<br\s*\/?>/gi, '\n')
-    .replace(/<\/?[^>]+(>|$)/g, '')
-    .replace(/&nbsp;/g, ' ')
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/&amp;/g, '&')
-    .replace(/&quot;/g, '"')
-    .replace(/&#39;/g, "'")
-    .trim();
-}
 
 function extractCoolTimeFromTooltip(tooltipRaw: string): number {
   const tooltip = JSON.parse(tooltipRaw);
@@ -45,15 +33,21 @@ function extractCoolTimeFromTooltip(tooltipRaw: string): number {
 
 function extractTripodsFromTooltip(tooltipRaw: string): ParsedTripod[] {
   const tooltip = JSON.parse(tooltipRaw);
+  let tripodElements: [];
 
-  const tripodElements = tooltip['Element_006']?.value;
-  if (!tripodElements) return [];
+  if (tooltip['Element_006']?.type === 'TripodSkillCustom') {
+    tripodElements = tooltip['Element_006'].value;
+  } else if (tooltip['Element_005']?.type === 'TripodSkillCustom') {
+    tripodElements = tooltip['Element_005']?.value;
+  } else {
+    return [];
+  }
 
   return Object.values(tripodElements).map((el: any) => ({
-    name: stripHtml(el.name),
+    name: el.name ? stripHtml(el.name) : '',
     icon: el.slotData?.iconPath || '/ico/ico-noImage.png',
-    tier: stripHtml(el.tier).match(/\d+/)?.[0] ?? '-',
-    isTierMax: stripHtml(el.tier).includes('최대') ? true : false,
+    tier: el.tier ? (stripHtml(el.tier).match(/\d+/)?.[0] ?? '-') : '-',
+    isTierMax: el.tier ? stripHtml(el.tier).includes('최대') : false,
   }));
 }
 
@@ -66,6 +60,8 @@ const SkillTable = ({ skills, gem }: Props) => {
           const tripods = extractTripodsFromTooltip(skill.Tooltip);
           const coolTime = extractCoolTimeFromTooltip(skill.Tooltip);
           const matchingGems = gem.Gems.filter(g => g.Tooltip.includes(skill.Name));
+
+          console.log(skill);
 
           return (
             <div key={idx} className={styles.row}>
