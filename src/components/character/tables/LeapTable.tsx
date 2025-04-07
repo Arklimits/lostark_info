@@ -1,4 +1,4 @@
-import styles from './ArkPassiveSection.module.scss';
+import styles from './ArkPassiveTable.module.scss';
 import ArkPassiveIcon from './ArkPassiveIcon';
 import { getArkPassiveDataByClass } from '@/data/arkpassive/arkpassiveData';
 import { ArkPassiveDto } from '@/types/dto/arkPassive';
@@ -38,7 +38,7 @@ const useLeapData = (evolution: ArkPassiveDto[], characterClass: string) => {
   return groupedLeap;
 };
 
-const LeapSection = ({
+const LeapTable = ({
   evolution,
   characterClass,
 }: {
@@ -69,4 +69,4 @@ const LeapSection = ({
   );
 };
 
-export default LeapSection;
+export default LeapTable;
