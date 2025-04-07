@@ -1,4 +1,5 @@
 .container {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -6,9 +7,18 @@
   background-color: #1e1e1e;
   border-radius: 0 0 8px 8px;
   color: #fff;
+}
+
+.section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 
   h3 {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+    padding: 0 1rem;
     margin-bottom: 0.5rem;
     border-bottom: 1px solid #444;
     padding-bottom: 0.3rem;
@@ -16,24 +26,43 @@
   }
 }
 
-.section {
+.halfSectionContainer {
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+}
+
+.halfSection {
+  width: 476px;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 1rem;
+
+  h3 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    padding: 0 1rem;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid #444;
+    padding-bottom: 0.3rem;
+    color: #ccc;
+  }
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 0.5rem 1.5rem;
+  gap: 1rem;
+  padding: 0 1rem;
 }
 
 .row {
   display: flex;
   justify-content: space-between;
-  background-color: #2a2a2a;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
+  align-items: center;
+  padding: 0.5rem;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 0.25rem;
 }
 
 .label {
@@ -42,6 +71,55 @@
 }
 
 .value {
-  font-weight: 600;
-  color: #fff;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.evolutionGrid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1rem;
+  padding: 0.5rem;
+  background-color: #2a2a2a;
+  border-radius: 4px;
+}
+
+.evolutionItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #333;
+  }
+}
+
+.evolutionIcon {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #444;
+
+  &.inactive {
+    filter: grayscale(100%);
+    opacity: 0.7;
+  }
+
+  .icon {
+    border-radius: 50%;
+  }
+}
+
+.evolutionLevel {
+  font-size: 0.9rem;
+  color: #aaa;
+  text-align: center;
 }

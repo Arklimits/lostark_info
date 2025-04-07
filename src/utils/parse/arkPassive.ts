@@ -1,6 +1,7 @@
-import { ArkPassiveEffect } from '@/types/character';
+import { ArkPassive } from '@/types/character';
+import { ArkPassiveDto } from '@/types/dto/arkPassive';
 
-export default function parseArkPassive(arkPassive: ArkPassiveEffect): {
+export default function parseEvolutionDamage(arkPassive: ArkPassive): {
   revoDamageBonus: number;
   critRate: number;
   critDamageBonus: number;
@@ -82,11 +83,36 @@ function extractEffect(description: string): {
   title: string;
   level: number;
 } {
-  const match = description.match(/<FONT[^>]*>(.*?) Lv\.(\d+)<\/FONT>/i);
+  const match = description.match(/<FONT[^>]*>([^L]+)Lv\.(\d+)<\/FONT>/i);
   if (!match) return { title: '', level: 0 };
 
   const title = match[1].trim();
   const level = parseInt(match[2], 10);
 
   return { title, level };
+}
+
+/**
+ * 아크패시브 정보를 파싱하는 함수
+ *
+ * @param arkPassive ArkPassive 객체
+ * @returns 진화 정보 DTO 배열
+ */
+export function parseArkPassive(arkPassive: ArkPassive): ArkPassiveDto[] {
+  if (!arkPassive || !arkPassive.Effects) {
+    return [];
+  }
+
+  return arkPassive.Effects.map(effect => {
+    const { title, level } = extractEffect(effect.Description);
+    const isActive = level > 0;
+
+    return {
+      name: effect.Name,
+      title,
+      icon: effect.Icon,
+      level,
+      isActive,
+    };
+  });
 }

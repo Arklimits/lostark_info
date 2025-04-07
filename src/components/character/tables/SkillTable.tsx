@@ -1,6 +1,7 @@
 import Image from 'next/image';
-import { ArmorySkill } from '@/types/character';
+import { ArmorySkill, ArmoryGem } from '@/types/character';
 import styles from './SkillTable.module.scss';
+import stripHtml from '@/utils/common/stripHtml';
 
 interface ParsedTripod {
   name: string;
@@ -11,20 +12,8 @@ interface ParsedTripod {
 
 type Props = {
   skills: ArmorySkill[];
+  gem: ArmoryGem;
 };
-
-function stripHtml(input: string): string {
-  return input
-    .replace(/<br\s*\/?>/gi, '\n')
-    .replace(/<\/?[^>]+(>|$)/g, '')
-    .replace(/&nbsp;/g, ' ')
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/&amp;/g, '&')
-    .replace(/&quot;/g, '"')
-    .replace(/&#39;/g, "'")
-    .trim();
-}
 
 function extractCoolTimeFromTooltip(tooltipRaw: string): number {
   const tooltip = JSON.parse(tooltipRaw);
@@ -44,19 +33,25 @@ function extractCoolTimeFromTooltip(tooltipRaw: string): number {
 
 function extractTripodsFromTooltip(tooltipRaw: string): ParsedTripod[] {
   const tooltip = JSON.parse(tooltipRaw);
+  let tripodElements: [];
 
-  const tripodElements = tooltip['Element_006']?.value;
-  if (!tripodElements) return [];
+  if (tooltip['Element_006']?.type === 'TripodSkillCustom') {
+    tripodElements = tooltip['Element_006'].value;
+  } else if (tooltip['Element_005']?.type === 'TripodSkillCustom') {
+    tripodElements = tooltip['Element_005']?.value;
+  } else {
+    return [];
+  }
 
   return Object.values(tripodElements).map((el: any) => ({
-    name: stripHtml(el.name),
+    name: el.name ? stripHtml(el.name) : '',
     icon: el.slotData?.iconPath || '/ico/ico-noImage.png',
-    tier: stripHtml(el.tier).match(/\d+/)?.[0] ?? '-',
-    isTierMax: stripHtml(el.tier).includes('최대') ? true : false,
+    tier: el.tier ? (stripHtml(el.tier).match(/\d+/)?.[0] ?? '-') : '-',
+    isTierMax: el.tier ? stripHtml(el.tier).includes('최대') : false,
   }));
 }
 
-const SkillTable = ({ skills }: Props) => {
+const SkillTable = ({ skills, gem }: Props) => {
   return (
     <div className={styles.table}>
       {skills
@@ -64,6 +59,9 @@ const SkillTable = ({ skills }: Props) => {
         .map((skill, idx) => {
           const tripods = extractTripodsFromTooltip(skill.Tooltip);
           const coolTime = extractCoolTimeFromTooltip(skill.Tooltip);
+          const matchingGems = gem.Gems.filter(g => g.Tooltip.includes(skill.Name));
+
+          console.log(skill);
 
           return (
             <div key={idx} className={styles.row}>
@@ -71,7 +69,6 @@ const SkillTable = ({ skills }: Props) => {
                 <Image src={skill.Icon} alt={skill.Name} width={40} height={40} />
               </div>
               <div className={styles.name}>{skill.Name}</div>
-
               <div className={styles.tripods}>
                 {tripods.map((tripod, i) =>
                   tripod.name ? (
@@ -84,12 +81,24 @@ const SkillTable = ({ skills }: Props) => {
                 )}
               </div>
 
-              <div className={styles.rune}>
+              <div className={styles.gemsAndRunes}>
                 {skill.Rune && (
-                  <>
+                  <div className={styles.rune} data-grade={skill.Rune.Grade}>
                     <Image src={skill.Rune.Icon} alt={skill.Rune.Name} width={30} height={30} />
                     <div>{`${skill.Rune.Grade} ${skill.Rune.Name}`}</div>
-                  </>
+                  </div>
+                )}
+                {matchingGems.length > 0 && (
+                  <div className={styles.gems}>
+                    {matchingGems.map((g, i) => (
+                      <div key={i} className={styles.gem} data-grade={g.Grade}>
+                        <Image src={g.Icon} alt={g.Name} width={30} height={30} />
+                        <div className={styles.gemName}>
+                          {stripHtml(g.Name).replace(/의 보석/, '')}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 )}
               </div>
 
