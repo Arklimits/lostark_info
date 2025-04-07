@@ -3,17 +3,8 @@
   flex-direction: column;
   gap: 10px;
   padding: 1rem;
-  background-color: #1e1e1e;
   border-radius: 0 0 8px 8px;
-  color: #fff;
-
-  h3 {
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
-    border-bottom: 1px solid #444;
-    padding-bottom: 0.3rem;
-    color: #ccc;
-  }
+  color: var(--foreground);
 }
 
 .transcendenceIcon {
@@ -25,7 +16,9 @@
   height: 60px;
   display: flex;
   gap: 10px;
-  background-color: var(--accentcolor);
+
+  border: 1px solid var(--light-gray-background);
+  border-radius: 10px;
 
   .type {
     align-content: center;

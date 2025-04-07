@@ -1,15 +1,15 @@
 .tabList {
   display: flex;
   height: 60px;
-  border-radius: 8px 8px 0 0;
+  border-radius: 10px 10px 0 0;
   overflow: hidden;
 }
 
 .tab {
   width: 200px;
   padding: 8px 16px;
-  background-color: #1e1e1e;
-  color: #ccc;
+  background-color: var(--contentbackground);
+  color: var(--contentforeground);
   border: none;
   font-size: 16px;
   cursor: pointer;
@@ -17,20 +17,17 @@
   transition: all 0.2s ease-in-out;
 }
 
+.tabContent {
+  background-color: var(--contentbackground);
+  border-radius: 0 0 10px 10px;
+}
+
 .tab:hover {
-  color: #fff;
+  color: var(--foreground);
 }
 
 .active {
   color: var(--foreground);
   border-bottom: 2px solid var(--foreground);
   font-weight: bold;
-}
-
-.content {
-  margin-top: 16px;
-  background-color: #1e1e1e;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 4px rgba(255, 255, 255, 0.1);
 }

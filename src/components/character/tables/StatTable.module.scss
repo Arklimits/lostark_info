@@ -4,9 +4,8 @@
   flex-direction: column;
   gap: 2rem;
   padding: 1rem;
-  background-color: #1e1e1e;
   border-radius: 0 0 8px 8px;
-  color: #fff;
+  color: var(--foreground);
 }
 
 .section {
@@ -20,9 +19,9 @@
     font-weight: 500;
     padding: 0 1rem;
     margin-bottom: 0.5rem;
-    border-bottom: 1px solid #444;
+    border-bottom: 1px solid var(--foreground);
     padding-bottom: 0.3rem;
-    color: #ccc;
+    color: var(--foreground);
   }
 }
 
@@ -43,9 +42,9 @@
     font-weight: 500;
     padding: 0 1rem;
     margin-bottom: 0.5rem;
-    border-bottom: 1px solid #444;
+    border-bottom: 1px solid var(--foreground);
     padding-bottom: 0.3rem;
-    color: #ccc;
+    color: var(--foreground);
   }
 }
 
@@ -63,63 +62,13 @@
   padding: 0.5rem;
   background-color: rgba(0, 0, 0, 0.1);
   border-radius: 0.25rem;
-}
 
-.label {
-  font-weight: 500;
-  color: #aaa;
-}
-
-.value {
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.evolutionGrid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 1rem;
-  padding: 0.5rem;
-  background-color: #2a2a2a;
-  border-radius: 4px;
-}
-
-.evolutionItem {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem;
-  border-radius: 4px;
-  transition: background-color 0.2s;
-
-  &:hover {
-    background-color: #333;
-  }
-}
-
-.evolutionIcon {
-  position: relative;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid #444;
-
-  &.inactive {
-    filter: grayscale(100%);
-    opacity: 0.7;
+  .label {
+    font-weight: 500;
+    color: var(--foreground);
   }
 
-  .icon {
-    border-radius: 50%;
+  .value {
+    color: var(--foreground);
   }
-}
-
-.evolutionLevel {
-  font-size: 0.9rem;
-  color: #aaa;
-  text-align: center;
 }
