@@ -95,7 +95,7 @@ export async function GET(req: NextRequest) {
         (1 + attackBonus / 100) *
         (1 + (profileDamageBonus + damageBonus) / 100) *
         (1 - critRate / 100 + (critRate / 100) * (2 + critDamageBonus / 100))) /
-      (1 - coolDown / 100)
+        (1 - coolDown / 100)
     ).toLocaleString();
 
     return NextResponse.json({ score });
