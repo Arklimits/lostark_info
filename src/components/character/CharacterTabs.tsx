@@ -29,6 +29,7 @@ const CharacterTabs = ({ data, skills, gem }: Props) => {
             tendencies={data.ArmoryProfile.Tendencies}
             characterClass={data.ArmoryProfile.CharacterClassName}
             evolution={evolution}
+            engraving={data.ArmoryEngraving}
           />
         );
       case '장비':
