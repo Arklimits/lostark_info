@@ -1,7 +1,14 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --accentcolor: #f5f5f5;
+  --contentbackground: #f5f5f5;
+  --contentforeground: #333;
+  --contentaccent: #888;
+  --dark-gray-background: #333;
+  --dark-gray-foreground: #aaa;
+
+  --light-gray-background: #aaa;
+  --light-gray-foreground: #333;
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
@@ -11,12 +18,13 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
-    --accentcolor: oklch(0.274 0.006 286.033);
+    --contentbackground: #333;
+    --contentforeground: #f5f5f5;
   }
 }
 
 select {
-  background-color: var(--accentcolor);
+  background-color: var(--contentbackground);
 }
 
 body {
@@ -40,7 +48,7 @@ section {
 .searchSection {
   border: 2px solid var(--foreground);
   border-radius: 10px;
-  background-color: var(--accentcolor);
+  background-color: var(--contentbackground);
 }
 
 .divLine {

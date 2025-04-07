@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import StatTable from './tables/StatTable';
 import EquipmentTable from './tables/EquipmentTable';
 import SkillTable from './tables/SkillTable';
@@ -15,42 +15,35 @@ interface Props {
 }
 
 const CharacterTabs = ({ data, skills, gem }: Props) => {
-  const [activeTab, setActiveTab] = useState('특성');
+  const evolution = useMemo(() => parseArkPassive(data.ArkPassive), [data.ArkPassive]);
 
-  // 진화 정보 파싱
-  const evolution = parseArkPassive(data.ArkPassive);
-
-  const renderTabContent = () => {
-    switch (activeTab) {
-      case '특성':
-        return (
-          <StatTable
-            stats={data.ArmoryProfile.Stats}
-            tendencies={data.ArmoryProfile.Tendencies}
-            characterClass={data.ArmoryProfile.CharacterClassName}
-            evolution={evolution}
-          />
-        );
-      case '장비':
-        return <EquipmentTable equipment={data.ArmoryEquipment} />;
-      case '아바타':
-        return <div>미구현</div>;
-      case '딜표':
-        return (
-          <DealTable
-            skills={skills}
-            attackPower={data.ArmoryProfile.Stats[7].Value}
-            engraving={data.ArmoryEngraving}
-          />
-        );
-      case '스킬':
-        return <SkillTable skills={data.ArmorySkills} gem={gem} />;
-      default:
-        return null;
-    }
-  };
+  const tabContents = useMemo(
+    () => ({
+      특성: (
+        <StatTable
+          stats={data.ArmoryProfile.Stats}
+          tendencies={data.ArmoryProfile.Tendencies}
+          characterClass={data.ArmoryProfile.CharacterClassName}
+          evolution={evolution}
+          engraving={data.ArmoryEngraving}
+        />
+      ),
+      장비: <EquipmentTable equipment={data.ArmoryEquipment} />,
+      아바타: <div>미구현</div>,
+      딜표: (
+        <DealTable
+          skills={skills}
+          attackPower={data.ArmoryProfile.Stats[7].Value}
+          engraving={data.ArmoryEngraving}
+        />
+      ),
+      스킬: <SkillTable skills={data.ArmorySkills} gem={gem} />,
+    }),
+    [data, skills, gem, evolution]
+  );
 
   const tabs = ['특성', '장비', '아바타', '딜표', '스킬'];
+  const [activeTab, setActiveTab] = useState('특성');
 
   return (
     <>
@@ -65,7 +58,7 @@ const CharacterTabs = ({ data, skills, gem }: Props) => {
           </button>
         ))}
       </div>
-      <div className={styles.tabContent}>{renderTabContent()}</div>
+      <div className={styles.tabContent}>{tabContents[activeTab as keyof typeof tabContents]}</div>
     </>
   );
 };

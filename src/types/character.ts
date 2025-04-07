@@ -33,6 +33,7 @@ export interface ArmoryEquipment {
 
 export interface ArmoryEngraving {
   ArkPassiveEffects: {
+    AbilityStoneLevel: number;
     Grade: string;
     Level: number;
     Name: string;

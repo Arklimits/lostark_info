@@ -5,7 +5,8 @@
   display: flex;
   gap: 10px;
   padding: 10px;
-  background-color: var(--accentcolor);
+  background-color: var(--contentbackground);
+  color: var(--contentforeground);
   border-radius: 10px;
 
   input {

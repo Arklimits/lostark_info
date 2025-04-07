@@ -1,35 +1,43 @@
 import { ArmoryProfile } from '@/types/character';
 import styles from './StatTable.module.scss';
-import EvolutionSection from './EvolutionSection';
+import EvolutionTable from './EvolutionTable';
 import { ArkPassiveDto } from '@/types/dto/arkPassive';
-import EnlightenmentSection from './EnlightenmentSection';
-import LeapSection from './LeapSection';
+import EnlightenmentTable from './EnlightenmentTable';
+import LeapTable from './LeapTable';
+import EngravingTable from './EngravingTable';
+
 type Props = {
   stats: ArmoryProfile['Stats'];
   tendencies: ArmoryProfile['Tendencies'];
   evolution: ArkPassiveDto[];
   characterClass: string;
+  engraving: any;
 };
 
-const StatTable = ({ stats, tendencies, evolution, characterClass }: Props) => {
+const StatTable = ({ stats, tendencies, evolution, characterClass, engraving }: Props) => {
   return (
     <div className={styles.container}>
       <div className={styles.halfSectionContainer}>
         <div className={styles.halfSection}>
-          <h3>진화</h3>
-          <EvolutionSection evolution={evolution} />
+          <h3>각인</h3>
+          <EngravingTable engraving={engraving} />
         </div>
 
         <div className={styles.halfSection}>
-          <h3>깨달음</h3>
-          <EnlightenmentSection evolution={evolution} characterClass={characterClass} />
+          <h3>진화</h3>
+          <EvolutionTable evolution={evolution} />
         </div>
       </div>
 
       <div className={styles.halfSectionContainer}>
         <div className={styles.halfSection}>
+          <h3>깨달음</h3>
+          <EnlightenmentTable evolution={evolution} characterClass={characterClass} />
+        </div>
+
+        <div className={styles.halfSection}>
           <h3>도약</h3>
-          <LeapSection evolution={evolution} characterClass={characterClass} />
+          <LeapTable evolution={evolution} characterClass={characterClass} />
         </div>
       </div>
 

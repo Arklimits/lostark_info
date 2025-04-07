@@ -1,4 +1,4 @@
-import styles from './ArkPassiveSection.module.scss';
+import styles from './ArkPassiveTable.module.scss';
 import ArkPassiveIcon from './ArkPassiveIcon';
 import evolutionData from '@/data/arkpassive/common/evolutionData';
 import { ArkPassiveDto } from '@/types/dto/arkPassive';
@@ -22,7 +22,7 @@ const useEvolutionData = (evolution: ArkPassiveDto[]) => {
   return groupedEvolution;
 };
 
-const EvolutionSection = ({ evolution }: { evolution: ArkPassiveDto[] }) => {
+const EvolutionTable = ({ evolution }: { evolution: ArkPassiveDto[] }) => {
   const groupedEvolution = useEvolutionData(evolution);
 
   return (
@@ -47,4 +47,4 @@ const EvolutionSection = ({ evolution }: { evolution: ArkPassiveDto[] }) => {
   );
 };
 
-export default EvolutionSection;
+export default EvolutionTable;

@@ -1,6 +1,6 @@
 .container {
   width: 400px;
-  background-color: var(--accentcolor);
+  background-color: var(--contentbackground);
   padding: 10px;
   border-radius: 10px;
   display: flex;
@@ -10,7 +10,7 @@
 
 .title {
   font-size: 14px;
-  color: #6b7280;
+  color: var(--contentforeground);
 }
 
 .gridContainer {
@@ -37,12 +37,12 @@
 
 .removeButton {
   margin-left: auto;
-  color: #9ca3af;
+  color: var(--contentforeground);
   background: none;
   border: none;
   cursor: pointer;
 }
 
 .removeButton:hover {
-  color: var(--accentcolor);
+  color: var(--contentaccent);
 }

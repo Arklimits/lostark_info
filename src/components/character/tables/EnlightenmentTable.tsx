@@ -1,4 +1,4 @@
-import styles from './ArkPassiveSection.module.scss';
+import styles from './ArkPassiveTable.module.scss';
 import ArkPassiveIcon from './ArkPassiveIcon';
 import { getArkPassiveDataByClass } from '@/data/arkpassive/arkpassiveData';
 import { ArkPassiveDto } from '@/types/dto/arkPassive';
@@ -24,7 +24,7 @@ const useEnlightenmentData = (evolution: ArkPassiveDto[], characterClass: string
   return groupedEnlightenment;
 };
 
-const EnlightenmentSection = ({
+const EnlightenmentTable = ({
   evolution,
   characterClass,
 }: {
@@ -55,4 +55,4 @@ const EnlightenmentSection = ({
   );
 };
 
-export default EnlightenmentSection;
+export default EnlightenmentTable;

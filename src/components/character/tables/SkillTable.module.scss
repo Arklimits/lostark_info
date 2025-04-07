@@ -93,20 +93,29 @@
 }
 
 .gemsAndRunes {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
   width: 120px;
   line-height: 1.8;
 
   .rune {
     display: flex;
   }
-  
-  .gem {
+
+  .gemContainer {
     display: flex;
-    overflow: hidden;
-    align-items: center;
-    gap: 2px;  
+    flex-direction: column;
+    gap: 2px;
+
+    .gem {
+      display: flex;
+      overflow: hidden;
+      align-items: center;
+      gap: 2px;
+    }
   }
-  
+
   img {
     border: 1px solid var(--foreground);
     border-radius: 8px;
@@ -142,4 +151,3 @@
     }
   }
 }
-

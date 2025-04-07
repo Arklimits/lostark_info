@@ -89,7 +89,7 @@ const SkillTable = ({ skills, gem }: Props) => {
                   </div>
                 )}
                 {matchingGems.length > 0 && (
-                  <div className={styles.gems}>
+                  <div className={styles.gemContainer}>
                     {matchingGems.map((g, i) => (
                       <div key={i} className={styles.gem} data-grade={g.Grade}>
                         <Image src={g.Icon} alt={g.Name} width={30} height={30} />
