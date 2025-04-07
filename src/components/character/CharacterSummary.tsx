@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { ArmoryProfile } from '@/types/character';
 import styles from './CharacterSummary.module.scss';
 import { useRouter } from 'next/navigation';
+import ScoreTabs from './ScoreTabs';
 
 type Props = {
   profile: ArmoryProfile;
@@ -49,6 +50,8 @@ const CharacterSummary = ({ profile }: Props) => {
               <span className={styles.Icon}></span>
             </div>
           </div>
+          <div style={{ height: '130px' }}></div>
+          <ScoreTabs data={10000} />
         </div>
       </div>
     </div>
