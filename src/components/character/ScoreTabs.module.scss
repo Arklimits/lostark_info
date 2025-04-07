@@ -1,0 +1,62 @@
+.tabList {
+  width: 300px;
+  display: flex;
+  height: 30px;
+  border: 1px solid #aaa;
+  color: #666;
+
+  background-color: #aaa;
+  border-radius: 8px 8px 0 0;
+  overflow: hidden;
+}
+
+.tab {
+  width: 110px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.tab:hover {
+  color: #333;
+}
+
+.active {
+  color: #333;
+  font-weight: bold;
+}
+
+.tabContent {
+  border: 1px solid #aaa;
+  padding: 10px;
+  border-radius: 0 0 8px 8px;
+}
+
+.content {
+  display: flex;
+  background-color: #1e1e1e;
+  padding: 20px;
+  border: 1px solid #aaa;
+  border-radius: 8px;
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.1);
+}
+
+.dpsContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  .dpsLabel {
+    width: 40px;
+    text-align: center;
+    background-color: #ff0000;
+    padding: 4px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  .dpsValue {
+    font-size: 14px;
+  }
+}
