@@ -25,6 +25,22 @@ export const warlordData = [
   },
   {
     name: '깨달음',
+    title: 'null',
+    icon: '',
+    level: -1,
+    maxLevel: -1,
+    isActive: false,
+  },
+  {
+    name: '깨달음',
+    title: 'null',
+    icon: '',
+    level: -1,
+    maxLevel: -1,
+    isActive: false,
+  },
+  {
+    name: '깨달음',
     title: '정교함',
     icon: 'https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_01/ark_passive_01_2.png',
     level: 0,
@@ -37,6 +53,14 @@ export const warlordData = [
     icon: 'https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_gl/ark_passive_gl_1.png',
     level: 0,
     maxLevel: 3,
+    isActive: false,
+  },
+  {
+    name: '깨달음',
+    title: 'null',
+    icon: '',
+    level: -1,
+    maxLevel: -1,
     isActive: false,
   },
   {
