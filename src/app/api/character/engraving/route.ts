@@ -12,12 +12,13 @@ export async function GET(req: NextRequest) {
     }
 
     const [rows] = await db.query<RowDataPacket[]>(
-      'SELECT image_url FROM engravings WHERE name IN (?)',
+      'SELECT name, image_url FROM engravings WHERE name IN (?)',
       [engravingNames]
     );
 
     return NextResponse.json({
-      images: rows.map(row => row.image_url),
+      name: rows.map(row => row.name),
+      image: rows.map(row => row.image_url),
     });
   } catch (err: unknown) {
     let message = '알 수 없는 에러';
