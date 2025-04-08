@@ -47,6 +47,7 @@ const CharacterCardContainer = ({ keyword }: Props) => {
                 ...char,
                 imageUrl: profile.CharacterImage || '/img-unknown.png',
                 GuildName: profile.GuildName ?? '-',
+                ServerName: profile.ServerName ?? '-',
                 AttackPower: profile.AttackPower ?? '-',
               };
             } catch {
@@ -54,6 +55,7 @@ const CharacterCardContainer = ({ keyword }: Props) => {
                 ...char,
                 imageUrl: '/img-unknown.png',
                 GuildName: '-',
+                ServerName: '-',
                 AttackPower: '-',
               };
             }
@@ -84,6 +86,7 @@ const CharacterCardContainer = ({ keyword }: Props) => {
           key={char.CharacterName}
           name={char.CharacterName}
           server={char.ServerName}
+          serverName={char.ServerName}
           job={char.CharacterClassName}
           imageUrl={char.imageUrl}
           classLevel={char.CharacterLevel}

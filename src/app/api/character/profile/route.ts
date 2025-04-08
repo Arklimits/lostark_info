@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
 
   try {
     const [rows] = await db.query<RowDataPacket[]>(
-      'SELECT character_image AS CharacterImage, guild AS GuildName FROM characters WHERE name = ?',
+      'SELECT character_image AS CharacterImage, guild AS GuildName, server_name AS ServerName FROM characters WHERE name = ?',
       [name]
     );
 

@@ -10,6 +10,7 @@ type CharacterCardProps = {
   imageUrl: string;
   classLevel: number;
   guildName: string;
+  serverName: string;
   itemLevel: number;
   score: string;
   onClick?: () => void;
@@ -22,6 +23,7 @@ const CharacterCard = ({
   imageUrl,
   classLevel,
   guildName,
+  serverName,
   itemLevel,
   score,
   onClick,
@@ -30,8 +32,8 @@ const CharacterCard = ({
     <div className={styles.card} onClick={onClick}>
       <div className={styles.header}>
         <span className={styles.job}>{job}</span>
-        <span className={styles.server}>{server}</span>
       </div>
+      <span className={styles.server}>{serverName}</span>
       <Image
         className={styles.avatar}
         src={imageUrl}
