@@ -54,7 +54,7 @@ const CharacterSummary = ({ profile, characterId }: Props) => {
             </div>
           </div>
           <div style={{ height: '30px' }}></div>
-          <ScoreTabs data={10000} />
+          <ScoreTabs characterId={characterId} />
           <div style={{ height: '30px' }}></div>
           <GemTable characterId={characterId} />
         </div>

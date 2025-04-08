@@ -1,17 +1,29 @@
 import { useState, useEffect } from 'react';
 import styles from './ScoreTabs.module.scss';
+import axios from 'axios';
 
 type Props = {
-  data: number;
+  characterId: number;
 };
 
-const ScoreTabs = ({ data }: Props) => {
+const ScoreTabs = ({ characterId }: Props) => {
   const [activeTab, setActiveTab] = useState('점수');
   const [isVisible, setIsVisible] = useState(false);
-
+  const [data, setData] = useState(0);
   useEffect(() => {
     setIsVisible(true);
   }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await axios.get(`/api/character/score`, {
+        params: { characterId },
+      });
+      setData(res.data.calculatedScore);
+    };
+
+    fetchData();
+  }, [characterId]);
 
   return (
     <div>
