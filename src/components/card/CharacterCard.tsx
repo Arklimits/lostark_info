@@ -2,32 +2,42 @@
 
 import Image from 'next/image';
 import styles from './CharacterCard.module.scss';
-
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 type CharacterCardProps = {
   name: string;
-  server: string;
   job: string;
   imageUrl: string;
   classLevel: number;
   guildName: string;
   serverName: string;
   itemLevel: number;
-  score: string;
   onClick?: () => void;
 };
 
 const CharacterCard = ({
   name,
-  server,
   job,
   imageUrl,
   classLevel,
   guildName,
   serverName,
   itemLevel,
-  score,
   onClick,
 }: CharacterCardProps) => {
+  const [score, setScore] = useState(0);
+
+  useEffect(() => {
+    const fetchScore = async () => {
+      const res = await axios.get(`/api/character/score`, {
+        params: { characterName: name },
+      });
+
+      setScore(res.data.calculatedScore);
+    };
+    fetchScore();
+  }, []);
+
   return (
     <div className={styles.card} onClick={onClick}>
       <div className={styles.header}>
@@ -46,7 +56,7 @@ const CharacterCard = ({
         <span className={styles.itemLevel}>{itemLevel}</span>
         <div className={styles.name}>{name}</div>
         <div className={styles.guild}>{guildName}</div>
-        <div className={styles.score}>{score}</div>
+        <div className={styles.score}>{score ? score.toLocaleString() : '-'}</div>
       </div>
     </div>
   );
