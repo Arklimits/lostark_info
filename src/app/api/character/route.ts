@@ -26,6 +26,20 @@ export async function GET(req: NextRequest) {
   const encodedName = encodeURIComponent(name);
 
   try {
+    const [exist] = await db.query<CachedCharacter[]>('SELECT * FROM characters WHERE name = ?', [
+      name,
+    ]);
+
+    if (exist.length > 0) {
+      const cached = exist[0];
+      const modifiedAt = new Date(cached.modified_at);
+      const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000);
+
+      if (modifiedAt > fiveMinutesAgo) {
+        return NextResponse.json(JSON.parse(cached.data));
+      }
+    }
+
     const apiUrl = `https://developer-lostark.game.onstove.com/armories/characters/${encodedName}`;
     const res = await axios.get(apiUrl, {
       headers: {
@@ -74,7 +88,7 @@ export async function GET(req: NextRequest) {
       [name]
     );
 
-    const characterId = rows[0]?.id;
+    const characterId = exist[0]?.id;
 
     const equipment = await saveEquipment(characterId, json.ArmoryEquipment);
     const gems = await saveGems(characterId, json.ArmoryGem);
