@@ -1,16 +1,31 @@
 import Image from 'next/image';
-import { ArmorySkill, ArmoryGem } from '@/types/character';
+import { ArmorySkill } from '@/types/character';
 import styles from './SkillTable.module.scss';
 import stripHtml from '@/utils/common/stripHtml';
 import { extractCoolTimeFromTooltip } from '@/services/skills/extractUtils';
 import { extractTripodsFromTooltip } from '@/services/skills/extractUtils';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import axios from 'axios';
+import { Gem } from '@/types/dto/gem';
 
 type Props = {
   skills: ArmorySkill[];
-  gem: ArmoryGem;
+  characterId: number;
 };
 
-const SkillTable = ({ skills, gem }: Props) => {
+const SkillTable = ({ skills, characterId }: Props) => {
+  const [gems, setGems] = useState<Gem[]>([]);
+
+  useEffect(() => {
+    const fetchGems = async () => {
+      const response = await axios.get(`/api/character/gem?characterId=${characterId}`);
+      setGems(response.data.data);
+    };
+
+    fetchGems();
+  }, []);
+
   return (
     <div className={styles.table}>
       {skills
@@ -18,7 +33,8 @@ const SkillTable = ({ skills, gem }: Props) => {
         .map((skill, idx) => {
           const tripods = extractTripodsFromTooltip(skill.Tooltip);
           const coolTime = extractCoolTimeFromTooltip(skill.Tooltip);
-          const matchingGems = gem.Gems.filter(g => g.Tooltip.includes(skill.Name));
+
+          const matchingGems = gems.filter(g => g.skill === skill.Name);
 
           return (
             <div key={idx} className={styles.row}>
@@ -48,12 +64,10 @@ const SkillTable = ({ skills, gem }: Props) => {
                 {matchingGems.length > 0 && (
                   <div className={styles.gemContainer}>
                     {matchingGems.map((g, i) => (
-                      <div key={i} className={styles.gem} data-grade={g.Grade}>
-                        <Image src={g.Icon} alt={g.Name} width={30} height={30} />
+                      <div key={i} className={styles.gem} data-grade={g.grade}>
+                        <Image src={g.icon} alt={g.name} width={30} height={30} />
                         <div className={styles.gemName}>
-                          {stripHtml(g.Name)
-                            .replace(/의 보석/, '')
-                            .replace(/\(귀속\)/, '')}
+                          {g.name.replace(/의 보석/, '').replace(/\(귀속\)/, '')}
                         </div>
                       </div>
                     ))}

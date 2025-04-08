@@ -11,11 +11,10 @@ import { parseArkPassive } from '@/utils/parse/arkPassive';
 interface Props {
   data: CharacterData;
   skills: Skill[];
-  gem: ArmoryGem;
   characterId: number;
 }
 
-const CharacterTabs = ({ characterId, data, skills, gem }: Props) => {
+const CharacterTabs = ({ characterId, data, skills }: Props) => {
   const evolution = useMemo(() => parseArkPassive(data.ArkPassive), [data.ArkPassive]);
 
   const tabContents = useMemo(
@@ -38,9 +37,9 @@ const CharacterTabs = ({ characterId, data, skills, gem }: Props) => {
           engraving={data.ArmoryEngraving}
         />
       ),
-      스킬: <SkillTable skills={data.ArmorySkills} gem={gem} />,
+      스킬: <SkillTable skills={data.ArmorySkills} characterId={characterId} />,
     }),
-    [data, skills, gem, evolution]
+    [data, skills, evolution]
   );
 
   const tabs = ['특성', '장비', '아바타', '딜표', '스킬'];
