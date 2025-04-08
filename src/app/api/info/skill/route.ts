@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 import { RowDataPacket } from 'mysql2';
-import { extractCoolTimeFromTooltip } from '@/services/skill/extractUtils';
+import { extractCoolTimeFromTooltip } from '@/services/skills/extractUtils';
 
 export async function POST(req: NextRequest) {
   const { skills, className } = await req.json();

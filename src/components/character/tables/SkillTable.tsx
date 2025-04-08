@@ -2,8 +2,8 @@ import Image from 'next/image';
 import { ArmorySkill, ArmoryGem } from '@/types/character';
 import styles from './SkillTable.module.scss';
 import stripHtml from '@/utils/common/stripHtml';
-import { extractCoolTimeFromTooltip } from '@/services/skill/extractUtils';
-import { extractTripodsFromTooltip } from '@/services/skill/extractUtils';
+import { extractCoolTimeFromTooltip } from '@/services/skills/extractUtils';
+import { extractTripodsFromTooltip } from '@/services/skills/extractUtils';
 
 type Props = {
   skills: ArmorySkill[];

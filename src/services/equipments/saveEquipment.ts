@@ -60,13 +60,13 @@ export default async function saveEquipment(characterId: number, equipment: any[
       };
 
       const existingEquipment = await db.query(
-        `SELECT * FROM equipments WHERE character_id = ? AND type = ?`,
+        `SELECT * FROM character_equipments WHERE character_id = ? AND type = ?`,
         [characterId, result.type]
       );
 
       if (Array.isArray(existingEquipment[0]) && existingEquipment[0].length > 0) {
         await db.query(
-          `UPDATE equipments 
+          `UPDATE character_equipments 
            SET name = ?, icon = ?, grade = ?, transcendence = ?, refinement = ?, slot_1 = ?, slot_2 = ?, slot_3 = ?, slot_4 = ?, slot_5 = ?
            WHERE character_id = ? AND type = ?`,
           [
@@ -82,7 +82,7 @@ export default async function saveEquipment(characterId: number, equipment: any[
         );
       } else {
         await db.query(
-          `INSERT INTO equipments (character_id, type, name, icon, grade, transcendence, refinement, slot_1, slot_2, slot_3, slot_4, slot_5)
+          `INSERT INTO character_equipments (character_id, type, name, icon, grade, transcendence, refinement, slot_1, slot_2, slot_3, slot_4, slot_5)
            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
           [
             characterId,
