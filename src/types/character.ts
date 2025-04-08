@@ -97,6 +97,7 @@ export interface ArmoryGem {
 }
 
 export interface CharacterData {
+  id: number;
   ArmoryProfile: ArmoryProfile;
   ArmoryEquipment: ArmoryEquipment[];
   ArmoryEngraving: ArmoryEngraving;
