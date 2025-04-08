@@ -37,8 +37,8 @@ export async function GET(req: NextRequest) {
     });
 
     await db.query<ResultSetHeader>(
-      'UPDATE characters SET character_image = ?, guild = ? WHERE name = ?',
-      [res.data.CharacterImage, res.data.GuildName, name]
+      'UPDATE characters SET character_image = ?, guild = ?, server_name = ? WHERE name = ?',
+      [res.data.CharacterImage, res.data.GuildName, res.data.ServerName, name]
     );
 
     return NextResponse.json({

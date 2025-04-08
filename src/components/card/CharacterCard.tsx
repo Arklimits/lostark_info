@@ -30,9 +30,8 @@ const CharacterCard = ({
     <div className={styles.card} onClick={onClick}>
       <div className={styles.header}>
         <span className={styles.job}>{job}</span>
-        <span className={styles.level}>Lv.{classLevel}</span>
+        <span className={styles.server}>{server}</span>
       </div>
-      <div className={styles.server}>{server}</div>
       <Image
         className={styles.avatar}
         src={imageUrl}
