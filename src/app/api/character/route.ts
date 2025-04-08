@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import axios from 'axios';
 import { db } from '@/lib/db';
 import type { RowDataPacket } from 'mysql2';
-import saveEquipment from '@/services/equipment/saveEquipment';
+import saveEquipment from '@/services/equipments/saveEquipment';
 
 type CachedCharacter = RowDataPacket & {
   data: string;

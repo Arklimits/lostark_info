@@ -9,7 +9,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'characterId 없음' }, { status: 400 });
   }
 
-  const equipment = await db.query('SELECT * FROM equipments WHERE character_id = ?', [
+  const equipment = await db.query('SELECT * FROM character_equipments WHERE character_id = ?', [
     characterId,
   ]);
 
