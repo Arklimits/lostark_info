@@ -35,6 +35,7 @@ const CharacterPage = () => {
         // constant 병합 API 호출
         const skillRes = await axios.post('/api/info/skill', {
           skills: res.data.ArmorySkills,
+          className: res.data.ArmoryProfile.CharacterClassName,
         });
         setSkills(skillRes.data);
       } catch (err) {
