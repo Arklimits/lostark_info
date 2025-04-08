@@ -28,6 +28,7 @@ const CharacterSummary = ({ profile }: Props) => {
           width={240}
           height={320}
           unoptimized
+          priority
         />
         <div className={styles.footer}>
           <p style={{ color: '#4dd' }}>{profile.GuildName}</p>
