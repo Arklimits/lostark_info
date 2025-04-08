@@ -23,7 +23,7 @@ const SkillTable = ({ skills, characterId }: Props) => {
     };
 
     fetchGems();
-  }, []);
+  }, [characterId]);
 
   return (
     <div className={styles.table}>

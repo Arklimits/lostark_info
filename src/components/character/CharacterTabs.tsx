@@ -39,7 +39,7 @@ const CharacterTabs = ({ characterId, data, skills }: Props) => {
       ),
       스킬: <SkillTable skills={data.ArmorySkills} characterId={characterId} />,
     }),
-    [data, skills, evolution]
+    [data, skills, evolution, characterId]
   );
 
   const tabs = ['특성', '장비', '아바타', '딜표', '스킬'];

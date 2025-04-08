@@ -36,7 +36,7 @@ const CharacterCard = ({
       setScore(res.data.calculatedScore);
     };
     fetchScore();
-  }, []);
+  }, [name]);
 
   return (
     <div className={styles.card} onClick={onClick}>

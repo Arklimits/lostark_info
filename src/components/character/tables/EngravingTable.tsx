@@ -33,7 +33,7 @@ export default function EngravingTable({ engraving }: { engraving: ArmoryEngravi
     if (engravings.length > 0) {
       fetchEngravingImages();
     }
-  }, []);
+  }, [engravings]);
 
   return (
     <div className={styles.engravingTable}>

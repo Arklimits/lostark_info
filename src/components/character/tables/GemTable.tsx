@@ -14,7 +14,7 @@ const GemTable = ({ characterId }: { characterId: number }) => {
       setGems(json.data.data);
     };
     fetchGems();
-  }, []);
+  }, [characterId]);
 
   return (
     <div className={styles.gemContainer}>
