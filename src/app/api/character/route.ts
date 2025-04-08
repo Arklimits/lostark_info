@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import axios from 'axios';
 import { db } from '@/lib/db';
 import type { RowDataPacket } from 'mysql2';
+import saveEquipment from '@/services/equipment/saveEquipment';
 
 type CachedCharacter = RowDataPacket & {
   data: string;
@@ -52,14 +53,42 @@ export async function GET(req: NextRequest) {
     const json = res.data;
 
     // 원정대 정보 업데이트
-    const [expeditionRows] = await db.query(
+    await db.query(
       `UPDATE expeditions
        SET expedition_level = ?, town_name = ?
        WHERE id = (SELECT expedition_id FROM characters WHERE name = ?)`,
       [json.ArmoryProfile.ExpeditionLevel, json.ArmoryProfile.TownName, name]
     );
 
-    console.log(expeditionRows);
+    await db.query(
+      `UPDATE characters
+       SET character_image = ?, character_level = ?, item_level = ?, crit = ?, specialization = ?,
+        domination = ?, swiftness = ?,  endurance = ?, expertise = ?, vitality = ?, attack_point = ?
+       WHERE name = ?`,
+      [
+        json.ArmoryProfile.CharacterImage,
+        json.ArmoryProfile.CharacterLevel,
+        json.ArmoryProfile.ItemMaxLevel.replace(/,/g, ''),
+        json.ArmoryProfile.Stats[0].Value,
+        json.ArmoryProfile.Stats[1].Value,
+        json.ArmoryProfile.Stats[2].Value,
+        json.ArmoryProfile.Stats[3].Value,
+        json.ArmoryProfile.Stats[4].Value,
+        json.ArmoryProfile.Stats[5].Value,
+        json.ArmoryProfile.Stats[6].Value,
+        json.ArmoryProfile.Stats[7].Value,
+        name,
+      ]
+    );
+
+    const [rows] = await db.query<(RowDataPacket & { id: number })[]>(
+      `SELECT id FROM characters WHERE name = ?`,
+      [name]
+    );
+
+    const characterId = rows[0]?.id;
+
+    const equipment = await saveEquipment(characterId, json.ArmoryEquipment);
 
     await db.query(
       `INSERT INTO character_cache (name, data, modified_at)
@@ -67,6 +96,8 @@ export async function GET(req: NextRequest) {
        ON DUPLICATE KEY UPDATE data = VALUES(data), modified_at = NOW()`,
       [name, JSON.stringify(json)]
     );
+
+    json.id = characterId;
 
     return NextResponse.json(json);
   } catch (err: unknown) {
@@ -79,6 +110,8 @@ export async function GET(req: NextRequest) {
     } else if (err instanceof Error) {
       message = err.message;
     }
+
+    console.log(err);
 
     return NextResponse.json({ error: 'LOA API 에러', detail: message }, { status });
   }
