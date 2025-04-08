@@ -22,19 +22,22 @@ export async function GET(req: NextRequest) {
     }
 
     const encodedName = encodeURIComponent(name);
-    const apiUrl = `https://developer-lostark.game.onstove.com/armories/characters/${encodedName}/profiles`;
+
     const token = process.env.LOSTARK_API_TOKEN;
 
     if (!token) {
       return NextResponse.json({ error: '서버 토큰 없음' }, { status: 500 });
     }
 
-    const res = await axios.get(apiUrl, {
-      headers: {
-        Authorization: `bearer ${token}`,
-        Accept: 'application/json',
-      },
-    });
+    const res = await axios.get(
+      `https://developer-lostark.game.onstove.com/armories/characters/${encodedName}/profiles`,
+      {
+        headers: {
+          Authorization: `bearer ${token}`,
+          Accept: 'application/json',
+        },
+      }
+    );
 
     await db.query<ResultSetHeader>(
       'UPDATE characters SET character_image = ?, guild = ?, server_name = ? WHERE name = ?',
@@ -44,6 +47,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({
       CharacterImage: res.data.CharacterImage,
       GuildName: res.data.GuildName,
+      ServerName: res.data.ServerName,
     });
   } catch (err: unknown) {
     let status = 500;
