@@ -61,10 +61,13 @@ export async function GET(req: NextRequest) {
       [json.ArmoryProfile.ExpeditionLevel, name]
     );
 
+    const calculatedScore = json.ArmoryProfile.Stats[7].Value;
+
     await db.query(
       `UPDATE characters
        SET character_image = ?, character_level = ?, item_level = ?, crit = ?, specialization = ?,
-        domination = ?, swiftness = ?,  endurance = ?, expertise = ?, vitality = ?, attack_point = ?
+        domination = ?, swiftness = ?,  endurance = ?, expertise = ?, vitality = ?, attack_point = ?,
+        calculated_score = ?
        WHERE name = ?`,
       [
         json.ArmoryProfile.CharacterImage,
@@ -78,6 +81,7 @@ export async function GET(req: NextRequest) {
         json.ArmoryProfile.Stats[5].Value,
         json.ArmoryProfile.Stats[6].Value,
         json.ArmoryProfile.Stats[7].Value,
+        calculatedScore,
         name,
       ]
     );
