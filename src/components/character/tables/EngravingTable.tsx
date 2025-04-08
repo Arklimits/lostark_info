@@ -15,7 +15,7 @@ export default function EngravingTable({ engraving }: { engraving: ArmoryEngravi
   useEffect(() => {
     const fetchEngravingImages = async () => {
       try {
-        const response = await axios.get(`/api/character/engraving?names=${engravings.join(',')}`);
+        const response = await axios.get(`/api/info/engraving?names=${engravings.join(',')}`);
         setEngravingImages(response.data.image);
 
         const sorted = [...engraving.ArkPassiveEffects].sort((a, b) => {
