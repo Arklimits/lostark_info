@@ -2,54 +2,13 @@ import Image from 'next/image';
 import { ArmorySkill, ArmoryGem } from '@/types/character';
 import styles from './SkillTable.module.scss';
 import stripHtml from '@/utils/common/stripHtml';
-
-interface ParsedTripod {
-  name: string;
-  icon: string;
-  tier: string;
-  isTierMax: boolean;
-}
+import { extractCoolTimeFromTooltip } from '@/services/skill/extractUtils';
+import { extractTripodsFromTooltip } from '@/services/skill/extractUtils';
 
 type Props = {
   skills: ArmorySkill[];
   gem: ArmoryGem;
 };
-
-function extractCoolTimeFromTooltip(tooltipRaw: string): number {
-  const tooltip = JSON.parse(tooltipRaw);
-  const raw = tooltip['Element_001']?.value?.leftText ?? '';
-  const text = stripHtml(raw);
-
-  const minuteMatch = text.match(/(\d+)\s*분/);
-  const secondMatch = text.match(/(\d+)\s*초/);
-
-  const minutes = minuteMatch ? parseInt(minuteMatch[1], 10) : 0;
-  const seconds = secondMatch ? parseInt(secondMatch[1], 10) : 0;
-
-  const totalSeconds = minutes * 60 + seconds;
-
-  return totalSeconds;
-}
-
-function extractTripodsFromTooltip(tooltipRaw: string): ParsedTripod[] {
-  const tooltip = JSON.parse(tooltipRaw);
-  let tripodElements: [];
-
-  if (tooltip['Element_006']?.type === 'TripodSkillCustom') {
-    tripodElements = tooltip['Element_006'].value;
-  } else if (tooltip['Element_005']?.type === 'TripodSkillCustom') {
-    tripodElements = tooltip['Element_005']?.value;
-  } else {
-    return [];
-  }
-
-  return Object.values(tripodElements).map((el: any) => ({
-    name: el.name ? stripHtml(el.name) : '',
-    icon: el.slotData?.iconPath || '/ico/ico-noImage.png',
-    tier: el.tier ? (stripHtml(el.tier).match(/\d+/)?.[0] ?? '-') : '-',
-    isTierMax: el.tier ? stripHtml(el.tier).includes('최대') : false,
-  }));
-}
 
 const SkillTable = ({ skills, gem }: Props) => {
   return (
@@ -60,8 +19,6 @@ const SkillTable = ({ skills, gem }: Props) => {
           const tripods = extractTripodsFromTooltip(skill.Tooltip);
           const coolTime = extractCoolTimeFromTooltip(skill.Tooltip);
           const matchingGems = gem.Gems.filter(g => g.Tooltip.includes(skill.Name));
-
-          console.log(skill);
 
           return (
             <div key={idx} className={styles.row}>
@@ -94,7 +51,9 @@ const SkillTable = ({ skills, gem }: Props) => {
                       <div key={i} className={styles.gem} data-grade={g.Grade}>
                         <Image src={g.Icon} alt={g.Name} width={30} height={30} />
                         <div className={styles.gemName}>
-                          {stripHtml(g.Name).replace(/의 보석/, '')}
+                          {stripHtml(g.Name)
+                            .replace(/의 보석/, '')
+                            .replace(/\(귀속\)/, '')}
                         </div>
                       </div>
                     ))}
