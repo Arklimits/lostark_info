@@ -67,9 +67,13 @@ function parseEngravingBonus(effects: EngravingEffect[]) {
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const characterId = searchParams.get('characterId');
+  const characterName = searchParams.get('characterName');
 
-  if (!characterId) {
-    return NextResponse.json({ error: 'characterId 파라미터가 필요합니다.' }, { status: 400 });
+  if (!characterId && !characterName) {
+    return NextResponse.json(
+      { error: 'characterId 혹은 characterName 파라미터가 필요합니다.' },
+      { status: 400 }
+    );
   }
 
   try {
@@ -98,12 +102,24 @@ export async function GET(req: NextRequest) {
     //     (1 - critRate / 100 + (critRate / 100) * (2 + critDamageBonus / 100))) /
     //     (1 - coolDown / 100)
     // ).toLocaleString();
-    const [rows] = await db.query<RowDataPacket[]>(
-      'SELECT calculated_score FROM characters WHERE id = ?',
-      [characterId]
-    );
 
-    return NextResponse.json({ calculatedScore: rows[0].calculated_score });
+    if (characterId) {
+      const [rows] = await db.query<RowDataPacket[]>(
+        'SELECT calculated_score FROM characters WHERE id = ?',
+        [characterId]
+      );
+
+      return NextResponse.json({ calculatedScore: rows[0].calculated_score });
+    }
+
+    if (characterName) {
+      const [rows] = await db.query<RowDataPacket[]>(
+        'SELECT calculated_score FROM characters WHERE name = ?',
+        [characterName]
+      );
+
+      return NextResponse.json({ calculatedScore: rows[0].calculated_score });
+    }
   } catch (e) {
     console.error('score 계산 에러:', e);
     return NextResponse.json({ error: 'score 계산 실패' }, { status: 500 });
