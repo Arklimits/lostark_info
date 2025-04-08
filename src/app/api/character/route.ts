@@ -3,6 +3,7 @@ import axios from 'axios';
 import { db } from '@/lib/db';
 import type { RowDataPacket } from 'mysql2';
 import saveEquipment from '@/services/equipments/saveEquipment';
+import saveGems from '@/services/gems/saveGems';
 
 type CachedCharacter = RowDataPacket & {
   data: string;
@@ -89,6 +90,7 @@ export async function GET(req: NextRequest) {
     const characterId = rows[0]?.id;
 
     const equipment = await saveEquipment(characterId, json.ArmoryEquipment);
+    const gems = await saveGems(characterId, json.ArmoryGem);
 
     await db.query(
       `INSERT INTO character_cache (name, data, modified_at)
