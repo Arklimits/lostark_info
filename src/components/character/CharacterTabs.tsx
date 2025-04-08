@@ -12,9 +12,10 @@ interface Props {
   data: CharacterData;
   skills: Skill[];
   gem: ArmoryGem;
+  characterId: number;
 }
 
-const CharacterTabs = ({ data, skills, gem }: Props) => {
+const CharacterTabs = ({ characterId, data, skills, gem }: Props) => {
   const evolution = useMemo(() => parseArkPassive(data.ArkPassive), [data.ArkPassive]);
 
   const tabContents = useMemo(
@@ -28,7 +29,7 @@ const CharacterTabs = ({ data, skills, gem }: Props) => {
           engraving={data.ArmoryEngraving}
         />
       ),
-      장비: <EquipmentTable equipment={data.ArmoryEquipment} />,
+      장비: <EquipmentTable characterId={characterId} />,
       아바타: <div>미구현</div>,
       딜표: (
         <DealTable
