@@ -38,7 +38,12 @@ export default async function saveEquipment(characterId: number, equipment: any[
       if (isStone) {
         equipmentEffects = [null, null, ...stoneEffects];
       } else if (isBracelet) {
-        equipmentEffects = [...braceletMainStats, ...braceletEffects];
+        equipmentEffects = [
+          ...braceletMainStats,
+          ...Array(2 - braceletMainStats.length).fill(null),
+          ...braceletEffects,
+          ...Array(3 - braceletMainStats.length - braceletEffects.length).fill(null),
+        ];
       } else if (isAccessory) {
         equipmentEffects = [null, null, ...accessoryEffects];
       } else if (item.Type === '무기') {
