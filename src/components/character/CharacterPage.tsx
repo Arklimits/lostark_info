@@ -54,10 +54,10 @@ const CharacterPage = () => {
   return (
     <>
       <div className={styles.summarySection}>
-        <CharacterSummary profile={data.ArmoryProfile} />
+        <CharacterSummary characterId={data.id} profile={data.ArmoryProfile} />
       </div>
       <div>
-        <CharacterTabs characterId={data.id} data={data} skills={skills} gem={data.ArmoryGem} />
+        <CharacterTabs characterId={data.id} data={data} skills={skills} />
       </div>
     </>
   );
