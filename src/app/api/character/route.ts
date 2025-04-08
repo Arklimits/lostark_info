@@ -24,22 +24,22 @@ export async function GET(req: NextRequest) {
   const encodedName = encodeURIComponent(name);
 
   try {
-    const [rows] = await db.query<CachedCharacter[]>(
-      `SELECT data, modified_at FROM character_cache WHERE name = ?`,
-      [name]
-    );
+    // const [rows] = await db.query<CachedCharacter[]>(
+    //   `SELECT data, modified_at FROM character_cache WHERE name = ?`,
+    //   [name]
+    // );
 
-    const cached = rows.length > 0 ? rows[0] : null;
+    // const cached = rows.length > 0 ? rows[0] : null;
 
-    if (cached) {
-      const modifiedAt = new Date(cached.modified_at);
-      const now = new Date();
-      const diffMinutes = (now.getTime() - modifiedAt.getTime()) / (1000 * 60);
+    // if (cached) {
+    //   const modifiedAt = new Date(cached.modified_at);
+    //   const now = new Date();
+    //   const diffMinutes = (now.getTime() - modifiedAt.getTime()) / (1000 * 60);
 
-      if (diffMinutes < 5) {
-        return NextResponse.json(JSON.parse(cached.data));
-      }
-    }
+    //   if (diffMinutes < 5) {
+    //     return NextResponse.json(JSON.parse(cached.data));
+    //   }
+    // }
 
     const apiUrl = `https://developer-lostark.game.onstove.com/armories/characters/${encodedName}`;
     const res = await axios.get(apiUrl, {
@@ -50,6 +50,16 @@ export async function GET(req: NextRequest) {
     });
 
     const json = res.data;
+
+    // 원정대 정보 업데이트
+    const [expeditionRows] = await db.query(
+      `UPDATE expeditions
+       SET expedition_level = ?, town_name = ?
+       WHERE id = (SELECT expedition_id FROM characters WHERE name = ?)`,
+      [json.ArmoryProfile.ExpeditionLevel, json.ArmoryProfile.TownName, name]
+    );
+
+    console.log(expeditionRows);
 
     await db.query(
       `INSERT INTO character_cache (name, data, modified_at)
