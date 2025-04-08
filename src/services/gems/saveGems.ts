@@ -1,5 +1,6 @@
 import { db } from '@/lib/db';
 import { extractClassAndEffects } from './extractUtils';
+import stripHtml from '@/utils/common/stripHtml';
 
 export default async function saveGems(characterId: number, gems: any) {
   try {
@@ -17,7 +18,7 @@ export default async function saveGems(characterId: number, gems: any) {
         [
           characterId,
           item.Slot,
-          item.Name,
+          stripHtml(item.Name),
           item.Icon,
           item.Grade,
           item.Level,
