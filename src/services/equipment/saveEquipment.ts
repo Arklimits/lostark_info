@@ -50,20 +50,19 @@ export default async function saveEquipment(characterId: number, equipment: any[
       }
 
       const result = {
-        ...item,
+        type: item.Type,
+        name: item.Name,
+        icon: item.Icon,
+        grade: item.Grade,
         refinementLevel,
         transcendenceLevel,
         equipmentEffects,
       };
 
-      console.log(item.Type, equipmentEffects);
-
       const existingEquipment = await db.query(
         `SELECT * FROM equipments WHERE character_id = ? AND type = ?`,
-        [characterId, result.Type]
+        [characterId, result.type]
       );
-
-      console.log(existingEquipment);
 
       if (Array.isArray(existingEquipment[0]) && existingEquipment[0].length > 0) {
         await db.query(
@@ -71,14 +70,14 @@ export default async function saveEquipment(characterId: number, equipment: any[
            SET name = ?, icon = ?, grade = ?, transcendence = ?, refinement = ?, slot_1 = ?, slot_2 = ?, slot_3 = ?, slot_4 = ?, slot_5 = ?
            WHERE character_id = ? AND type = ?`,
           [
-            result.Name,
-            result.Icon,
-            result.Grade,
+            result.name,
+            result.icon,
+            result.grade,
             result.transcendenceLevel,
             result.refinementLevel,
             ...result.equipmentEffects,
             characterId,
-            result.Type,
+            result.type,
           ]
         );
       } else {
@@ -87,10 +86,10 @@ export default async function saveEquipment(characterId: number, equipment: any[
            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
           [
             characterId,
-            result.Type,
-            result.Name,
-            result.Icon,
-            result.Grade,
+            result.type,
+            result.name,
+            result.icon,
+            result.grade,
             result.transcendenceLevel,
             result.refinementLevel,
             ...result.equipmentEffects,
