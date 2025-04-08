@@ -56,9 +56,9 @@ export async function GET(req: NextRequest) {
     // 원정대 정보 업데이트
     await db.query(
       `UPDATE expeditions
-       SET expedition_level = ?, town_name = ?
+       SET expedition_level = ?
        WHERE id = (SELECT expedition_id FROM characters WHERE name = ?)`,
-      [json.ArmoryProfile.ExpeditionLevel, json.ArmoryProfile.TownName, name]
+      [json.ArmoryProfile.ExpeditionLevel, name]
     );
 
     await db.query(
