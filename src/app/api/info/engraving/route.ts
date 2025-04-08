@@ -16,9 +16,14 @@ export async function GET(req: NextRequest) {
       [engravingNames]
     );
 
+    // 입력된 순서대로 정렬
+    const sortedRows = engravingNames.map(
+      name => rows.find(row => row.name === name) || { name, image_url: null }
+    );
+
     return NextResponse.json({
-      name: rows.map(row => row.name),
-      image: rows.map(row => row.image_url),
+      name: sortedRows.map(row => row.name),
+      image: sortedRows.map(row => row.image_url),
     });
   } catch (err: unknown) {
     let message = '알 수 없는 에러';

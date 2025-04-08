@@ -1,30 +1,23 @@
 'use client';
 
 import { ArmoryEngraving } from '@/types/character';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import Image from 'next/image';
 import axios from 'axios';
 import styles from './EngravingTable.module.scss';
 
 export default function EngravingTable({ engraving }: { engraving: ArmoryEngraving }) {
-  const engravings = engraving.ArkPassiveEffects.map(effect => effect.Name);
-
+  const engravings = useMemo(
+    () => engraving.ArkPassiveEffects.map(effect => effect.Name),
+    [engraving.ArkPassiveEffects]
+  );
   const [engravingImages, setEngravingImages] = useState<string[]>([]);
-  const [sortedEffects, setSortedEffects] = useState(engraving.ArkPassiveEffects);
 
   useEffect(() => {
     const fetchEngravingImages = async () => {
       try {
         const response = await axios.get(`/api/info/engraving?names=${engravings.join(',')}`);
         setEngravingImages(response.data.image);
-
-        const sorted = [...engraving.ArkPassiveEffects].sort((a, b) => {
-          const aIndex = response.data.name.indexOf(a.Name);
-          const bIndex = response.data.name.indexOf(b.Name);
-          return aIndex - bIndex;
-        });
-
-        setSortedEffects(sorted);
       } catch (error) {
         console.error('Failed to fetch engraving images:', error);
       }
@@ -37,7 +30,7 @@ export default function EngravingTable({ engraving }: { engraving: ArmoryEngravi
 
   return (
     <div className={styles.engravingTable}>
-      {sortedEffects.map((effect, index) => (
+      {engraving.ArkPassiveEffects.map((effect, index) => (
         <div key={index} className={styles.item}>
           <Image
             key={index}
