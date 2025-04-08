@@ -3,12 +3,14 @@ import { ArmoryProfile } from '@/types/character';
 import styles from './CharacterSummary.module.scss';
 import { useRouter } from 'next/navigation';
 import ScoreTabs from './ScoreTabs';
+import GemTable from './tables/GemTable';
 
 type Props = {
   profile: ArmoryProfile;
+  characterId: number;
 };
 
-const CharacterSummary = ({ profile }: Props) => {
+const CharacterSummary = ({ profile, characterId }: Props) => {
   const router = useRouter();
 
   const handleExpeditionInfoClick = () => {
@@ -51,8 +53,10 @@ const CharacterSummary = ({ profile }: Props) => {
               <span className={styles.Icon}></span>
             </div>
           </div>
-          <div style={{ height: '130px' }}></div>
+          <div style={{ height: '30px' }}></div>
           <ScoreTabs data={10000} />
+          <div style={{ height: '30px' }}></div>
+          <GemTable characterId={characterId} />
         </div>
       </div>
     </div>
