@@ -42,7 +42,7 @@ export default async function saveEquipment(characterId: number, equipment: any[
           ...braceletMainStats,
           ...Array(2 - braceletMainStats.length).fill(null),
           ...braceletEffects,
-          ...Array(3 - braceletMainStats.length - braceletEffects.length).fill(null),
+          ...Array(3 - braceletEffects.length).fill(null),
         ];
       } else if (isAccessory) {
         equipmentEffects = [null, null, ...accessoryEffects];
