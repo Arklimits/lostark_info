@@ -40,7 +40,7 @@ const InquiryModal = ({ onClose }: Props) => {
             className={styles.input}
             value={author}
             onChange={e => setAuthor(e.target.value)}
-            placeholder="이름"
+            placeholder="작성자"
           />
           <button className={styles.button} onClick={onClose}>
             취소

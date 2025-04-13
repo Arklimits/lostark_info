@@ -9,7 +9,7 @@ export const KakaoInquiry = () => {
   return (
     <>
       <span className={styles.inquiry} onClick={() => setShowModal(true)}>
-        1:1 문의
+        문의하기
       </span>
       <span
         className={styles.inquiry}
