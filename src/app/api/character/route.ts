@@ -4,11 +4,7 @@ import { db } from '@/lib/db';
 import type { RowDataPacket } from 'mysql2';
 import saveEquipment from '@/services/equipments/saveEquipment';
 import saveGems from '@/services/gems/saveGems';
-
-type CachedCharacter = RowDataPacket & {
-  data: string;
-  modified_at: string;
-};
+import saveArkPassive from '@/services/arkpassives/saveArkPassive';
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -26,19 +22,21 @@ export async function GET(req: NextRequest) {
   const encodedName = encodeURIComponent(name);
 
   try {
-    const [exist] = await db.query<CachedCharacter[]>('SELECT * FROM characters WHERE name = ?', [
+    const [exist] = await db.query<RowDataPacket[]>('SELECT * FROM characters WHERE name = ?', [
       name,
     ]);
 
-    if (exist.length > 0) {
-      const cached = exist[0];
-      const modifiedAt = new Date(cached.modified_at);
-      const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000);
+    // if (exist.length > 0) {
+    //   const cached = exist[0];
+    //   const modifiedAt = new Date(cached.modified_at);
+    //   const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000);
 
-      if (modifiedAt > fiveMinutesAgo) {
-        return NextResponse.json(JSON.parse(cached.data));
-      }
-    }
+    //   console.log(modifiedAt, fiveMinutesAgo);
+    //   if (modifiedAt < fiveMinutesAgo) {
+    //     console.log('캐시 사용');
+    //     return NextResponse.json(cached);
+    //   }
+    // }
 
     const apiUrl = `https://developer-lostark.game.onstove.com/armories/characters/${encodedName}`;
     const res = await axios.get(apiUrl, {
@@ -64,7 +62,7 @@ export async function GET(req: NextRequest) {
       `UPDATE characters
        SET character_image = ?, character_level = ?, item_level = ?, crit = ?, specialization = ?,
         domination = ?, swiftness = ?,  endurance = ?, expertise = ?, vitality = ?, attack_point = ?,
-        calculated_score = ?
+        calculated_score = ?, modified_at = NOW()
        WHERE name = ?`,
       [
         json.ArmoryProfile.CharacterImage,
@@ -92,6 +90,7 @@ export async function GET(req: NextRequest) {
 
     const equipment = await saveEquipment(characterId, json.ArmoryEquipment);
     const gems = await saveGems(characterId, json.ArmoryGem);
+    const arkPassive = await saveArkPassive(characterId, json.ArkPassive);
 
     json.id = characterId;
 
