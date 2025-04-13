@@ -5,9 +5,6 @@ import CharacterPage from '@/components/character/CharacterPage';
 export default function Page() {
   return (
     <main className="page-container">
-      <section className="top-section">
-        <SearchBar />
-      </section>
       <section className="character-section">
         <Suspense fallback={<div>로딩 중...</div>}>
           <CharacterPage />
