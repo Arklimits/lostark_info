@@ -72,12 +72,9 @@ export async function GET(req: NextRequest) {
       expeditionId = existingChars[0].expedition_id;
     } else {
       // 없으면 새 원정대 생성
-      const mainChar = characters[0];
-      const expeditionServer = mainChar.ServerName;
-
       const [expInsert] = await db.query<ResultSetHeader>(
-        'INSERT INTO expeditions (server, created_by, created_at) VALUES (?, ?, NOW())',
-        [expeditionServer, keyword]
+        'INSERT INTO expeditions (created_by, created_at) VALUES (?, NOW())',
+        [keyword]
       );
       expeditionId = expInsert.insertId;
     }
