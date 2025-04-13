@@ -23,7 +23,7 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json({
       name: sortedRows.map(row => row.name),
-      image: sortedRows.map(row => row.image_url),
+      image_url: sortedRows.map(row => row.image_url),
     });
   } catch (err: unknown) {
     let message = '알 수 없는 에러';

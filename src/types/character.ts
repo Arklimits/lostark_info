@@ -38,6 +38,7 @@ export interface ArmoryEngraving {
     Level: number;
     Name: string;
     Description: string;
+    ImageUrl: string;
   }[];
 }
 

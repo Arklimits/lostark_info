@@ -5,6 +5,7 @@ import type { RowDataPacket } from 'mysql2';
 import saveEquipment from '@/services/equipments/saveEquipment';
 import saveGems from '@/services/gems/saveGems';
 import saveArkPassive from '@/services/arkpassives/saveArkPassive';
+import saveEngraving from '@/services/engravings/saveEngraving';
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -91,6 +92,7 @@ export async function GET(req: NextRequest) {
     const equipment = await saveEquipment(characterId, json.ArmoryEquipment);
     const gems = await saveGems(characterId, json.ArmoryGem);
     const arkPassive = await saveArkPassive(characterId, json.ArkPassive);
+    const engraving = await saveEngraving(characterId, json.ArmoryEngraving);
 
     json.id = characterId;
 
