@@ -56,6 +56,11 @@ section {
   border-top: 1px solid var(--foreground);
 }
 
+.logo {
+  font-family: 'Giants-Bold';
+  font-size: 80px;
+}
+
 @font-face {
   font-family: 'Giants-Bold';
   src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/Giants-Bold.woff2')
