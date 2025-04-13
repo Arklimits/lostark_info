@@ -1,40 +1,21 @@
 'use client';
 
 import { ArmoryEngraving } from '@/types/character';
-import { useState, useEffect, useMemo } from 'react';
 import Image from 'next/image';
-import axios from 'axios';
 import styles from './EngravingTable.module.scss';
 
-export default function EngravingTable({ engraving }: { engraving: ArmoryEngraving }) {
-  const engravings = useMemo(
-    () => engraving.ArkPassiveEffects.map(effect => effect.Name),
-    [engraving.ArkPassiveEffects]
-  );
-  const [engravingImages, setEngravingImages] = useState<string[]>([]);
-
-  useEffect(() => {
-    const fetchEngravingImages = async () => {
-      try {
-        const response = await axios.get(`/api/info/engraving?names=${engravings.join(',')}`);
-        setEngravingImages(response.data.image);
-      } catch (error) {
-        console.error('Failed to fetch engraving images:', error);
-      }
-    };
-
-    if (engravings.length > 0) {
-      fetchEngravingImages();
-    }
-  }, [engravings]);
-
+export default function EngravingTable({
+  engraving,
+}: {
+  engraving: ArmoryEngraving['ArkPassiveEffects'];
+}) {
   return (
     <div className={styles.engravingTable}>
-      {engraving.ArkPassiveEffects.map((effect, index) => (
+      {engraving.map((effect, index) => (
         <div key={index} className={styles.item}>
           <Image
             key={index}
-            src={engravingImages[index] || '/ico/ico-noImage.png'}
+            src={effect.ImageUrl || '/ico/ico-noImage.png'}
             alt={effect.Name}
             width={40}
             height={40}

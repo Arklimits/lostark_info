@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react';
-import StatTable from './tables/StatTable';
 import EquipmentTable from './tables/EquipmentTable';
 import SkillTable from './tables/SkillTable';
 import styles from './CharacterTabs.module.scss';
@@ -7,7 +6,7 @@ import { CharacterData, ArmoryGem } from '@/types/character';
 import DealTable from './tables/DealTable';
 import { Skill } from '@/types/character';
 import { parseArkPassive } from '@/utils/parse/arkPassive';
-
+import StatContainer from '@/containers/character/detail/StatContainer';
 interface Props {
   data: CharacterData;
   skills: Skill[];
@@ -20,7 +19,8 @@ const CharacterTabs = ({ characterId, data, skills }: Props) => {
   const tabContents = useMemo(
     () => ({
       특성: (
-        <StatTable
+        <StatContainer
+          characterId={characterId}
           stats={data.ArmoryProfile.Stats}
           tendencies={data.ArmoryProfile.Tendencies}
           characterClass={data.ArmoryProfile.CharacterClassName}
