@@ -1,6 +1,6 @@
 .card {
   position: relative;
-  width: 150px;
+  width: 160px;
   background-color: #15181d;
   color: white;
   border-radius: 10px;
@@ -38,9 +38,13 @@
 }
 
 .name {
+  width: 150px;
   font-size: 16px;
   font-weight: bold;
   margin-top: 4px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .server {

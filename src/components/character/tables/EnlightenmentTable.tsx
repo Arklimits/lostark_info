@@ -3,11 +3,11 @@ import ArkPassiveIcon from './ArkPassiveIcon';
 import { getArkPassiveDataByClass } from '@/data/arkpassive/arkpassiveData';
 import { ArkPassiveDto } from '@/types/dto/arkPassive';
 
-const useEnlightenmentData = (evolution: ArkPassiveDto[], characterClass: string) => {
+const useEnlightenmentData = (arkPassive: ArkPassiveDto[], characterClass: string) => {
   const updatedEnlightenmentData = getArkPassiveDataByClass(characterClass)
     .filter((item: any) => item.name === '깨달음')
     .map((item: any) => {
-      const matchingEnlightenment = evolution?.find((e: any) => e.title === item.title);
+      const matchingEnlightenment = arkPassive?.find((e: any) => e.title === item.title);
       return {
         ...item,
         level: matchingEnlightenment?.level || 0,
@@ -25,13 +25,13 @@ const useEnlightenmentData = (evolution: ArkPassiveDto[], characterClass: string
 };
 
 const EnlightenmentTable = ({
-  evolution,
+  arkPassive,
   characterClass,
 }: {
-  evolution: ArkPassiveDto[];
+  arkPassive: ArkPassiveDto[];
   characterClass: string;
 }) => {
-  const groupedEnlightenment = useEnlightenmentData(evolution, characterClass);
+  const groupedEnlightenment = useEnlightenmentData(arkPassive, characterClass);
 
   return (
     <div className={styles.container}>

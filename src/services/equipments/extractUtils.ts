@@ -1,18 +1,10 @@
-import Image from 'next/image';
-import { ArmoryEquipment } from '@/types/character';
-import styles from './EquipmentTable.module.scss';
-
-interface Props {
-  equipment: ArmoryEquipment[];
-}
-
-function extractRefinementLevel(tooltip: string): number | null {
+export function extractRefinementLevel(tooltip: string): number | null {
   const match = tooltip.match(/<FONT COLOR='#FFD200'>(\d+)<\/FONT>단계/);
 
   return match ? parseInt(match[1], 10) : null;
 }
 
-function extractTranscendenceLevel(tooltip: string): number | null {
+export function extractTranscendenceLevel(tooltip: string): number | null {
   const match = tooltip.match(/\[초월\][\s\S]*?<FONT COLOR='#FFD200'>(\d+)<\/FONT>단계/);
 
   return match ? parseInt(match[1], 10) : null;
@@ -29,7 +21,7 @@ function extractTranscendenceLevel(tooltip: string): number | null {
  * @example
  * - ["[공용] 힘 Lv.5", "[투구] 회심 (질서) Lv.5"]
  */
-function extractElixirEffects(tooltip: string): string[] {
+export function extractElixirEffects(tooltip: string): string[] {
   const matches = [
     ...tooltip.matchAll(
       /<FONT color='#FFD200'>\[(.*?)\]<\/FONT>\s*(.*?)\s*<FONT color='#FFD200'>Lv\.(\d+)<\/FONT>/g
@@ -44,7 +36,7 @@ function extractElixirEffects(tooltip: string): string[] {
  *
  * - HTML 태그 제거 후 옵션 목록만 반환
  */
-function extractAccessoryEffects(tooltip: string): string[] {
+export function extractAccessoryEffects(tooltip: string): string[] {
   const parsed: Record<string, any> = JSON.parse(tooltip);
   const raw: string | undefined = parsed?.Element_005?.value?.Element_001;
 
@@ -62,7 +54,7 @@ function extractAccessoryEffects(tooltip: string): string[] {
  *
  * 예: "돌격대장 Lv.3", "공격속도 감소 Lv.0" 등의 배열 반환
  */
-function extractAbilityStoneEngravings(tooltip: string): string[] {
+export function extractAbilityStoneEngravings(tooltip: string): string[] {
   const matches = [...tooltip.matchAll(/\[<FONT COLOR='[^']*'>(.*?)<\/FONT>.*?Lv\.(\d+)/g)];
 
   return matches.map(match => `${match[1]} Lv.${match[2]}`);
@@ -82,7 +74,10 @@ function extractAbilityStoneEngravings(tooltip: string): string[] {
  *   stats:   ["신속 +67", "치명 +71"]
  *   effects: ["치명타 피해가 6.8% 증가한다."]
  */
-function extractBraceletStatsAndEffects(tooltip: string): { stats: string[]; effects: string[] } {
+export function extractBraceletStatsAndEffects(tooltip: string): {
+  stats: string[];
+  effects: string[];
+} {
   const parsed: Record<string, any> = JSON.parse(tooltip);
   const raw: string | undefined = parsed?.Element_004?.value?.Element_001;
 
@@ -122,7 +117,7 @@ function extractBraceletStatsAndEffects(tooltip: string): { stats: string[]; eff
   }
 
   const summarized = effectLines
-    .map(summarizeEffectLine)
+    .map(convertBraceltEffect)
     .filter((line): line is string => line !== null);
 
   return {
@@ -131,7 +126,7 @@ function extractBraceletStatsAndEffects(tooltip: string): { stats: string[]; eff
   };
 }
 
-function summarizeEffectLine(line: string): string | null {
+function convertBraceltEffect(line: string): string | null {
   if (line.includes('무기 공격력') && line.includes('30초') && line.includes('120초')) {
     const grade = line.includes('150') ? '상' : line.includes('140') ? '중' : '하';
     return `무공 에포형 ${grade}`;
@@ -218,79 +213,4 @@ function summarizeEffectLine(line: string): string | null {
   }
 
   return line; // 인식되지 않은 줄은 그대로 반환
-}
-
-export default function EquipmentTable({ equipment }: Props) {
-  return (
-    <div className={styles.container}>
-      {equipment.map((item, index) => {
-        const isAccessory = ['목걸이', '귀걸이', '반지'].includes(item.Type);
-        const isStone = item.Type === '어빌리티 스톤';
-        const isBracelet = item.Type === '팔찌';
-        const isEquipment = ['투구', '상의', '하의', '장갑', '무기', '어깨'].includes(item.Type);
-
-        const refinementLevel = isEquipment ? extractRefinementLevel(item.Tooltip) : [];
-        const transcendenceLevel = extractTranscendenceLevel(item.Tooltip);
-
-        const elixirEffects = isEquipment ? extractElixirEffects(item.Tooltip) : [];
-        const accessoryEffects = isAccessory ? extractAccessoryEffects(item.Tooltip) : [];
-        const stoneEffects = isStone ? extractAbilityStoneEngravings(item.Tooltip) : [];
-
-        const { stats: braceletMainStats, effects: braceletEffects } =
-          item.Type === '팔찌'
-            ? extractBraceletStatsAndEffects(item.Tooltip)
-            : { stats: [], effects: [] };
-
-        const slot2Lines: string[] = [
-          ...elixirEffects,
-          ...accessoryEffects,
-          ...stoneEffects,
-          ...braceletEffects,
-        ];
-
-        return (
-          <div key={index} className={styles.row} data-grade={item.Grade}>
-            <div className={styles.type}>{item.Type}</div>
-            <div className={styles.iconHolder}>
-              <Image
-                className={styles.icon}
-                width="40"
-                height="40"
-                src={item.Icon}
-                alt={item.Name}
-              />
-            </div>
-            <div className={styles.name}>
-              {item.Name}
-              {isEquipment && <span> +{refinementLevel}</span>}
-            </div>
-            <div className={styles.slot1}>
-              {braceletMainStats.map((line, idx) => (
-                <div key={idx}>{line}</div>
-              ))}
-            </div>
-            <div className={styles.slot2}>
-              {slot2Lines.map((line, idx) => (
-                <div key={idx}>{line}</div>
-              ))}
-            </div>
-            <div className={styles.slot3}>
-              {isEquipment && (
-                <>
-                  <Image
-                    className={styles.transcendenceIcon}
-                    width="20"
-                    height="20"
-                    src="https://cdn-lostark.game.onstove.com/2018/obt/assets/images/common/game/ico_tooltip_transcendence.png"
-                    alt="초월 이미지"
-                  />
-                  {`${transcendenceLevel}단계`}
-                </>
-              )}
-            </div>
-          </div>
-        );
-      })}
-    </div>
-  );
 }

@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
 
   try {
     const [rows] = await db.query<RowDataPacket[]>(
-      'SELECT character_image AS CharacterImage, guild AS GuildName FROM characters WHERE name = ?',
+      'SELECT character_image AS CharacterImage, guild AS GuildName, server_name AS ServerName FROM characters WHERE name = ?',
       [name]
     );
 
@@ -22,28 +22,32 @@ export async function GET(req: NextRequest) {
     }
 
     const encodedName = encodeURIComponent(name);
-    const apiUrl = `https://developer-lostark.game.onstove.com/armories/characters/${encodedName}/profiles`;
+
     const token = process.env.LOSTARK_API_TOKEN;
 
     if (!token) {
       return NextResponse.json({ error: '서버 토큰 없음' }, { status: 500 });
     }
 
-    const res = await axios.get(apiUrl, {
-      headers: {
-        Authorization: `bearer ${token}`,
-        Accept: 'application/json',
-      },
-    });
+    const res = await axios.get(
+      `https://developer-lostark.game.onstove.com/armories/characters/${encodedName}/profiles`,
+      {
+        headers: {
+          Authorization: `bearer ${token}`,
+          Accept: 'application/json',
+        },
+      }
+    );
 
     await db.query<ResultSetHeader>(
-      'UPDATE characters SET character_image = ?, guild = ? WHERE name = ?',
-      [res.data.CharacterImage, res.data.GuildName, name]
+      'UPDATE characters SET character_image = ?, guild = ?, server_name = ? WHERE name = ?',
+      [res.data.CharacterImage, res.data.GuildName, res.data.ServerName, name]
     );
 
     return NextResponse.json({
       CharacterImage: res.data.CharacterImage,
       GuildName: res.data.GuildName,
+      ServerName: res.data.ServerName,
     });
   } catch (err: unknown) {
     let status = 500;

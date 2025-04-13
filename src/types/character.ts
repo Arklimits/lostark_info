@@ -38,6 +38,7 @@ export interface ArmoryEngraving {
     Level: number;
     Name: string;
     Description: string;
+    ImageUrl: string;
   }[];
 }
 
@@ -55,6 +56,7 @@ export interface ArmorySkill {
     Level: number;
     IsSelected: boolean;
     ToolTip: string;
+    IsTierMax: boolean;
   }[];
   Rune: {
     Name: string;
@@ -97,6 +99,7 @@ export interface ArmoryGem {
 }
 
 export interface CharacterData {
+  characterId: number;
   ArmoryProfile: ArmoryProfile;
   ArmoryEquipment: ArmoryEquipment[];
   ArmoryEngraving: ArmoryEngraving;

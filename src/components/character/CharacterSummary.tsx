@@ -3,17 +3,36 @@ import { ArmoryProfile } from '@/types/character';
 import styles from './CharacterSummary.module.scss';
 import { useRouter } from 'next/navigation';
 import ScoreTabs from './ScoreTabs';
+import GemTable from './tables/GemTable';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 type Props = {
-  profile: ArmoryProfile;
+  characterId: number;
 };
 
-const CharacterSummary = ({ profile }: Props) => {
+const CharacterSummary = ({ characterId }: Props) => {
   const router = useRouter();
 
+  const [profile, setProfile] = useState<ArmoryProfile>();
+
+  if (!characterId) return <div>캐릭터 아이디 없음</div>;
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      const res = await axios.get(`/api/character/summary?characterId=${characterId}`);
+      setProfile(res.data);
+    };
+    fetchProfile();
+  }, [characterId]);
+
   const handleExpeditionInfoClick = () => {
-    router.push(`/search?keyword=${encodeURIComponent(profile.CharacterName)}`);
+    if (profile?.CharacterName) {
+      router.push(`/search?keyword=${encodeURIComponent(profile.CharacterName)}`);
+    }
   };
+
+  if (!profile) return <div>로딩 중...</div>;
 
   return (
     <div className={styles.wrapper}>
@@ -28,6 +47,7 @@ const CharacterSummary = ({ profile }: Props) => {
           width={240}
           height={320}
           unoptimized
+          priority
         />
         <div className={styles.footer}>
           <p style={{ color: '#4dd' }}>{profile.GuildName}</p>
@@ -50,8 +70,10 @@ const CharacterSummary = ({ profile }: Props) => {
               <span className={styles.Icon}></span>
             </div>
           </div>
-          <div style={{ height: '130px' }}></div>
-          <ScoreTabs data={10000} />
+          <div style={{ height: '30px' }}></div>
+          <ScoreTabs characterId={characterId} />
+          <div style={{ height: '30px' }}></div>
+          <GemTable characterId={characterId} />
         </div>
       </div>
     </div>

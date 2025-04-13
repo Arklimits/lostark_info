@@ -8,13 +8,11 @@ import CharacterSummary from '@/components/character/CharacterSummary';
 import CharacterTabs from '@/components/character/CharacterTabs';
 import { CharacterData } from '@/types/character';
 import { notFound } from 'next/navigation';
-import { Skill } from '@/types/character';
 
 const CharacterPage = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [data, setData] = useState<CharacterData>();
-  const [skills, setSkills] = useState<Skill[]>([]);
   const [error, setError] = useState(false);
   const name = searchParams.get('name')?.trim() ?? '';
 
@@ -31,12 +29,6 @@ const CharacterPage = () => {
           params: { name: decodedName },
         });
         setData(res.data);
-
-        // constant 병합 API 호출
-        const skillRes = await axios.post('/api/info/skill', {
-          skills: res.data.ArmorySkills,
-        });
-        setSkills(skillRes.data);
       } catch (err) {
         console.error(err);
         setError(true);
@@ -53,10 +45,10 @@ const CharacterPage = () => {
   return (
     <>
       <div className={styles.summarySection}>
-        <CharacterSummary profile={data.ArmoryProfile} />
+        <CharacterSummary characterId={data.characterId} />
       </div>
       <div>
-        <CharacterTabs data={data} skills={skills} gem={data.ArmoryGem} />
+        <CharacterTabs characterId={data.characterId} />
       </div>
     </>
   );

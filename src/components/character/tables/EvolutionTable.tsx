@@ -3,9 +3,9 @@ import ArkPassiveIcon from './ArkPassiveIcon';
 import evolutionData from '@/data/arkpassive/common/evolutionData';
 import { ArkPassiveDto } from '@/types/dto/arkPassive';
 
-const useEvolutionData = (evolution: ArkPassiveDto[]) => {
+const useEvolutionData = (arkPassive: ArkPassiveDto[]) => {
   const updatedEvolutionData = evolutionData.map(item => {
-    const matchingEvolution = evolution?.find((e: any) => e.title === item.title);
+    const matchingEvolution = arkPassive?.find((e: any) => e.title === item.title);
     return {
       ...item,
       level: matchingEvolution?.level || 0,
@@ -22,8 +22,8 @@ const useEvolutionData = (evolution: ArkPassiveDto[]) => {
   return groupedEvolution;
 };
 
-const EvolutionTable = ({ evolution }: { evolution: ArkPassiveDto[] }) => {
-  const groupedEvolution = useEvolutionData(evolution);
+const EvolutionTable = ({ arkPassive }: { arkPassive: ArkPassiveDto[] }) => {
+  const groupedEvolution = useEvolutionData(arkPassive);
 
   return (
     <div className={styles.container}>

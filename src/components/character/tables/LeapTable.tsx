@@ -4,9 +4,9 @@ import { getArkPassiveDataByClass } from '@/data/arkpassive/arkpassiveData';
 import { ArkPassiveDto } from '@/types/dto/arkPassive';
 import leapData from '@/data/arkpassive/common/leapData';
 
-const useLeapData = (evolution: ArkPassiveDto[], characterClass: string) => {
+const useLeapData = (arkPassive: ArkPassiveDto[], characterClass: string) => {
   const updatedCommonLeapData = leapData.map(item => {
-    const matchingLeap = evolution?.find((e: any) => e.title === item.title);
+    const matchingLeap = arkPassive?.find((e: any) => e.title === item.title);
     return {
       ...item,
       level: matchingLeap?.level || 0,
@@ -17,7 +17,7 @@ const useLeapData = (evolution: ArkPassiveDto[], characterClass: string) => {
   const updatedLeapData = getArkPassiveDataByClass(characterClass)
     .filter((item: any) => item.name === '도약')
     .map((item: any) => {
-      const matchingLeap = evolution?.find((e: any) => e.title === item.title);
+      const matchingLeap = arkPassive?.find((e: any) => e.title === item.title);
       return {
         ...item,
         level: matchingLeap?.level || 0,
@@ -39,13 +39,13 @@ const useLeapData = (evolution: ArkPassiveDto[], characterClass: string) => {
 };
 
 const LeapTable = ({
-  evolution,
+  arkPassive,
   characterClass,
 }: {
-  evolution: ArkPassiveDto[];
+  arkPassive: ArkPassiveDto[];
   characterClass: string;
 }) => {
-  const groupedLeap = useLeapData(evolution, characterClass);
+  const groupedLeap = useLeapData(arkPassive, characterClass);
 
   return (
     <div className={styles.container}>

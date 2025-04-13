@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import axios from 'axios';
-
+import { RowDataPacket } from 'mysql2';
+import { db } from '@/lib/db';
 type EngravingEffect = {
   Name: string;
   Description: string;
@@ -65,40 +66,60 @@ function parseEngravingBonus(effects: EngravingEffect[]) {
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
-  const name = searchParams.get('name');
+  const characterId = searchParams.get('characterId');
+  const characterName = searchParams.get('characterName');
 
-  if (!name) {
-    return NextResponse.json({ error: 'name 파라미터가 필요합니다.' }, { status: 400 });
+  if (!characterId && !characterName) {
+    return NextResponse.json(
+      { error: 'characterId 혹은 characterName 파라미터가 필요합니다.' },
+      { status: 400 }
+    );
   }
 
   try {
-    const [profileRes, engravingRes] = await Promise.all([
-      axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/character/profile`, { params: { name } }),
-      axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/character/engraving`, {
-        params: { name },
-      }),
-    ]);
+    // const [profileRes, engravingRes] = await Promise.all([
+    //   axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/character/profile`, { params: { name } }),
+    //   axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/character/engraving`, {
+    //     params: { name },
+    //   }),
+    // ]);
 
-    const attack = parseFloat((profileRes.data.AttackPower ?? '0').replace(',', ''));
-    const profileCritRate = parseFloat(profileRes.data.CritRate ?? '0');
-    const coolDown = parseFloat(profileRes.data.CoolDown ?? '0');
-    const profileDamageBonus = parseFloat(profileRes.data.DamageBonus ?? '0');
-    const engraving = engravingRes.data.ArkPassiveEffects;
+    // const attack = parseFloat((profileRes.data.AttackPower ?? '0').replace(',', ''));
+    // const profileCritRate = parseFloat(profileRes.data.CritRate ?? '0');
+    // const coolDown = parseFloat(profileRes.data.CoolDown ?? '0');
+    // const profileDamageBonus = parseFloat(profileRes.data.DamageBonus ?? '0');
+    // const engraving = engravingRes.data.ArkPassiveEffects;
 
-    const { attackBonus, damageBonus, engCritRate, critDamageBonus } =
-      parseEngravingBonus(engraving);
+    // const { attackBonus, damageBonus, engCritRate, critDamageBonus } =
+    //   parseEngravingBonus(engraving);
 
-    const critRate = profileCritRate + engCritRate > 100 ? 100 : profileCritRate + engCritRate;
+    // const critRate = profileCritRate + engCritRate > 100 ? 100 : profileCritRate + engCritRate;
 
-    const score = Math.round(
-      (attack *
-        (1 + attackBonus / 100) *
-        (1 + (profileDamageBonus + damageBonus) / 100) *
-        (1 - critRate / 100 + (critRate / 100) * (2 + critDamageBonus / 100))) /
-        (1 - coolDown / 100)
-    ).toLocaleString();
+    // const score = Math.round(
+    //   (attack *
+    //     (1 + attackBonus / 100) *
+    //     (1 + (profileDamageBonus + damageBonus) / 100) *
+    //     (1 - critRate / 100 + (critRate / 100) * (2 + critDamageBonus / 100))) /
+    //     (1 - coolDown / 100)
+    // ).toLocaleString();
 
-    return NextResponse.json({ score });
+    if (characterId) {
+      const [rows] = await db.query<RowDataPacket[]>(
+        'SELECT calculated_score FROM characters WHERE id = ?',
+        [characterId]
+      );
+
+      return NextResponse.json({ calculatedScore: rows[0].calculated_score });
+    }
+
+    if (characterName) {
+      const [rows] = await db.query<RowDataPacket[]>(
+        'SELECT calculated_score FROM characters WHERE name = ?',
+        [characterName]
+      );
+
+      return NextResponse.json({ calculatedScore: rows[0].calculated_score });
+    }
   } catch (e) {
     console.error('score 계산 에러:', e);
     return NextResponse.json({ error: 'score 계산 실패' }, { status: 500 });

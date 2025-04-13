@@ -1,3 +1,8 @@
+.tabWrapper {
+  position: relative;
+  width: 100%;
+}
+
 .tabList {
   display: flex;
   height: 60px;
@@ -14,12 +19,31 @@
   font-size: 16px;
   cursor: pointer;
   border-bottom: 2px solid transparent;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.3s ease;
+}
+
+.tabContentContainer {
+  position: relative;
+  width: 100%;
+  min-height: 200px;
 }
 
 .tabContent {
   background-color: var(--contentbackground);
   border-radius: 0 0 10px 10px;
+  transition: all 0.3s ease;
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+.activeContent {
+  opacity: 1;
+  visibility: visible;
+  position: relative;
 }
 
 .tab:hover {

@@ -29,7 +29,7 @@ export async function GET(req: NextRequest) {
         ServerName: existing[0].server,
         CharacterName: sibling.name,
         CharacterLevel: sibling.character_level,
-        CharacterClassName: sibling.class,
+        CharacterClassName: sibling.character_class_name,
         ItemMaxLevel: sibling.item_level,
       }));
 
@@ -87,8 +87,8 @@ export async function GET(req: NextRequest) {
 
       // 캐릭터 저장
       await db.query(
-        `INSERT INTO characters (name, expedition_id, character_level, class, item_level, created_at, modified_at)
-          VALUES (?, ?, ?, ?, ?, NOW(), NOW())
+        `INSERT INTO characters (name, expedition_id, character_level, class, item_level, server_name, created_at, modified_at)
+          VALUES (?, ?, ?, ?, ?, ?, NOW(), NOW())
           ON DUPLICATE KEY UPDATE modified_at = NOW(), expedition_id = ?`,
         [
           char.CharacterName,
@@ -96,6 +96,7 @@ export async function GET(req: NextRequest) {
           char.CharacterLevel,
           char.CharacterClassName,
           char.ItemMaxLevel,
+          char.ServerName,
           expeditionId,
         ]
       );

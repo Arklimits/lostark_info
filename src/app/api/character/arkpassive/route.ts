@@ -11,17 +11,9 @@ export async function GET(req: NextRequest) {
   }
 
   const [rows] = await db.query<RowDataPacket[]>(
-    'SELECT * FROM character_engravings WHERE character_id = ?',
+    'SELECT * FROM character_arkpassives WHERE character_id = ?',
     [characterId]
   );
 
-  const engravingData = rows.map(row => ({
-    Name: row.name,
-    Grade: row.grade,
-    Level: row.level,
-    AbilityStoneLevel: row.ability_stone_level,
-    ImageUrl: row.image_url,
-  }));
-
-  return NextResponse.json(engravingData);
+  return NextResponse.json(rows);
 }
