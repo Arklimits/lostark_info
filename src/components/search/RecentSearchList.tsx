@@ -34,10 +34,6 @@ const RecentSearchList = () => {
     }
   });
 
-  if (allItems.length === 0) {
-    return null;
-  }
-
   return (
     <div className={styles.container}>
       <div className={styles.title}>최근검색</div>
