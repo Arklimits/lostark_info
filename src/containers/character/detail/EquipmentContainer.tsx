@@ -33,10 +33,6 @@ export default function EquipmentContainer({ characterId }: Props) {
     processEquipment();
   }, [characterId]);
 
-  if (processedEquipment.length === 0) {
-    return <div>로딩 중...</div>;
-  }
-
   return (
     <div className={styles.container}>
       {processedEquipment.map((item, index) => {

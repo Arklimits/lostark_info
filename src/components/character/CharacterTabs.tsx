@@ -6,6 +6,7 @@ import StatContainer from '@/containers/character/detail/StatContainer';
 import EquipmentContainer from '@/containers/character/detail/EquipmentContainer';
 import SkillContainer from '@/containers/character/detail/SkillContainer';
 import DealContainer from '@/containers/character/detail/DealContainer';
+
 interface Props {
   characterId: number;
 }
@@ -26,7 +27,7 @@ const CharacterTabs = ({ characterId }: Props) => {
   const [activeTab, setActiveTab] = useState('특성');
 
   return (
-    <>
+    <div className={styles.tabWrapper}>
       <div className={styles.tabList}>
         {tabs.map(tab => (
           <button
@@ -38,8 +39,17 @@ const CharacterTabs = ({ characterId }: Props) => {
           </button>
         ))}
       </div>
-      <div className={styles.tabContent}>{tabContents[activeTab as keyof typeof tabContents]}</div>
-    </>
+      <div className={styles.tabContentContainer}>
+        {tabs.map(tab => (
+          <div
+            key={tab}
+            className={`${styles.tabContent} ${activeTab === tab ? styles.activeContent : ''}`}
+          >
+            {tabContents[tab as keyof typeof tabContents]}
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };
 
