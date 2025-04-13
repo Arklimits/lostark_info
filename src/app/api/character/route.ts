@@ -6,6 +6,7 @@ import saveEquipment from '@/services/equipments/saveEquipment';
 import saveGems from '@/services/gems/saveGems';
 import saveArkPassive from '@/services/arkpassives/saveArkPassive';
 import saveEngraving from '@/services/engravings/saveEngraving';
+import saveSkill from '@/services/skills/saveSkill';
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -93,6 +94,7 @@ export async function GET(req: NextRequest) {
     const gems = await saveGems(characterId, json.ArmoryGem);
     const arkPassive = await saveArkPassive(characterId, json.ArkPassive);
     const engraving = await saveEngraving(characterId, json.ArmoryEngraving);
+    const skill = await saveSkill(characterId, json.ArmorySkills);
 
     json.id = characterId;
 
