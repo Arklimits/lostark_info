@@ -15,6 +15,14 @@ const SearchBar = ({ className }: { className?: string }) => {
     const trimmed = keyword.trim();
     if (!trimmed) return;
 
+    const storedSearches = localStorage.getItem('recentSearches');
+    const searches = storedSearches ? JSON.parse(storedSearches) : [];
+    const newSearches = [
+      { keyword: trimmed },
+      ...searches.filter((item: { keyword: string }) => item.keyword !== trimmed),
+    ].slice(0, 10);
+    localStorage.setItem('recentSearches', JSON.stringify(newSearches));
+
     router.push(`/search?keyword=${encodeURIComponent(trimmed)}`);
   };
 
