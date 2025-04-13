@@ -5,9 +5,6 @@ import { Suspense } from 'react';
 export default function Page() {
   return (
     <main>
-      <section className="top-section">
-        <SearchBar />
-      </section>
       <section>
         <Suspense>
           <SearchPage />

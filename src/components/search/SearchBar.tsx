@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 
 import styles from './SearchBar.module.scss';
 
-const SearchBar = () => {
+const SearchBar = ({ className }: { className?: string }) => {
   const [keyword, setKeyword] = useState('');
   const router = useRouter();
 
@@ -19,7 +19,7 @@ const SearchBar = () => {
   };
 
   return (
-    <form className={styles.searchBar} onSubmit={handleSubmit}>
+    <form className={`${styles.searchBar} ${className}`} onSubmit={handleSubmit}>
       <div style={{ width: '10px' }}></div>
       <input
         type="text"
