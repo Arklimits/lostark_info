@@ -1,5 +1,6 @@
 import SearchBar from '@/components/search/SearchBar';
 import RecentSearchList from '@/components/search/RecentSearchList';
+import BoardContainer from '@/containers/board/BoardContainer';
 
 export default function Home() {
   return (
@@ -11,6 +12,9 @@ export default function Home() {
           <div className="divLine" />
           <RecentSearchList />
         </div>
+        <section className="boardSection">
+          <BoardContainer />
+        </section>
       </main>
       <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center"></footer>
     </div>
