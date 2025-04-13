@@ -34,12 +34,13 @@ body {
 }
 
 main {
+  min-height: 1000px;
+  height: 90vh;
   display: flex;
   flex-direction: column;
   gap: 10px;
   grid-row-start: 2;
   align-items: center;
-  height: 90vh;
 }
 
 footer {
