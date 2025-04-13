@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import styles from './DealContainer.module.scss';
+import styles from './SkillContainer.module.scss';
 import { ArmoryEngraving, Skill } from '@/types/character';
 import calculateCriticalDamage from '@/utils/calculate/criticalDamage';
 import parseEngraving from '@/utils/parse/engraving';
