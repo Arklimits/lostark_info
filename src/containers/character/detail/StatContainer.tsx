@@ -6,6 +6,7 @@ import EvolutionTable from '@/components/character/tables/EvolutionTable';
 import LeapTable from '@/components/character/tables/LeapTable';
 import EngravingTable from '@/components/character/tables/EngravingTable';
 import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 type Props = {
   characterId: number;
@@ -18,21 +19,18 @@ const StatContainer = ({ characterId }: Props) => {
 
   useEffect(() => {
     const fetchArkPassive = async () => {
-      const response = await fetch(`/api/character/arkpassive?characterId=${characterId}`);
-      const data = await response.json();
-      setArkPassive(data);
+      const response = await axios.get(`/api/character/arkpassive?characterId=${characterId}`);
+      setArkPassive(response.data);
     };
 
     const fetchStatus = async () => {
-      const response = await fetch(`/api/character/status?characterId=${characterId}`);
-      const data = await response.json();
-      setStatus(data);
+      const response = await axios.get(`/api/character/status?characterId=${characterId}`);
+      setStatus(response.data);
     };
 
     const fetchEngraving = async () => {
-      const response = await fetch(`/api/character/engraving?characterId=${characterId}`);
-      const data = await response.json();
-      setEngraving(data);
+      const response = await axios.get(`/api/character/engraving?characterId=${characterId}`);
+      setEngraving(response.data);
     };
 
     fetchArkPassive();
