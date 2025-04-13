@@ -13,21 +13,13 @@ interface Props {
   characterId: number;
 }
 
-const CharacterTabs = ({ characterId, data, skills }: Props) => {
+const CharacterTabs = ({ data, skills }: Props) => {
   const evolution = useMemo(() => parseArkPassive(data.ArkPassive), [data.ArkPassive]);
+  const characterId = data.id;
 
   const tabContents = useMemo(
     () => ({
-      특성: (
-        <StatContainer
-          characterId={characterId}
-          stats={data.ArmoryProfile.Stats}
-          tendencies={data.ArmoryProfile.Tendencies}
-          characterClass={data.ArmoryProfile.CharacterClassName}
-          evolution={evolution}
-          engraving={data.ArmoryEngraving}
-        />
-      ),
+      특성: <StatContainer characterId={characterId} />,
       장비: <EquipmentTable characterId={characterId} />,
       아바타: <div>미구현</div>,
       딜표: (
