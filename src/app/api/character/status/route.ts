@@ -11,12 +11,12 @@ export async function GET(req: NextRequest) {
   }
 
   const [rows] = await db.query<RowDataPacket[]>(
-    'SELECT class, crit, specialization, domination, swiftness, endurance, expertise, vitality, attack_point FROM characters WHERE id = ?',
+    'SELECT character_class_name, crit, specialization, domination, swiftness, endurance, expertise, vitality, attack_point FROM characters WHERE id = ?',
     [characterId]
   );
 
   const result = {
-    CharacterClassName: rows[0].class,
+    CharacterClassName: rows[0].character_class_name,
     Stats: [
       {
         Type: '치명',

@@ -29,7 +29,7 @@ export async function GET(req: NextRequest) {
         ServerName: existing[0].server,
         CharacterName: sibling.name,
         CharacterLevel: sibling.character_level,
-        CharacterClassName: sibling.class,
+        CharacterClassName: sibling.character_class_name,
         ItemMaxLevel: sibling.item_level,
       }));
 
