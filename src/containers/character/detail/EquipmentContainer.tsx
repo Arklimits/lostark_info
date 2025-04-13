@@ -1,8 +1,8 @@
 import Image from 'next/image';
-import { ArmoryEquipment } from '@/types/character';
-import styles from './EquipmentTable.module.scss';
+import styles from './EquipmentContainer.module.scss';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+
 interface Props {
   characterId: number;
 }
@@ -21,23 +21,13 @@ interface ProcessedEquipment {
   slot_5: string;
 }
 
-export default function EquipmentTable({ characterId }: Props) {
+export default function EquipmentContainer({ characterId }: Props) {
   const [processedEquipment, setProcessedEquipment] = useState<ProcessedEquipment[]>([]);
 
   useEffect(() => {
     const processEquipment = async () => {
-      try {
-        const response = await axios.get(`/api/character/equipment?characterId=${characterId}`);
-
-        if (response.status !== 200) {
-          throw new Error('장비 데이터 처리 중 오류가 발생했습니다.');
-        }
-
-        const data = response.data;
-        setProcessedEquipment(data[0]);
-      } catch (error) {
-        console.error('장비 데이터 처리 오류:', error);
-      }
+      const response = await axios.get(`/api/character/equipment?characterId=${characterId}`);
+      setProcessedEquipment(response.data[0]);
     };
 
     processEquipment();
