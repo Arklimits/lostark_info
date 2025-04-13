@@ -4,18 +4,33 @@ import styles from './CharacterSummary.module.scss';
 import { useRouter } from 'next/navigation';
 import ScoreTabs from './ScoreTabs';
 import GemTable from './tables/GemTable';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 type Props = {
-  profile: ArmoryProfile;
   characterId: number;
 };
 
-const CharacterSummary = ({ profile, characterId }: Props) => {
+const CharacterSummary = ({ characterId }: Props) => {
   const router = useRouter();
 
+  const [profile, setProfile] = useState<ArmoryProfile>();
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      const res = await axios.get(`/api/character/summary?characterId=${characterId}`);
+      setProfile(res.data);
+    };
+    fetchProfile();
+  }, [characterId]);
+
   const handleExpeditionInfoClick = () => {
-    router.push(`/search?keyword=${encodeURIComponent(profile.CharacterName)}`);
+    if (profile?.CharacterName) {
+      router.push(`/search?keyword=${encodeURIComponent(profile.CharacterName)}`);
+    }
   };
+
+  if (!profile) return <div>로딩 중...</div>;
 
   return (
     <div className={styles.wrapper}>
