@@ -29,12 +29,12 @@ export async function GET(req: NextRequest) {
     ]);
 
     if (exist.length > 0) {
-      const cached = exist[0];
-      const modifiedAt = new Date(cached.modified_at);
+      const cached = exist[0].id;
+      const modifiedAt = new Date(exist[0].modified_at);
       const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000);
 
-      if (modifiedAt < fiveMinutesAgo) {
-        return NextResponse.json(cached);
+      if (modifiedAt > fiveMinutesAgo) {
+        return NextResponse.json({ characterId: cached });
       }
     }
 
@@ -94,7 +94,7 @@ export async function GET(req: NextRequest) {
     const engraving = await saveEngraving(characterId, json.ArmoryEngraving);
     const skill = await saveSkill(characterId, json.ArmorySkills);
 
-    return NextResponse.json(characterId);
+    return NextResponse.json({ characterId });
   } catch (err: unknown) {
     let status = 500;
     let message = '알 수 없는 에러';
