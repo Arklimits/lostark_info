@@ -45,10 +45,10 @@ const CharacterPage = () => {
   return (
     <>
       <div className={styles.summarySection}>
-        <CharacterSummary characterId={data.id} />
+        <CharacterSummary characterId={data.characterId} />
       </div>
       <div>
-        <CharacterTabs characterId={data.id} />
+        <CharacterTabs characterId={data.characterId} />
       </div>
     </>
   );
