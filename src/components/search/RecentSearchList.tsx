@@ -1,25 +1,29 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import styles from './RecentSearchList.module.scss';
 
 type SearchItem = {
   keyword: string;
 };
 
-const allItems: SearchItem[] = [
-  { keyword: '아크리미츠' },
-  { keyword: '칭찬자판기' },
-  { keyword: '비난자판기' },
-  { keyword: '폭주끝나고산책하기' },
-  { keyword: '아이디가열두글자까지된다' },
-  { keyword: '아크탈로스' },
-  { keyword: '와이게사네' },
-  { keyword: '와이게닿네' },
-  { keyword: '와이게맞네' },
-  { keyword: '와이게죽네' },
-];
-
 const RecentSearchList = () => {
+  const [allItems, setAllItems] = useState<SearchItem[]>([]);
   const leftItems: SearchItem[] = [];
   const rightItems: SearchItem[] = [];
+
+  useEffect(() => {
+    const storedItems = localStorage.getItem('recentSearches');
+    if (storedItems) {
+      setAllItems(JSON.parse(storedItems));
+    }
+  }, []);
+
+  const handleRemoveItem = (index: number) => {
+    const newItems = allItems.filter((_, idx) => idx !== index);
+    setAllItems(newItems);
+    localStorage.setItem('recentSearches', JSON.stringify(newItems));
+  };
 
   allItems.forEach((item, index) => {
     if (index < 5) {
@@ -37,7 +41,9 @@ const RecentSearchList = () => {
           {leftItems.map((item, idx) => (
             <div key={idx} className={styles.itemRow}>
               <span>{item.keyword}</span>
-              <button className={styles.removeButton}>✕</button>
+              <button className={styles.removeButton} onClick={() => handleRemoveItem(idx)}>
+                ✕
+              </button>
             </div>
           ))}
         </div>
@@ -45,7 +51,9 @@ const RecentSearchList = () => {
           {rightItems.map((item, idx) => (
             <div key={idx + 5} className={styles.itemRow}>
               <span>{item.keyword}</span>
-              <button className={styles.removeButton}>✕</button>
+              <button className={styles.removeButton} onClick={() => handleRemoveItem(idx + 5)}>
+                ✕
+              </button>
             </div>
           ))}
         </div>
