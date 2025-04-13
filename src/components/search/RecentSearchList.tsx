@@ -2,12 +2,13 @@
 
 import { useEffect, useState } from 'react';
 import styles from './RecentSearchList.module.scss';
-
+import { useRouter } from 'next/navigation';
 type SearchItem = {
   keyword: string;
 };
 
 const RecentSearchList = () => {
+  const router = useRouter();
   const [allItems, setAllItems] = useState<SearchItem[]>([]);
   const leftItems: SearchItem[] = [];
   const rightItems: SearchItem[] = [];
@@ -44,7 +45,11 @@ const RecentSearchList = () => {
         <div className={styles.column}>
           {leftItems.map((item, idx) => (
             <div key={idx} className={styles.itemRow}>
-              <span>{item.keyword}</span>
+              <span
+                onClick={() => router.push(`/search?keyword=${encodeURIComponent(item.keyword)}`)}
+              >
+                {item.keyword}
+              </span>
               <button className={styles.removeButton} onClick={() => handleRemoveItem(idx)}>
                 ✕
               </button>
