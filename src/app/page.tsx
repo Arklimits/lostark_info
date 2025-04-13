@@ -1,7 +1,7 @@
 import SearchBar from '@/components/search/SearchBar';
 import RecentSearchList from '@/components/search/RecentSearchList';
 import BoardContainer from '@/containers/board/BoardContainer';
-import KakaoInquiry from '@/components/Inquiry/KakaoInquiry';
+import InquiryButtons from '@/components/Inquiry/InquiryButtons';
 export default function Home() {
   return (
     <>
@@ -17,7 +17,7 @@ export default function Home() {
         </section>
       </main>
       <footer>
-        <KakaoInquiry />
+        <InquiryButtons />
       </footer>
     </>
   );
