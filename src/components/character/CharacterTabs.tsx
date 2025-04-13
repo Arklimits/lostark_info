@@ -7,29 +7,19 @@ import EquipmentContainer from '@/containers/character/detail/EquipmentContainer
 import SkillContainer from '@/containers/character/detail/SkillContainer';
 import DealContainer from '@/containers/character/detail/DealContainer';
 interface Props {
-  data: CharacterData;
-  skills: Skill[];
   characterId: number;
 }
 
-const CharacterTabs = ({ data, skills }: Props) => {
-  const characterId = data.id;
-
+const CharacterTabs = ({ characterId }: Props) => {
   const tabContents = useMemo(
     () => ({
       특성: <StatContainer characterId={characterId} />,
       장비: <EquipmentContainer characterId={characterId} />,
       아바타: <div>미구현</div>,
-      딜표: (
-        <DealContainer
-          skills={skills}
-          attackPower={data.ArmoryProfile.Stats[7].Value}
-          engraving={data.ArmoryEngraving}
-        />
-      ),
+      딜표: <DealContainer characterId={characterId} />,
       스킬: <SkillContainer characterId={characterId} />,
     }),
-    [data, skills, characterId]
+    [characterId]
   );
 
   const tabs = ['특성', '장비', '아바타', '딜표', '스킬'];
