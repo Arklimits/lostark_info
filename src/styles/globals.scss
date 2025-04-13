@@ -61,9 +61,15 @@ section {
 }
 
 .searchSection {
+  width: auto;
   border: 2px solid var(--foreground);
   border-radius: 10px;
   background-color: var(--contentbackground);
+  overflow: auto;
+
+  @media (max-width: 440px) {
+    width: 80%;
+  }
 }
 
 .boardSection {
@@ -75,6 +81,10 @@ section {
   padding: 20px;
   padding-right: 10px;
   overflow: auto;
+
+  @media (max-width: 440px) {
+    width: 90%;
+  }
 }
 
 .divLine {
