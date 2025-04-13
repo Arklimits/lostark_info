@@ -28,17 +28,15 @@ export async function GET(req: NextRequest) {
       name,
     ]);
 
-    // if (exist.length > 0) {
-    //   const cached = exist[0];
-    //   const modifiedAt = new Date(cached.modified_at);
-    //   const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000);
+    if (exist.length > 0) {
+      const cached = exist[0];
+      const modifiedAt = new Date(cached.modified_at);
+      const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000);
 
-    //   console.log(modifiedAt, fiveMinutesAgo);
-    //   if (modifiedAt < fiveMinutesAgo) {
-    //     console.log('캐시 사용');
-    //     return NextResponse.json(cached);
-    //   }
-    // }
+      if (modifiedAt < fiveMinutesAgo) {
+        return NextResponse.json(cached);
+      }
+    }
 
     const apiUrl = `https://developer-lostark.game.onstove.com/armories/characters/${encodedName}`;
     const res = await axios.get(apiUrl, {
@@ -96,9 +94,7 @@ export async function GET(req: NextRequest) {
     const engraving = await saveEngraving(characterId, json.ArmoryEngraving);
     const skill = await saveSkill(characterId, json.ArmorySkills);
 
-    json.id = characterId;
-
-    return NextResponse.json(json);
+    return NextResponse.json(characterId);
   } catch (err: unknown) {
     let status = 500;
     let message = '알 수 없는 에러';
