@@ -17,8 +17,6 @@ const StatContainer = ({ characterId }: Props) => {
   const [engraving, setEngraving] = useState<ArmoryEngraving['ArkPassiveEffects']>();
   const [status, setStatus] = useState<ArmoryProfile>();
 
-  if (!characterId) return <div>캐릭터 아이디 없음</div>;
-
   useEffect(() => {
     const fetchArkPassive = async () => {
       const response = await axios.get(`/api/character/arkpassive?characterId=${characterId}`);
@@ -39,6 +37,8 @@ const StatContainer = ({ characterId }: Props) => {
     fetchStatus();
     fetchEngraving();
   }, [characterId]);
+
+  if (!characterId) return <div>캐릭터 아이디 없음</div>;
 
   return (
     <div className={styles.container}>

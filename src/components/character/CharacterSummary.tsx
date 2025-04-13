@@ -16,8 +16,6 @@ const CharacterSummary = ({ characterId }: Props) => {
 
   const [profile, setProfile] = useState<ArmoryProfile>();
 
-  if (!characterId) return <div>캐릭터 아이디 없음</div>;
-
   useEffect(() => {
     const fetchProfile = async () => {
       const res = await axios.get(`/api/character/summary?characterId=${characterId}`);
@@ -32,6 +30,7 @@ const CharacterSummary = ({ characterId }: Props) => {
     }
   };
 
+  if (!characterId) return <div>캐릭터 아이디 없음</div>;
   if (!profile) return <div>로딩 중...</div>;
 
   return (
