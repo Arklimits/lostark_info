@@ -51,6 +51,17 @@ section {
   background-color: var(--contentbackground);
 }
 
+.boardSection {
+  width: auto;
+  height: 400px;
+  border: 2px solid var(--foreground);
+  border-radius: 10px;
+  background-color: var(--contentbackground);
+  padding: 20px;
+  padding-right: 10px;
+  overflow: auto;
+}
+
 .divLine {
   margin: 0 10px 0 10px;
   border-top: 1px solid var(--foreground);
@@ -62,9 +73,25 @@ section {
 }
 
 @font-face {
+  font-family: 'Giants-Regular';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/Giants-Regular.woff2')
+    format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
   font-family: 'Giants-Bold';
   src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/Giants-Bold.woff2')
     format('woff2');
   font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Giants-Inline';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/Giants-Inline.woff2')
+    format('woff2');
+  font-weight: normal;
   font-style: normal;
 }

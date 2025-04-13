@@ -1,0 +1,91 @@
+.boardTitle {
+  width: 100%;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  font-family: 'Giants-Bold';
+}
+
+.title {
+  font-family: 'Giants-Regular';
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.item {
+  width: 400px;
+  border-bottom: 1px solid var(--foreground);
+}
+
+.text {
+  max-height: 0;
+  overflow: hidden;
+  transition:
+    max-height 0.5s ease,
+    opacity 0.5s ease;
+  opacity: 0;
+  margin-top: 8px;
+  line-height: 1.6;
+  font-size: 14px;
+  color: var(--contentforeground);
+  padding-right: 4px;
+  white-space: pre-line;
+
+  &.active {
+    max-height: 800px;
+    opacity: 1;
+    margin-bottom: 20px;
+  }
+}
+
+.accordionIcon {
+  float: right;
+  width: 30px;
+  height: 30px;
+  margin-top: -3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.active::before {
+    transform: rotate(90deg);
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    height: 20px;
+    width: 2px;
+    background-color: var(--foreground);
+    transition: transform 0.2s ease;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    height: 2px;
+    width: 20px;
+    background-color: var(--foreground);
+  }
+}
+
+.scrollBox {
+  max-height: 300px;
+  scrollbar-gutter: stable;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+  }
+}
