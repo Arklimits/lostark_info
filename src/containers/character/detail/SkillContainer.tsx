@@ -1,28 +1,32 @@
 import Image from 'next/image';
 import { ArmorySkill } from '@/types/character';
-import styles from './SkillTable.module.scss';
-import { extractCoolTimeFromTooltip } from '@/services/skills/extractUtils';
-import { extractTripodsFromTooltip } from '@/services/skills/extractUtils';
-import { useEffect } from 'react';
-import { useState } from 'react';
-import axios from 'axios';
+import styles from './SkillContainer.module.scss';
+import { useEffect, useState } from 'react';
 import { Gem } from '@/types/dto/gem';
 
 type Props = {
-  skills: ArmorySkill[];
   characterId: number;
 };
 
-const SkillTable = ({ skills, characterId }: Props) => {
+const SkillContainer = ({ characterId }: Props) => {
   const [gems, setGems] = useState<Gem[]>([]);
+  const [skills, setSkills] = useState<ArmorySkill[]>([]);
 
   useEffect(() => {
-    const fetchGems = async () => {
-      const response = await axios.get(`/api/character/gem?characterId=${characterId}`);
-      setGems(response.data.data);
+    const fetchData = async () => {
+      const [skillsRes, gemsRes] = await Promise.all([
+        fetch(`/api/character/skill?characterId=${characterId}`),
+        fetch(`/api/character/gem?characterId=${characterId}`),
+      ]);
+
+      const skillsData = await skillsRes.json();
+      const gemsData = await gemsRes.json();
+
+      setSkills(skillsData.data);
+      setGems(gemsData.data);
     };
 
-    fetchGems();
+    fetchData();
   }, [characterId]);
 
   return (
@@ -30,9 +34,6 @@ const SkillTable = ({ skills, characterId }: Props) => {
       {skills
         .filter(skill => skill.Level >= 4 || skill.SkillType > 0)
         .map((skill, idx) => {
-          const tripods = extractTripodsFromTooltip(skill.Tooltip);
-          const coolTime = extractCoolTimeFromTooltip(skill.Tooltip);
-
           const matchingGems = gems.filter(g => g.skill === skill.Name);
 
           return (
@@ -42,12 +43,12 @@ const SkillTable = ({ skills, characterId }: Props) => {
               </div>
               <div className={styles.name}>{skill.Name}</div>
               <div className={styles.tripods}>
-                {tripods.map((tripod, i) =>
-                  tripod.name ? (
-                    <div key={i} className={styles.tripod} data-grade={tripod.isTierMax}>
-                      <Image src={tripod.icon} alt={tripod.name} width={30} height={30} />
-                      <div className={styles.grade}>{`${tripod.tier}`}</div>
-                      <div>{tripod.name}</div>
+                {skill.Tripods.map((tripod, i) =>
+                  tripod.Name ? (
+                    <div key={i} className={styles.tripod} data-grade={tripod.IsTierMax}>
+                      <Image src={tripod.Icon} alt={tripod.Name} width={30} height={30} />
+                      <div className={styles.grade}>{`${tripod.Tier}`}</div>
+                      <div>{tripod.Name}</div>
                     </div>
                   ) : null
                 )}
@@ -79,7 +80,7 @@ const SkillTable = ({ skills, characterId }: Props) => {
                 <div className={styles.tag}>레벨</div>
               </div>
               <div className={styles.status}>
-                <div>{coolTime}</div>
+                <div>TBD</div>
                 <div className={styles.tag}>쿨타임</div>
               </div>
               <div className={styles.status}>
@@ -93,4 +94,4 @@ const SkillTable = ({ skills, characterId }: Props) => {
   );
 };
 
-export default SkillTable;
+export default SkillContainer;

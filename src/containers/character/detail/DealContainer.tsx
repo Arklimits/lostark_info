@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import styles from './SkillTable.module.scss';
+import styles from './DealContainer.module.scss';
 import { ArmoryEngraving, Skill } from '@/types/character';
 import calculateCriticalDamage from '@/utils/calculate/criticalDamage';
 import parseEngraving from '@/utils/parse/engraving';
@@ -10,7 +10,7 @@ type Props = {
   engraving: ArmoryEngraving;
 };
 
-const DealTable = ({ skills, attackPower, engraving }: Props) => {
+const DealContainer = ({ skills, attackPower, engraving }: Props) => {
   const {
     attackBonus: engAttackBonus,
     damageBonus: engDamageBonus,
@@ -54,4 +54,4 @@ const DealTable = ({ skills, attackPower, engraving }: Props) => {
   );
 };
 
-export default DealTable;
+export default DealContainer;

@@ -56,6 +56,7 @@ export interface ArmorySkill {
     Level: number;
     IsSelected: boolean;
     ToolTip: string;
+    IsTierMax: boolean;
   }[];
   Rune: {
     Name: string;

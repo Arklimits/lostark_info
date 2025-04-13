@@ -3,7 +3,7 @@ import stripHtml from '@/utils/common/stripHtml';
 interface ParsedTripod {
   name: string;
   icon: string;
-  tier: string;
+  tier: number;
   isTierMax: boolean;
 }
 
@@ -36,9 +36,9 @@ export function extractTripodsFromTooltip(tooltipRaw: string): ParsedTripod[] {
   }
 
   return Object.values(tripodElements).map((el: any) => ({
-    name: el.name ? stripHtml(el.name) : '',
-    icon: el.slotData?.iconPath || '/ico/ico-noImage.png',
-    tier: el.tier ? (stripHtml(el.tier).match(/\d+/)?.[0] ?? '-') : '-',
-    isTierMax: el.tier ? stripHtml(el.tier).includes('최대') : false,
+    name: stripHtml(el.name),
+    icon: el.slotData?.iconPath,
+    tier: parseInt(stripHtml(el.tier).match(/\d+/)?.[0] ?? '0'),
+    isTierMax: stripHtml(el.tier).includes('최대'),
   }));
 }

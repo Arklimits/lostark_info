@@ -1,12 +1,11 @@
 import { useMemo, useState } from 'react';
-import SkillTable from './tables/SkillTable';
 import styles from './CharacterTabs.module.scss';
 import { CharacterData } from '@/types/character';
-import DealTable from './tables/DealTable';
 import { Skill } from '@/types/character';
-import { parseArkPassive } from '@/utils/parse/arkPassive';
 import StatContainer from '@/containers/character/detail/StatContainer';
 import EquipmentContainer from '@/containers/character/detail/EquipmentContainer';
+import SkillContainer from '@/containers/character/detail/SkillContainer';
+import DealContainer from '@/containers/character/detail/DealContainer';
 interface Props {
   data: CharacterData;
   skills: Skill[];
@@ -14,7 +13,6 @@ interface Props {
 }
 
 const CharacterTabs = ({ data, skills }: Props) => {
-  const evolution = useMemo(() => parseArkPassive(data.ArkPassive), [data.ArkPassive]);
   const characterId = data.id;
 
   const tabContents = useMemo(
@@ -23,15 +21,15 @@ const CharacterTabs = ({ data, skills }: Props) => {
       장비: <EquipmentContainer characterId={characterId} />,
       아바타: <div>미구현</div>,
       딜표: (
-        <DealTable
+        <DealContainer
           skills={skills}
           attackPower={data.ArmoryProfile.Stats[7].Value}
           engraving={data.ArmoryEngraving}
         />
       ),
-      스킬: <SkillTable skills={data.ArmorySkills} characterId={characterId} />,
+      스킬: <SkillContainer characterId={characterId} />,
     }),
-    [data, skills, evolution, characterId]
+    [data, skills, characterId]
   );
 
   const tabs = ['특성', '장비', '아바타', '딜표', '스킬'];
