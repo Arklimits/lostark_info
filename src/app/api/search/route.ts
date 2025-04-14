@@ -85,8 +85,8 @@ export async function GET(req: NextRequest) {
       // 캐릭터 저장
       await db.query(
         `INSERT INTO characters (name, expedition_id, character_level, character_class_name, item_level, server_name, created_at, modified_at)
-          VALUES (?, ?, ?, ?, ?, ?, NOW(), NOW())
-          ON DUPLICATE KEY UPDATE modified_at = NOW(), expedition_id = ?`,
+          VALUES (?, ?, ?, ?, ?, ?, NOW(), DATE_SUB(NOW(), INTERVAL 10 MINUTE))
+          ON DUPLICATE KEY UPDATE expedition_id = ?`,
         [
           char.CharacterName,
           expeditionId,
