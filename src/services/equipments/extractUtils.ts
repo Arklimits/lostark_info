@@ -1,5 +1,5 @@
 export function extractRefinementLevel(tooltip: string): number | null {
-  const match = tooltip.match(/<FONT COLOR='#FFD200'>(\d+)<\/FONT>단계/);
+  const match = tooltip.match(/\[상급 재련\]<\/FONT> <FONT COLOR='#FFD200'>(\d+)<\/FONT>단계/);
 
   return match ? parseInt(match[1], 10) : null;
 }
