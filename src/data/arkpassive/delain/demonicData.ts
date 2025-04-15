@@ -24,14 +24,16 @@ export const demonicData = [
     isActive: false,
   },
   {
-    name: 'null',
+    name: '깨달음',
+    title: 'null',
     icon: '',
     level: -1,
     maxLevel: -1,
     isActive: false,
   },
   {
-    name: 'null',
+    name: '깨달음',
+    title: 'null',
     icon: '',
     level: -1,
     maxLevel: -1,
@@ -54,7 +56,8 @@ export const demonicData = [
     isActive: false,
   },
   {
-    name: 'null',
+    name: '깨달음',
+    title: 'null',
     icon: '',
     level: -1,
     maxLevel: -1,
