@@ -10,7 +10,9 @@ type Response = {
 const saveEngraving = async (characterId: number, engraving: ArmoryEngraving) => {
   await db.query('DELETE FROM character_engravings WHERE character_id = ?', [characterId]);
 
-  const effects = engraving.ArkPassiveEffects;
+  const effects = engraving?.ArkPassiveEffects;
+
+  if (!effects) return [];
 
   const engravingNames = effects.map(effect => effect.Name);
   const responses = await Promise.all(
