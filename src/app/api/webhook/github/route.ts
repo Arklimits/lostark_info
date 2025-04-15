@@ -1,21 +1,22 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
+import { NextRequest, NextResponse } from 'next/server';
 import { exec } from 'child_process';
 
-export async function POST(req: NextApiRequest, res: NextApiResponse) {
-  if (req.headers.authorization !== `Bearer ${process.env.DEPLOY_SECRET}`) {
-    return res.status(403).end('Forbidden');
+export async function POST(req: NextRequest) {
+  const authHeader = req.headers.get('authorization');
+  if (authHeader !== `Bearer ${process.env.DEPLOY_SECRET}`) {
+    return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
   }
 
-  exec(
-    'git pull origin main && yarn install && yarn build && pm2 restart app',
-    (err, stdout, stderr) => {
-      if (err) {
-        console.error(stderr);
-        return res.status(500).json({ error: stderr });
+  return new Promise(resolve => {
+    exec(
+      'git pull origin main && yarn install && yarn build && pm2 restart app',
+      (err, stdout, stderr) => {
+        if (err) {
+          resolve(NextResponse.json({ error: stderr }, { status: 500 }));
+        } else {
+          resolve(NextResponse.json({ message: 'Deployed!', output: stdout }));
+        }
       }
-
-      console.log(stdout);
-      res.status(200).json({ message: 'Deployed!' });
-    }
-  );
+    );
+  });
 }
