@@ -20,7 +20,7 @@ export default async function saveEquipment(characterId: number, equipment: any[
       const refinementLevel = isEquipment ? extractRefinementLevel(item.Tooltip) : null;
       const transcendenceLevel = extractTranscendenceLevel(item.Tooltip);
 
-      const elixirEffects = isEquipment ? extractElixirEffects(item.Tooltip) : [null, null, null];
+      const elixirEffects = isEquipment ? extractElixirEffects(item.Tooltip) : [null, null];
       const accessoryEffects = isAccessory
         ? extractAccessoryEffects(item.Tooltip)
         : [null, null, null];
@@ -33,7 +33,7 @@ export default async function saveEquipment(characterId: number, equipment: any[
           ? extractBraceletStatsAndEffects(item.Tooltip)
           : { stats: [], effects: [] };
 
-      let equipmentEffects = [];
+      let equipmentEffects: (string | null)[] = [];
 
       if (isStone) {
         equipmentEffects = [null, null, ...stoneEffects];
@@ -50,9 +50,9 @@ export default async function saveEquipment(characterId: number, equipment: any[
         equipmentEffects = [null, null, null, null, null];
       } else if (isEquipment) {
         equipmentEffects = [null, null, ...elixirEffects, null];
-      } else {
-        equipmentEffects = [null, null, null, null, null];
       }
+
+      equipmentEffects = [...equipmentEffects, ...Array(5 - equipmentEffects.length).fill(null)];
 
       const result = {
         type: item.Type,

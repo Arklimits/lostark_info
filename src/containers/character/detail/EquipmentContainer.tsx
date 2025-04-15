@@ -52,7 +52,7 @@ export default function EquipmentContainer({ characterId }: Props) {
             </div>
             <div className={styles.name}>
               {item.name}
-              {isEquipment && <span> +{item.refinement}</span>}
+              {isEquipment && item.refinement > 0 && <span> +{item.refinement}</span>}
             </div>
             <div className={styles.slot12Holder}>
               <div className={styles.slot1}>{item.slot_1}</div>
@@ -63,7 +63,7 @@ export default function EquipmentContainer({ characterId }: Props) {
               <div className={styles.slot4}>{item.slot_4}</div>
               <div className={styles.slot5}>{item.slot_5}</div>
             </div>
-            {isEquipment && (
+            {isEquipment && item.transcendence > 0 && (
               <div className={styles.transcendenceHolder}>
                 <Image
                   className={styles.transcendenceIcon}
